@@ -1,0 +1,329 @@
+@charset "UTF-8";
+
+   h1 {
+        text-align: center;
+        margin-top: 180px;
+        margin-bottom: 20px;
+        font-size: 90px;
+        font-weight: bold;
+        color:#1dc078
+    }
+     
+ 	h3 {
+        text-align: center;
+        font-weight: bold;
+        color:#1dc078
+    }
+	
+	
+	#row {
+	margin-bottom: 80px;
+	}
+	
+    #topRow-left { 
+      padding-left: 400px;  
+      
+     } 
+
+	#dropD {
+		font-size: 14px;
+	}
+	
+	#tabletr .title {
+		text-align: left;
+	}
+	
+	body {
+	    font-family: Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Roboto,Helvetica Neue,Segoe UI,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,sans-serif;
+	}
+   
+    * {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+	}
+	
+    a {
+	text-decoration: none;
+	color: inherit;
+	}
+		
+	.board_list_wrap {
+	
+	margin: 0 auto;
+	max-width: 1000px;
+	} 	
+
+	.board_header {
+	margin-bottom: 100px;
+	background-color: #333b3d;
+	width: 100%;
+	padding: 24px 0;
+	}
+
+	img {
+		width: 80px;
+		margin-right: 5px;
+	} 
+	
+	.board_title h2 {
+	color: #fff;
+	height: 20px;
+	font-size: 24px;
+	line-height: .71;
+	width: 1160px;
+	margin: 10px auto;
+	font-weight: bold;
+	
+	}
+	
+	
+	.board_title p {
+	margin-top: 12px;
+	font-size: 16px;
+	line-height: normal;
+	color: #fff;
+	width: 1160px;
+	margin: 0 auto;
+	}
+
+	.bt_wrap {
+	margin-top: 50px;
+	text-align: center;
+	}
+
+	.board_page {
+	margin-top: 130px;
+	text-align: center;
+	font-size: 0;
+	}		
+
+	.board_page a {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	box-sizing: border-box;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+	border-left: 0;
+	line-height: 100%;
+	}
+	
+	.board_page a:hover {
+		background: #34a853;
+		color: #fff;
+		font-weight: bold;
+	}
+	
+	.board_page a.bt {
+	padding-top: 10px;
+	font-size: 0.9rem;
+	letter-spacing: -1px;
+	}
+
+	.board_page a.num {
+	padding-top: 9px;
+	font-size: 0.9rem;
+	}
+	
+	.board_page a:first-child {
+	border-left: 1px solid #ddd;
+	}
+	
+	.board_list {
+	border-top: 2px solid #000;
+}
+
+.board_list > div {
+	border-bottom: 1px solid #ddd;
+	font-size: 0;
+}
+
+.board_list > div.top {
+	border-bottom: 1px solid #999;
+}
+
+.board_list > div:last-child {
+	border-bottom: 1px solid #000;
+}
+
+.board_list > div > div {
+	display: inline-block;
+	text-align: center;
+	font-size: 15px;
+}
+
+.board_list > div.top > div {
+	font-weight: 600;
+}
+
+.board_list .num {
+	witdh: 10%;
+}
+
+.board_list .title {
+	witdh: 10%;
+	text-align: left;
+}
+
+.board_list .top .title {
+	text-align: center;
+}
+
+.board_list .writer {
+	witdh: 10%;
+}
+
+.board_list .date {
+	witdh: 10%;
+}
+
+.board_list .count {
+	witdh: 10%;
+}
+
+
+.board_view {
+	border-top: 2px solid #000;
+}	
+
+.board_view .title {
+	padding: 20px 15px;
+	border-bottom: 1px dashed #ddd;
+	font-size: 16px;
+}
+
+.board_view .info {
+	padding: 15px;
+	border-bottom: 1px solid #ddd;
+ 	font-size: 0;
+}
+
+.board_view .info dl {
+	position: relative;
+	display: inline-block;
+	padding: 0 20px;
+}
+
+.board_view .info dl:first-child {
+	padding-left: 0;
+}
+
+.board_view .info dl::before {
+	content: "";
+	position: absolute;
+	top: 1px;
+	left: 0;
+	display: block;
+	width: 1px;
+	height: 13px;
+	background: #ddd;
+}
+
+.board_view .info dl:first-child::before {
+	display: none;
+}
+
+.board_view .info dl dt,
+.board_view .info dl dd {
+	display: inline-block;
+	font-size: 20px;
+}
+
+.board_view .info dl dt {
+}
+
+.board_view .info dl dd {
+	margin-left: 10px;
+	color: #777;
+}
+
+.board_view .cont {
+	padding: 15px;
+	border-bottom: 1px solid #000;
+	line-height: 160%;
+	font-size: 1.4rem;
+}	
+
+.board_insert_wrap {
+	margin: 0 auto;
+	max-width: 700px;
+	} 	
+	
+.board_insert {
+	border-top: 2px solid #000;
+}
+
+.board_insert .title,
+.board_insert .info {
+	padding-top: 15px;
+	margin-left: 20px;
+}
+
+.board_insert .info {
+	border-top: 1px dashed #ddd;
+	border-bottom: 1px solid #000;
+	font-size: 0;
+}
+
+.board_insert .title dl {
+	font-size: 0;
+}
+
+.board_insert .info dl {
+	display: inline-block;
+	width: 50%;
+	vertical-align: middle; 
+}
+
+.board_insert .title dl,
+.board_insert .title dt,
+.board_insert .info dt,
+.board_insert .info dd {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 0.8rem;
+}
+
+.board_insert .title dt,
+.board_insert .info dt {
+	width: 100%;
+}
+
+.board_insert .title dd {
+	width: calc(100% - 100px);
+}
+
+.board_insert .title input[type="text"],
+.board_insert .info input[type="text"],
+.board_insert .info input[type="password"] {
+	padding: 10px;
+	border: none;
+}
+
+.board_insert .title input:focus,
+.board_insert .info input:focus,
+.board_insert .info input:focus {
+	outline: none;
+}
+
+.board_insert .title input[type="text"] {
+	width: 500px;
+	height: 30px;
+}
+	
+.board_insert .cont {
+	border-bottom: 1px solid #000;
+	
+}
+
+.board_insert .cont textarea {
+	display: block;
+	width: 100%;
+	height: 300px;
+	padding: 30px;
+	box-sizing: border-box;
+	border: 0;
+	resize: vertical;
+	
+}
