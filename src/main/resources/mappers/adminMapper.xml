@@ -36,6 +36,12 @@
   		VALUES ( seq_userId.nextval,#{userid}, #{password}, #{username}, #{usergender})
 
   	</insert>
+  	
+  	<insert id="insertPost" parameterType="admin">
+  		INSERT INTO adminPost 
+  		VALUES ( seq_postId.nextval, #{postTitle}, #{postPass}, #{postContent}, TO_CHAR(sysdate, 'YYYY-MM-DD'), #{postCnt})
+
+  	</insert>
 
 	<select id="getBookList" parameterType="admin" resultType="admin">
 		select * from books 
@@ -81,10 +87,13 @@
 	
 	</update>
 
-	<select id="getAllList" resultType="admin">
-  		SELECT * FROM books order by bookid
+	<select id="getBoardList" resultType="admin">
+  		SELECT * FROM adminPost order by postId
   	</select>
   	
+  	<select id="getAllList" resultType="admin">
+  		SELECT * FROM books order by bookid
+  	</select>
   	<update id="changeInfo" parameterType="admin">
 	
 	update books set bookstatement = 'Y', rentalDue = '' where bookid= #{bookid}

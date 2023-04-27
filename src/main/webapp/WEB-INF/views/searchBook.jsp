@@ -1,8 +1,8 @@
-<%@page import="com.human.web.domain.UserVO"%>
+<%@page import="com.human.soup.domain.AdminVO"%>
 <%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.human.web.*" %>
+<%@page import="com.human.soup.*" %>
 <%@page import="java.util.List" %>
     <!-- 배열과 같이 사용하는 반복문 활용 : JSTL -->
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

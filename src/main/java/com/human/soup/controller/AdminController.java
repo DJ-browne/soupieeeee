@@ -151,7 +151,7 @@ public class AdminController {
 	
 	@RequestMapping("updateAction")
 	public String userUpdate(AdminVO vo) {
-		adminService.updateBoard(vo);
+		adminService.userUpdate(vo);
 			
 		return "redirect:/main";
 		
@@ -199,6 +199,27 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("saveBoard")
+	public String saveBoard(AdminVO vo) {
+		
+		System.out.println("컨트롤");
+		adminService.saveBoard(vo);
+		
+		return "redirect:/adminpost";
+		
+	}
+	
+	@RequestMapping("getBoardList")
+	@ResponseBody
+	public HashMap<String, List<AdminVO>> getBoardList(AdminVO vo) {
+		List<AdminVO> aList = adminService.getBoardList(vo);
+	
+	HashMap<String, List<AdminVO>> map = new HashMap<String, List<AdminVO>>();
+	 map.put("adminList", aList);
+	
+	return map;
+	
+	}
 	
 
 	

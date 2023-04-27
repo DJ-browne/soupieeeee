@@ -2,6 +2,5 @@
     pageEncoding="UTF-8"%>
     
     
-<%--  <% response.sendRedirect("main"); %> --%>
+ <% response.sendRedirect("main"); %>
 <%--  <% response.sendRedirect("adminpost"); %> --%>
- <% response.sendRedirect("adminpost2"); %>

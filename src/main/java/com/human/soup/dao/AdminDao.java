@@ -62,6 +62,10 @@ public interface AdminDao {
 
 	public List<AdminVO> getAllList();
 
+	public int saveBoard(AdminVO vo);
+
+	public List<AdminVO> getBoardList();
+
 	
 	
 }

@@ -48,6 +48,12 @@ public interface AdminService {
 		public List<AdminVO> getAllList();
 
 
+		public int saveBoard(AdminVO vo);
+
+
+		public List<AdminVO> getBoardList(AdminVO vo);
+
+
 	
 	
 }

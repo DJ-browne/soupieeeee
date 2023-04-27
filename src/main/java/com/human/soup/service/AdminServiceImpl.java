@@ -68,10 +68,22 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
-
+	
+	@Override
+	public void userUpdate(AdminVO vo) {
+		adminDao.userUpdate(vo);
+		
+	}
+	
+	@Override
+	public int saveBoard(AdminVO vo) {
+		System.out.println("서비스");
+		return adminDao.saveBoard(vo);
+		
+	}
+		
 	@Override
 	public void updateBoard(AdminVO vo) {
-		adminDao.userUpdate(vo);
 		
 	}
 
@@ -86,18 +98,18 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	@Override
-	public void userUpdate(AdminVO vo) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	public List<AdminVO> getAllList() {
 		// TODO Auto-generated method stub
 		return adminDao.getAllList();
 	}
+
+	@Override
+	public List<AdminVO> getBoardList(AdminVO vo) {
+		return adminDao.getBoardList();
+	}
+
 	
 	
 	

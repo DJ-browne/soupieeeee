@@ -27,14 +27,14 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 0 15px; margin: 30px 20px;">
   <div class="container-fluid">
-    <a class="navbar-brand" style="color: #1dc078; font-weight: bold; font-size: 22px;" href="adminpost2"><img src="resources/img/soupie.png">Soupieeeee</a>
+    <a class="navbar-brand" style="color: #1dc078; font-weight: bold; font-size: 22px;" href="main"><img src="resources/img/soupie.png">Soupieeeee</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" style=" color: #4a4a4a; font-size: 16px;" aria-current="page" href="adminpost2">Home</a>
+          <a class="nav-link active" style=" color: #4a4a4a; font-size: 16px;" aria-current="page" href="main">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style=" color: #4a4a4a; font-size: 14px; margin-top: 2px;" href="adminpost">공지사항</a>
@@ -88,28 +88,28 @@
 				<p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
 			</div>
 		</section>
-		<form action="saveBoard" method="post" id="">
+		<form action="saveBoard" method="post" id="frm">
 		<div class="board_insert_wrap">
 			<div class="board_insert">
 				<div class="title">
 					<dl>
 						<dt>제목</dt>
-						<dd><input type="text" placeholder="제목 입력"></dd>
+						<dd><input type="text" name="postTitle" placeholder="제목 입력" ></dd>
 					</dl>
 				</div>				
 				<div class="info">
 					<dl>
 						<dt>글쓴이</dt>
-						<dd><input type="text" value="Admin" readonly></dd>
+						<dd><input type="text" value="관리자" readonly></dd>
 					</dl>
 					<dl>
 						<dt>비밀번호</dt>
-						<dd><input type="password" placeholder="비밀번호 입력"></dd>
+						<dd><input type="password" name="postPass" placeholder="비밀번호 입력" ></dd>
 					</dl>
 					
 				</div>				
 				<div class="cont">
-					<textarea placeholder="내용 입력"></textarea>
+					<textarea name="postContent"  placeholder="내용 입력"></textarea>
 				</div>				
 			</div>
 		</div>
@@ -121,8 +121,8 @@
 		
 			
 		<div class="bt_wrap">
-			<button type="button" class="btn btn-success" id="insertBtn" ><a href="">등록</a></button>
-			<button type="button" class="btn btn-success" id="insertBtn" ><a href="adminpost">취소</a></button>
+			<button type="button" class="btn btn-success" id="insertBtn" >등록</a></button>
+			<button type="button" class="btn btn-success" id="cancelBtn" ><a href="adminpost">취소</a></button>
 		</div>
 	</div>
 
@@ -131,4 +131,17 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function () {
+	$('#insertBtn').click(function() {
+		$('#frm').submit();
+	})
+})
+
+
+
+</script>
+
+
 </html>

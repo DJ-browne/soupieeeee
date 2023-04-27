@@ -25,6 +25,12 @@ public class AdminVO
 	private String bookingTel;
 	private String rentalDue;
 	private String rentalPeriod;
+	private String postId;
+	private String postTitle;
+	private String postPass;
+	private String postContent;
+	private String postDate;
+	private int postCnt;
 	
 	
 	public AdminVO() {
