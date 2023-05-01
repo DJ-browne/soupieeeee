@@ -277,15 +277,15 @@ function getCommentList() {
 			for (let idx in commentList) {
 				
 				htmlTag += '<tr id="comTable">' +
-	            '<td scope="col">'+commentList[idx].commentId+'</td>' +
-				'<input type="hidden" name="postId" value="'+commentList[idx].postId+'"></p>' +
-				'<td scope="col">'+commentList[idx].writer+'</td>' +
-				'<td scope="col">'+commentList[idx].content+'</td>' +
-				'<td scope="col">'+commentList[idx].regDate+'</td></tr>' 
+				'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
+				'<input type="hidden" name="postId" value="'+commentList[idx].postId+'">' +
+				'<td>'+commentList[idx].writer+'</td>' +
+				'<td>'+commentList[idx].content+'</td>' +
+				'<td>'+commentList[idx].regDate+'</td></tr>' 
 								
 			}
 			
-			$('#com').next().after('<div id="commentAdded"><table>'+htmlTag+'</table></div>')
+			$('#com').next().after('<div id="commentAdded"><table id="commentAddedTable">'+htmlTag+'</table></div>')
 		
 			
 	            

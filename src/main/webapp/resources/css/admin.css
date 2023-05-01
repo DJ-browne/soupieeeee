@@ -376,12 +376,23 @@ ul, li {
 	margin-left: 190px;
 	margin-top: 80px;
 }
+
+#commentAddedTable {
+	margin: 0 auto;
+	max-width: 900px;
+	font-size: 13px;
+}
+
 #hr {
 	margin: 0 auto;
 	max-width: 900px;
 	margin-bottom: 50px;
     margin-top: 15px;
 	
+}
+
+#commentAdded {
+	margin-bottom: 40px;
 }
 
 #inputBox {
