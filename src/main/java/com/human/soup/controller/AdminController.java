@@ -247,11 +247,22 @@ public class AdminController {
 	public String insertComment(AdminVO vo) {
 		
 		System.out.println("컨트롤");
-		adminService.saveBoard(vo);
+		adminService.insertComment(vo);
 		
-		return "redirect:/comment";
+		return "redirect:/boardview";
 		
 	}
 	
+	@RequestMapping("getCommentList")
+	@ResponseBody
+	public HashMap<String, List<AdminVO>> getCommentList(AdminVO vo) {
+		List<AdminVO> cList = adminService.getCommentList(vo);
+	
+	HashMap<String, List<AdminVO>> map = new HashMap<String, List<AdminVO>>();
+	 map.put("commentList", cList);
+	
+	return map;
+	
+	}
 	
 }

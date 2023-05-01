@@ -66,6 +66,8 @@ public interface AdminDao {
 
 	public int insertComment(AdminVO vo);
 
+	public List<AdminVO> getCommentList();
+
 	
 	
 }

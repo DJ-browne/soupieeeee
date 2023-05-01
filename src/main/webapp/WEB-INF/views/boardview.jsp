@@ -179,6 +179,7 @@
 				<p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
 			</div>
 		</section>
+		
 		<div class="board_view_wrap">
 			<div class="board_view">
 				<c:forEach items="${list}" var="post">
@@ -213,15 +214,26 @@
 		
 		<br>
 	<!-- Comments Form -->
+	<h3 id="com">Comments :</h3><hr id="hr"/>
 	<div class="card my-4" id="commentBox">
-		<h5 class="card-header" style="font-size: 14px;">댓글을 남겨주세요 :</h5>
+		<h5 class="card-header" style="font-size: 15px; padding: 15px;">댓글을 남겨주세요 </h5>
 		<div class="card-body">
 			<form name="comment-form" action="commentAction" method="post" autocomplete="off">
 				<div class="form-group">
-					<input type="hidden" name="postId" value="<%=postId %>" />
-					<textarea name="content" class="form-control" rows="3" id="commentText" maxlength="500"></textarea>
+				<div id="inputBox">
+				<div id="inputBoxL">
+					<input type="hidden" name="postId" value="<%=postId %>">
+					<label class="control-label" for="id" id="writerTop">작성자</label>
+            		<input class="form-control" type="text" name="writer" id="writerBot"/>					
+				</div>
+				<div id="inputBoxR">
+					<label class="control-label" for="pwd" id="pwdTop" >비밀번호</label>
+            		<input class="form-control" type="password" name="password" id="pwdBot"/>
+            	</div>
+            	</div>
+					<textarea name="content" class="form-control" rows="3" id="commentText" maxlength="500" style="margin-top: 15px;"></textarea>
 				</div><br>
-				<button type="submit" class="btn btn-success">댓글등록</button>
+				<button type="submit" class="btn btn-success" style="text-align: center;">댓글등록</button>
 			</form>
 		</div>
 	</div>
@@ -243,4 +255,52 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	getCommentList();
+})
+
+function getCommentList() {
+	
+	
+	$.ajax({
+		url: "getCommentList",
+		type : "get",
+		dataType: "json",
+		success : function(data){
+			
+			var commentList = data.commentList;
+			
+			let htmlTag ='';
+			
+			for (let idx in commentList) {
+				
+				htmlTag += '<tr id="comTable">' +
+	            '<td scope="col">'+commentList[idx].commentId+'</td>' +
+				'<input type="hidden" name="postId" value="'+commentList[idx].postId+'"></p>' +
+				'<td scope="col">'+commentList[idx].writer+'</td>' +
+				'<td scope="col">'+commentList[idx].content+'</td>' +
+				'<td scope="col">'+commentList[idx].regDate+'</td></tr>' 
+								
+			}
+			
+			$('#com').next().after('<div id="commentAdded"><table>'+htmlTag+'</table></div>')
+		
+			
+	            
+					
+			
+		},
+		error : function(err){
+			console.log(err);
+		}				
+		
+	}) //ajax
+}
+
+
+
+
+</script>
 </html>

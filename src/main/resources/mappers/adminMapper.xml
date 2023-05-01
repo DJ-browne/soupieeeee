@@ -130,7 +130,15 @@
 
   	</insert>
   	
-  	
+  	<select id="getCommentList" resultType="admin">
+  		SELECT commentId
+  			 , postId
+  			 , writer
+  			 , content
+  			 , TO_CHAR(regDate, 'YYYY-MM-DD') as regDate
+  			   			 
+  		 FROM usercomment order by commentId desc
+  	</select>
   	
   	
   	

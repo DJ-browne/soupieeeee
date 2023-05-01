@@ -119,6 +119,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.insertComment(vo);
 		
 	}
+
+	@Override
+	public List<AdminVO> getCommentList(AdminVO vo) {
+		return adminDao.getCommentList();
+	}
 	
 	
 }

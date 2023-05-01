@@ -57,6 +57,9 @@ public interface AdminService {
 		int insertComment(AdminVO vo);
 
 
+		public List<AdminVO> getCommentList(AdminVO vo);
+
+
 	
 	
 }
