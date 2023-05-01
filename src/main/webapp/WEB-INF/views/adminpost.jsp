@@ -240,11 +240,10 @@ $(document).ready(function() {
 					
 					htmlTag +='<tr id="tabletr">' +
 		              '<td scope="col">'+adminList[idx].postId+'</td>' +
-		              '<td scope="col">'+adminList[idx].postTitle+'</td>' +
+		              '<td scope="col"><a href="boardview.do?postId='+adminList[idx].postId+'">'+adminList[idx].postTitle+'</a></td>' +
 		              '<td scope="col">관리자</td>' +
-		              '<th scope="col">'+adminList[idx].postDate+'</th>'+
-		              '<th scope="col">'+adminList[idx].postCnt+'</th>'
-		                
+		              '<td scope="col">'+adminList[idx].postDate+'</td>'+
+		              '<td scope="col">'+adminList[idx].postCnt+'</td></tr>'
 		       }
 								
 								

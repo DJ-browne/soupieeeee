@@ -78,16 +78,18 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int saveBoard(AdminVO vo) {
 		System.out.println("다오");
+		
 		return mybatis.insert("adminDao.insertPost",vo);
 		
 	}
 
 	@Override
-	public AdminVO getBoard(AdminVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AdminVO> getBoard(AdminVO vo) {
+		
+		List<AdminVO> aList = mybatis.selectList("adminDao.getViewList", vo);
+		return aList;
 	}
-
+	
 
 	@Override
 	public void updateBoard(AdminVO vo) {
@@ -123,6 +125,13 @@ public class AdminDaoImpl implements AdminDao{
 	public List<AdminVO> getBoardList() {
 		List<AdminVO> aList = mybatis.selectList("adminDao.getBoardList");
 		return aList;
+	}
+
+	
+	@Override
+	public int insertComment(AdminVO vo) {
+		
+		return mybatis.insert("adminDao.insertComment",vo);
 	}
 
 	

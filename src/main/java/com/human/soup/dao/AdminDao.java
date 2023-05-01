@@ -49,11 +49,8 @@ public interface AdminDao {
 	   void deleteBoard(AdminVO vo);
 	   
 	   // 글 상세 조회
-	   AdminVO getBoard(AdminVO vo);
+	   List<AdminVO> getBoard(AdminVO vo);
 	   
-	   // 글 목록 조회
-//	   List<UserVO> getBoardList(HashMap map);
-
 	void userUpdate(AdminVO vo);
 
 	int changeInfo(AdminVO vo);
@@ -65,6 +62,9 @@ public interface AdminDao {
 	public int saveBoard(AdminVO vo);
 
 	public List<AdminVO> getBoardList();
+
+
+	public int insertComment(AdminVO vo);
 
 	
 	

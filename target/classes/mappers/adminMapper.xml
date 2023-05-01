@@ -39,7 +39,8 @@
   	
   	<insert id="insertPost" parameterType="admin">
   		INSERT INTO adminPost 
-  		VALUES ( seq_postId.nextval, #{postTitle}, #{postPass}, #{postContent}, TO_CHAR(sysdate, 'YYYY-MM-DD'), #{postCnt})
+  		VALUES ( seq_postId.nextval, #{postTitle}, #{postPass}, #{postContent}, 
+  		sysdate, 0, #{groupId}, #{sequenceNo} )
 
   	</insert>
 
@@ -88,7 +89,23 @@
 	</update>
 
 	<select id="getBoardList" resultType="admin">
-  		SELECT * FROM adminPost order by postId
+  		SELECT POSTID
+  			 , POSTTITLE
+  			 , POSTCONTENT
+  			 , TO_CHAR(postdate, 'YYYY-MM-DD') as POSTDATE
+  			 , POSTCNT
+  			 
+  		 FROM adminPost order by postId desc
+  	</select>
+  	
+  	<select id="getViewList" parameterType="admin" resultType="admin">
+  	SELECT POSTID
+  			 , POSTTITLE
+  			 , POSTCONTENT
+  			 , TO_CHAR(postdate, 'YYYY-MM-DD') as POSTDATE
+  			 , POSTCNT
+  			 
+  		 FROM adminPost where postId= #{postId} order by postId desc
   	</select>
   	
   	<select id="getAllList" resultType="admin">
@@ -104,6 +121,18 @@
   	delete from bookinginfo where bookingid = #{bookid}
   	
   	</delete>
+  	
+    	
+  	<insert id="insertComment" parameterType="admin">
+  		INSERT INTO usercomment 
+  		VALUES ( seq_commentId.nextval, #{postId}, #{writer}, #{password}, #{content}, 
+  		sysdate)
+
+  	</insert>
+  	
+  	
+  	
+  	
   	
   	
   	

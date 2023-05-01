@@ -77,6 +77,28 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("boardview.do")
+	public String boardview(Model model, AdminVO vo, String postId) {
+		
+		int postid = 0;
+		if(postId != null) {
+			postid = Integer.parseInt(postId);
+			vo.setPostId(postid);
+			
+			List<AdminVO> aList = adminService.getBoard(vo);
+			model.addAttribute("list", aList);
+			
+		}
+		
+			
+			return "boardview"; 
+			
+		
+	}
+	
+	
+	
+	
 	@RequestMapping("ajax")
 					// 1. 원래는 페이지로 리턴하는데 ajax을 써서 페이지로 보이지않고 데이터로 보여주겠다를 하려고
 	@ResponseBody   // 2. responsebody annotaion 을 붙인다
@@ -221,7 +243,15 @@ public class AdminController {
 	
 	}
 	
-
+	@RequestMapping("commentAction")
+	public String insertComment(AdminVO vo) {
+		
+		System.out.println("컨트롤");
+		adminService.saveBoard(vo);
+		
+		return "redirect:/comment";
+		
+	}
 	
 	
 }

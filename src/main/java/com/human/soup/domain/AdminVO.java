@@ -13,6 +13,7 @@ public class AdminVO
 	private String newpass;
 	private String username;
 	private String usergender;
+	
 	private int bookid;
 	private String booktitle;
 	private String bookauthor;
@@ -20,18 +21,26 @@ public class AdminVO
 	private String bookdate;
 	private String bookSearch;
 	private String topSelect;
+	
 	private int bookingId;
 	private String bookingName;
 	private String bookingTel;
 	private String rentalDue;
 	private String rentalPeriod;
-	private String postId;
+	
+	private int postId;
+	private	int		groupId;
+	private	String	sequenceNo;
 	private String postTitle;
 	private String postPass;
 	private String postContent;
 	private String postDate;
 	private int postCnt;
 	
+	private int commentId;
+	private String writer;
+	private String content;
+	private String regDate;
 	
 	public AdminVO() {
 		

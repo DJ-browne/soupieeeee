@@ -54,49 +54,9 @@
 </div>
 </div>
 </nav>
-<div class="board_wrap">
-		<section class="board_header">
-			<div class="board_title">
-				<h2>공지사항</h2>
-				<p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
-			</div>
-		</section>
-		<div class="board_view_wrap">
-			<div class="board_view">
-			<c:forEach items="${list}" var="post">
-				<div class="title">
-					${post.postTitle}
-				</div>
-				<div class="info">
-					<dl>
-						<dt>번호</dt>
-						<dd>${post.postId}</dd>
-					</dl>
-					<dl>
-						<dt>글쓴이</dt>
-						<dd>관리자</dd>
-					</dl>
-					<dl>
-						<dt>작성일</dt>
-						<dd>${post.postDate}</dd>
-					</dl>
-					<dl>
-						<dt>조회</dt>
-						<dd>${post.postCnt}</dd>
-					</dl>
-				</div>
-				<div class="cont">
-					${post.postContent}
-				</div>
-				 </c:forEach> 
-			</div>
-		</div>
-		
-	<div class="bt_wrap">
-			<button type="button" class="btn btn-success" id="insertBtn" ><a href="adminpost">목록</a></button>
-		</div>
-	</div>
-
+<h1>
+    <span>L</span><span>o</span><span>g</span><span>i</span><span style="margin-right: 20px;">n</span><span>n</span><span>e</span><span>e</span><span>d</span><span>e</span><span>d</span><span>✍</span>
+  </h1>
 		
 <% } else { if(name.equals("코코딩")) {  // >>>>> 관리자로 로그인 %>
     	<div class="dropdown">
@@ -120,7 +80,7 @@
 		</section>
 		<div class="board_view_wrap">
 			<div class="board_view">
-				<c:forEach items="${list}" var="post">
+					<c:forEach items="${list}" var="post">
 				<div class="title">
 					${post.postTitle}
 				</div>
@@ -145,11 +105,27 @@
 				<div class="cont">
 					${post.postContent}
 				</div>
-				 </c:forEach> 
+				 </c:forEach>
 				
 			</div>
 		</div>
 			
+			<div>
+
+	<form method="post" action="/reply/write">
+	
+		<p>
+			<label>댓글 작성자</label> <input type="text" name="writer">
+		</p>
+		<p>
+			<textarea rows="5" cols="50" name="content"></textarea>
+		</p>
+		<p>
+			<button type="submit">댓글 작성</button>
+		</p>
+	</form>
+	
+</div>
 		<div class="bt_wrap">
 			<button type="button" class="btn btn-success"><a href="adminpost">목록</a></button>
 			<button type="button" class="btn btn-success" id="editBtn" ><a href="replyAction?parentId=<%= postId %>">수정</a></button>
@@ -181,7 +157,7 @@
 		</section>
 		<div class="board_view_wrap">
 			<div class="board_view">
-				<c:forEach items="${list}" var="post">
+					<c:forEach items="${list}" var="post">
 				<div class="title">
 					${post.postTitle}
 				</div>
@@ -206,28 +182,43 @@
 				<div class="cont">
 					${post.postContent}
 				</div>
-				 </c:forEach> 
+				 </c:forEach>
 				
 			</div>
 		</div>
-		
-		<br>
+	
+		<div>
 	<!-- Comments Form -->
-	<div class="card my-4" id="commentBox">
-		<h5 class="card-header" style="font-size: 14px;">댓글을 남겨주세요 :</h5>
+	<div class="card my-4">
+		<h5 class="card-header">댓글을 남겨주세요 :</h5>
 		<div class="card-body">
 			<form name="comment-form" action="commentAction" method="post" autocomplete="off">
 				<div class="form-group">
-					<input type="hidden" name="postId" value="<%=postId %>" />
-					<textarea name="content" class="form-control" rows="3" id="commentText" maxlength="500"></textarea>
-				</div><br>
-				<button type="submit" class="btn btn-success">댓글등록</button>
+					<input type="hidden" name="idx" th:value="*{idx}" />
+					<textarea name="content" class="form-control" rows="3"></textarea>
+				</div>
+				<button type="submit" class="btn btn-success">등록</button>
 			</form>
 		</div>
 	</div>
-		
+	
+	<form method="post" action="commentAction" id="comment">
+	
+		<p>
+			<label>댓글 작성자</label> <input type="text" name="writer">
+		</p>
+		<p>
+			<textarea rows="5" cols="50" name="content"></textarea>
+		</p>
+		<p>
+			<button type="submit">댓글 작성</button>
+		</p>
+	</form>
+	
+</div>
 		<div class="bt_wrap">
-			<button type="button" class="btn btn-success" id="listBtn" ><a href="adminpost">목록</a></button>
+			<button type="button" class="btn btn-success" id="insertBtn" ><a href="adminpost">목록</a></button>
+			<button type="button" class="btn btn-success" id="replyBtn" ><a href="BoardReplyAction?parentId=<%= postId %>">댓글쓰기</a></button>
 		</div>
 	</div>
 

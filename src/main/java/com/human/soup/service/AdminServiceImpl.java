@@ -9,6 +9,8 @@ import com.human.soup.dao.AdminDao;
 import com.human.soup.dao.AdminDaoImpl;
 import com.human.soup.domain.AdminVO;
 
+import java.text.DecimalFormat;
+
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
@@ -78,6 +80,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int saveBoard(AdminVO vo) {
 		System.out.println("서비스");
+				
 		return adminDao.saveBoard(vo);
 		
 	}
@@ -94,9 +97,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public AdminVO getBoard(AdminVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AdminVO> getBoard(AdminVO vo) {
+		return adminDao.getBoard(vo);
 	}
 	
 
@@ -110,7 +112,13 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.getBoardList();
 	}
 
-	
+	@Override
+	public int insertComment(AdminVO vo) {
+		System.out.println("서비스");
+				
+		return adminDao.insertComment(vo);
+		
+	}
 	
 	
 }

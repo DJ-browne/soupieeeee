@@ -30,7 +30,7 @@ public interface AdminService {
 		void deleteBoard(AdminVO vo);
 
 		// 글 상세 조회
-		AdminVO getBoard(AdminVO vo);
+		List<AdminVO> getBoard(AdminVO vo);
 
 		// 글 목록 조회
 		List<AdminVO> getBookList(AdminVO vo);
@@ -52,6 +52,9 @@ public interface AdminService {
 
 
 		public List<AdminVO> getBoardList(AdminVO vo);
+
+
+		int insertComment(AdminVO vo);
 
 
 	
