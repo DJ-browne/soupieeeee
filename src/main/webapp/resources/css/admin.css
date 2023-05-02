@@ -302,7 +302,7 @@ ul, li {
 	display: block;
 	width: 100%;
 	height: 100px;
-	padding: 15px;
+	padding: 25px 50px;
 	box-sizing: border-box;
 	resize: none;
 	font-size: 13px;
@@ -382,6 +382,41 @@ ul, li {
 	max-width: 900px;
 	font-size: 13px;
 }
+#comTable, #comTableTop {
+
+}
+
+#comTableTop th,  #comTable td  {
+padding: 1px 30px 3px 2px;
+
+}
+
+#comTableTop th {
+	text-align: center;
+	
+}
+#comTable td {
+	text-align: left;
+	
+	
+}
+#comTableTop #dateTd {
+	width: 40px;
+	padding-left: 16px;
+}
+#comTable #dateTd {
+	padding-right: 0;
+}
+
+#comTableTop #writertd, #comTable #writertd {
+	padding-left: 15px;
+	
+}
+
+#comTableTop #writertd {
+	padding-right: 22px;
+	padding-left: 12px;
+}
 
 #hr {
 	margin: 0 auto;
@@ -422,5 +457,9 @@ ul, li {
 
 #writerBot, #pwdBot {
 	width: 100px;
+}
+
+#commentDeleteBtn {
+	font-size: 12px;
 }
 	

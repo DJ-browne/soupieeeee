@@ -249,7 +249,7 @@ public class AdminController {
 		System.out.println("컨트롤");
 		adminService.insertComment(vo);
 		
-		return "redirect:/boardview";
+		return "redirect:/boardview.do";
 		
 	}
 	

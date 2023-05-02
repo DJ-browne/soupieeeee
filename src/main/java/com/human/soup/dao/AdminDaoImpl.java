@@ -130,7 +130,7 @@ public class AdminDaoImpl implements AdminDao{
 	
 	@Override
 	public int insertComment(AdminVO vo) {
-		System.err.println("다오");
+		System.out.println("다오");
 		return mybatis.insert("adminDao.insertComment",vo);
 	}
 

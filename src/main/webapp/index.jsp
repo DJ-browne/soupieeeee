@@ -3,3 +3,4 @@
     
     
  <% response.sendRedirect("main"); %>
+<%--  <% response.sendRedirect("innerpage"); %> --%>
