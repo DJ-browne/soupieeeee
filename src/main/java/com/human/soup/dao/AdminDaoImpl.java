@@ -140,6 +140,13 @@ public class AdminDaoImpl implements AdminDao{
 		return cList;
 	}
 
+	@Override
+	public int updateCnt(AdminVO vo) {
+		System.out.println("다오");
+		return mybatis.update("adminDao.updateCnt",vo);
+		
+	}
+
 	
 	
 

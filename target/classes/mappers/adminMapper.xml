@@ -37,13 +37,7 @@
 
   	</insert>
   	
-  	<insert id="insertPost" parameterType="admin">
-  		INSERT INTO adminPost 
-  		VALUES ( seq_postId.nextval, #{postTitle}, #{postPass}, #{postContent}, 
-  		sysdate, 0, #{groupId}, #{sequenceNo} )
-
-  	</insert>
-
+  	
 	<select id="getBookList" parameterType="admin" resultType="admin">
 		select * from books 
 		<where>
@@ -69,8 +63,15 @@
 	update users set password = #{newpass} where password= #{password}
 	</update>
 	
+		<select id="getAllList" resultType="admin">
+  		SELECT * FROM books order by bookid
+  	</select>
+  	
+  	<update id="changeInfo" parameterType="admin">
 	
+	update books set bookstatement = 'Y', rentalDue = '' where bookid= #{bookid}
 	
+	</update>	
 	
 	
 	<insert id="userReservation" parameterType="admin">
@@ -81,12 +82,23 @@
 
   	</insert>
   	
+  	<delete id="bookingDelete" parameterType="admin">
+  	delete from bookinginfo where bookingid = #{bookid}
+  	
+  	</delete>
   		
 	<update id="bookingUpdate" parameterType="admin">
 	
 	update books set bookstatement = 'N', rentalDue = #{rentalDue} where bookid = #{bookid} 
 	
 	</update>
+	
+	<insert id="insertPost" parameterType="admin">
+  		INSERT INTO adminPost 
+  		VALUES ( seq_postId.nextval, #{postTitle}, #{postPass}, #{postContent}, 
+  		sysdate, 0 )
+
+  	</insert>
 
 	<select id="getBoardList" resultType="admin">
   		SELECT POSTID
@@ -108,19 +120,13 @@
   		 FROM adminPost where postId= #{postId} order by postId desc
   	</select>
   	
-  	<select id="getAllList" resultType="admin">
-  		SELECT * FROM books order by bookid
-  	</select>
-  	<update id="changeInfo" parameterType="admin">
+  	<update id="updateCnt" parameterType="admin">
 	
-	update books set bookstatement = 'Y', rentalDue = '' where bookid= #{bookid}
+	update adminPost set postCnt = postCnt + 1 where postId = #{postId} 
 	
 	</update>
 	
-  	<delete id="bookingDelete" parameterType="admin">
-  	delete from bookinginfo where bookingid = #{bookid}
   	
-  	</delete>
   	
     	
   	<insert id="insertComment" parameterType="admin">

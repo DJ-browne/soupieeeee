@@ -4,7 +4,6 @@
     <%@page import="com.human.soup.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
-    String postId = request.getParameter("postId");
     String id = null;
     String name = null;
     if(session.getAttribute("userid") != null) {
@@ -25,8 +24,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="resources/assets/img/favicon.png" rel="icon">
-  <link href="resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	<link href="../resources/img/soupie.png" rel="icon">
+  <link href="../resources/img/soupie.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -65,7 +64,7 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
-              <li><a href="admin">공지사항</a></li>
+              <li><a href="adminBoard.do">공지사항</a></li>
               <li><a href="#">FAQs</a></li>
             </ul>
           </li>
@@ -92,7 +91,7 @@
           <% } // else안에 if %>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+<!--         <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
 
     </div>
@@ -129,7 +128,7 @@
 				<div class="info">
 					<dl>
 						<dt>번호</dt>
-						<dd>${post.postId}</dd>
+						<dd id="boardPostId">${post.postId}</dd>
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
@@ -152,7 +151,7 @@
 		</div>
 		
 	<div class="bt_wrap">
-			<button type="button" class="btn btn-success" id="insertBtn" ><a href="adminpost">목록</a></button>
+		<button type="button" class="boardList" id="listBtn">목록</button>
 		</div>
 	</div>
 
@@ -170,7 +169,7 @@
 				<div class="info">
 					<dl>
 						<dt>번호</dt>
-						<dd>${post.postId}</dd>
+						<dd id="boardPostId">${post.postId}</dd>
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
@@ -192,7 +191,14 @@
 				
 			</div>
 		</div>
-				<br>
+								
+		<div class="bt_wrap">
+			<button type="button" class="boardList" id="listBtn">목록</button>
+			<button type="button" class="editPost" id="editBtn">수정</button>
+			<button type="button" class="deletePost" id="deleteBtn">삭제</button>
+		</div>
+		
+		
 	<!-- Comments Form -->
 	<h3 id="com">Comments :</h3><hr id="hr"/>
 	<div class="card my-4" id="commentBox">
@@ -202,7 +208,7 @@
 				<div class="form-group">
 				<div id="inputBox">
 				<div id="inputBoxL">
-					<input type="hidden" name="postId" value="<%=postId %>">
+					<input type="hidden" name="postId" id="hiddenPostId" value="${post.postId}">
 					<label class="control-label" for="id" id="writerTop">작성자</label>
             		<input class="form-control" type="text" name="writer" id="writerBot" value="<%=id%>"/>					
 				</div>
@@ -213,15 +219,11 @@
             	</div>
 					<textarea name="content" class="form-control" rows="3" id="commentText" maxlength="500" style="margin-top: 15px;"></textarea>
 				</div><br>
-				<button type="button" class="btn btn-success" id="leavecomment">댓글등록</button>
+				<button type="button" class="submitComment" id="leavecomment">댓글등록</button>
 			</form>
 		</div>
 	</div>
-		<div class="bt_wrap">
-			<button type="button" class="btn btn-success"><a href="adminpost">목록</a></button>
-			<button type="button" class="btn btn-success" id="editBtn" ><a href="replyAction?parentId=<%= postId %>">수정</a></button>
-			<button type="button" class="btn btn-success" id="deleteBtn" ><a href="deleteAction?postId=<%= postId %>">삭제</a></button>
-		</div>
+		
 		
 	</div>
 
@@ -241,7 +243,7 @@
 				<div class="info">
 					<dl>
 						<dt>번호</dt>
-						<dd>${post.postId}</dd>
+						<dd id="boardPostId">${post.postId}</dd>
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
@@ -266,7 +268,7 @@
 		<br>
 	<!-- Comments Form -->
 	<h3 id="com">Comments :</h3><hr id="hr"/>
-	
+	<form name="comment-form" id="deleteBtn" action="commentDelete" method="post">
 	<div class="card my-4" id="commentBox">
 		<h5 class="card-header" style="font-size: 15px; padding: 15px;">댓글을 남겨주세요 </h5>
 		<div class="card-body">
@@ -274,7 +276,7 @@
 				<div class="form-group">
 				<div id="inputBox">
 				<div id="inputBoxL">
-					<input type="hidden" name="postId" value="<%=postId %>">
+					<input type="hidden" name="postId" id="hiddenPostId" value="${post.postId}">
 					<label class="control-label" for="id" id="writerTop">작성자</label>
             		<input class="form-control" type="text" name="writer" id="writerBot" value="<%=id%>"/>					
 				</div>
@@ -289,9 +291,9 @@
 			</form>
 		</div>
 	</div>
-		
+		</form>
 		<div class="bt_wrap">
-			<button type="button" class="btn btn-success" id="listBtn" ><a href="adminpost">목록</a></button>
+			<button type="button" class="boardList" id="listBtn">목록</button>
 		</div>
 	</div>
 
@@ -306,70 +308,70 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
+<!--     <div class="footer-top"> -->
+<!--       <div class="container"> -->
+<!--         <div class="row"> -->
 
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Arsha</h3>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-          </div>
+<!--           <div class="col-lg-3 col-md-6 footer-contact"> -->
+<!--             <h3>Arsha</h3> -->
+<!--             <p> -->
+<!--               A108 Adam Street <br> -->
+<!--               New York, NY 535022<br> -->
+<!--               United States <br><br> -->
+<!--               <strong>Phone:</strong> +1 5589 55488 55<br> -->
+<!--               <strong>Email:</strong> info@example.com<br> -->
+<!--             </p> -->
+<!--           </div> -->
 
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
+<!--           <div class="col-lg-3 col-md-6 footer-links"> -->
+<!--             <h4>Useful Links</h4> -->
+<!--             <ul> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
+<!--             </ul> -->
+<!--           </div> -->
 
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
+<!--           <div class="col-lg-3 col-md-6 footer-links"> -->
+<!--             <h4>Our Services</h4> -->
+<!--             <ul> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li> -->
+<!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
+<!--             </ul> -->
+<!--           </div> -->
 
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Social Networks</h4>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-            <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-          </div>
+<!--           <div class="col-lg-3 col-md-6 footer-links"> -->
+<!--             <h4>Our Social Networks</h4> -->
+<!--             <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p> -->
+<!--             <div class="social-links mt-3"> -->
+<!--               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> -->
+<!--               <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a> -->
+<!--               <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a> -->
+<!--               <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
+<!--               <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
+<!--             </div> -->
+<!--           </div> -->
 
-        </div>
-      </div>
-    </div>
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
 
-    <div class="container footer-bottom clearfix">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+<!--     <div class="container footer-bottom clearfix"> -->
+<!--       <div class="copyright"> -->
+<!--         &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved -->
+<!--       </div> -->
+<!--       <div class="credits"> -->
+<!--         All the links in the footer should remain intact. -->
+<!--         You can delete the links only if you purchased the pro version. -->
+<!--         Licensing information: https://bootstrapmade.com/license/ -->
+<!--         Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+<!--         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+<!--       </div> -->
 
     </div>
   </footer><!-- End Footer -->
@@ -390,5 +392,123 @@
   <script src="resources/assets/js/main.js"></script>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
 
+$(document).ready(function() {
+	getCommentList();
+})
+
+function getCommentList() {
+	
+	$.ajax({
+		url: "getCommentList",
+		type : "get",
+		dataType: "json",
+		success : function(data){
+			
+			var commentList = data.commentList;
+			var commentname = $('#writerBot').val()
+			var hiddenPostId = $('#hiddenPostId').val()
+			
+			console.log(commentname)
+			console.log(hiddenPostId)
+			
+			
+			let htmlTag ='';
+														
+			for (let idx in commentList) {
+				
+				if (commentname == commentList[idx].writer) {
+									
+					
+				if (hiddenPostId == commentList[idx].postId) {
+					
+				htmlTag += '<thead><tr id="comTableTop">' +
+				'<th id="writertd">작성자</th>' +
+				'<th>내용</th>' +
+				'<th id="dateTd">날짜</th></tr></thead>' + 
+				'<tr id="comTable">' +
+				'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
+				'<input type="hidden" name="postId" value="'+commentList[idx].postId+'">' +
+				'<td id="writertd">'+commentList[idx].writer+'</td>' +
+				'<td>'+commentList[idx].content+'</td>' +
+				'<td id="dateTd">'+commentList[idx].regDate+'</td>' +
+				'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>' 
+				
+				
+				} else if (commentname == 'coco') {
+					
+					htmlTag += '<thead><tr id="comTableTop">' +
+					'<th id="writertd">작성자</th>' +
+					'<th>내용</th>' +
+					'<th id="dateTd">날짜</th></tr></thead>' + 
+					'<tr id="comTable">' +
+					'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
+					'<input type="hidden" name="postId" id="hiddenPostId" value="'+commentList[idx].postId+'">' +
+					'<td id="writertd">'+commentList[idx].writer+'</td>' +
+					'<td>'+commentList[idx].content+'</td>' +
+					'<td id="dateTd">'+commentList[idx].regDate+'</td></tr>' +
+					'<tr id="comTableBtn">' +
+					'<td><input type="hidden"></td>'+ 
+					'<td><input type="hidden"></td>' +
+					'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>' 
+				}
+			
+			$('#com').next().after('<div id="commentAdded"><table id="commentAddedTable">'+htmlTag+'</table></div>')
+								
+			 }
+				
+				
+			
+		}
+		
+		  
+					
+			
+		},
+		error : function(err){
+			console.log(err);
+		}				
+		
+	}) //ajax
+}
+
+$(function () {
+	  	var pwd = $('#pwdBot').val()
+	  	var text = $('#commentText').val()
+	  	
+	  	console.log(pwd)
+	  	console.log(text)
+	  	
+	$('#leavecomment').click(function() {
+	  	
+		if(pwd == '' && text == '' ) {
+			alert('작성한 내용이 없습니다.')
+		} else if (text == '') {
+			alert('댓글을 입력해주세요.')
+			
+		} else if (pwd == '') {
+			alert('비밀번호를 입력해주세요.')
+		} else {
+		$('#frm').submit();
+			
+		}
+		
+	})
+	
+	
+	$('#listBtn').click(function() {
+		location.href='adminBoard.do';
+	})
+	
+	
+	
+	
+})
+
+
+</script>
 </html>

@@ -60,6 +60,10 @@ public interface AdminService {
 		public List<AdminVO> getCommentList(AdminVO vo);
 
 
+
+		public List<AdminVO> updateCnt(AdminVO vo);
+
+
 	
 	
 }

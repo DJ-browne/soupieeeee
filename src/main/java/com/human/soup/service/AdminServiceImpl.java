@@ -124,6 +124,25 @@ public class AdminServiceImpl implements AdminService {
 	public List<AdminVO> getCommentList(AdminVO vo) {
 		return adminDao.getCommentList();
 	}
+
+	@Override
+	public List<AdminVO> updateCnt(AdminVO vo) {
+		
+		System.out.println("서비스");
+
+		List<AdminVO> aList = null;
+		
+		int result = adminDao.updateCnt(vo);
+		
+		if (result>0) {
+			aList = adminDao.getBoard(vo);
+		}
+		 
+		return aList;
+		
+	}
+
+	
 	
 	
 }

@@ -364,12 +364,12 @@ $(function () {
 	  	
 	$('#leavecomment').click(function() {
 	  	
-		if(pwd == null && text == null ) {
+		if(pwd == '' && text == '' ) {
 			alert('작성한 내용이 없습니다.')
-		} else if (text == null) {
+		} else if (text == '') {
 			alert('댓글을 입력해주세요.')
 			
-		} else if (pwd == null) {
+		} else if (pwd == '') {
 			alert('비밀번호를 입력해주세요.')
 		} else {
 		$('#frm').submit();

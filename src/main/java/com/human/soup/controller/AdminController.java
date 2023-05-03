@@ -77,24 +77,7 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping("boardview.do")
-	public String boardview(Model model, AdminVO vo, String postId) {
-		
-		int postid = 0;
-		if(postId != null) {
-			postid = Integer.parseInt(postId);
-			vo.setPostId(postid);
-			
-			List<AdminVO> aList = adminService.getBoard(vo);
-			model.addAttribute("list", aList);
-			
-		}
-		
-			
-			return "boardview"; 
-			
-		
-	}
+	
 	
 	
 	
@@ -133,7 +116,13 @@ public class AdminController {
 		 return map;
 		
 	}
-	
+	@RequestMapping("changeAction")
+	public String changeInfo(AdminVO vo) {
+		adminService.changeInfo(vo);
+			
+		return "redirect:/myBooking";
+		
+	}
 	@RequestMapping("getBookingInfo")
 	@ResponseBody // 2. responsebody annotaion 을 붙인다
 	public String getBookingInfo(AdminVO vo) {
@@ -213,13 +202,7 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping("changeAction")
-	public String changeInfo(AdminVO vo) {
-		adminService.changeInfo(vo);
-			
-		return "redirect:/myBooking";
-		
-	}
+
 	
 	@RequestMapping("saveBoard")
 	public String saveBoard(AdminVO vo) {
@@ -227,19 +210,43 @@ public class AdminController {
 		System.out.println("컨트롤");
 		adminService.saveBoard(vo);
 		
-		return "redirect:/adminpost";
+		return "redirect:/adminBoard";
 		
 	}
 	
-	@RequestMapping("getBoardList")
-	@ResponseBody
-	public HashMap<String, List<AdminVO>> getBoardList(AdminVO vo) {
+	@RequestMapping("updateCnt")
+	public String updateCnt(AdminVO vo, Model model) {
+		
+		System.out.println("컨트롤");
+				
+		List<AdminVO> aList = adminService.updateCnt(vo);
+		model.addAttribute("list", aList);
+		
+		return "adminBoardView";
+		
+	}
+	
+		
+//	@RequestMapping("getBoardList")
+//	@ResponseBody
+//	public HashMap<String, List<AdminVO>> getBoardList(AdminVO vo) {
+//		List<AdminVO> aList = adminService.getBoardList(vo);
+//	
+//	HashMap<String, List<AdminVO>> map = new HashMap<String, List<AdminVO>>();
+//	 map.put("adminList", aList);
+//	
+//	return map;
+//	
+//	}
+	
+	@RequestMapping("adminBoard.do")
+	public String getBoardList(AdminVO vo, Model model) {
+		
 		List<AdminVO> aList = adminService.getBoardList(vo);
 	
-	HashMap<String, List<AdminVO>> map = new HashMap<String, List<AdminVO>>();
-	 map.put("adminList", aList);
+		model.addAttribute("list", aList);
 	
-	return map;
+	return "adminBoard";
 	
 	}
 	
@@ -249,7 +256,7 @@ public class AdminController {
 		System.out.println("컨트롤");
 		adminService.insertComment(vo);
 		
-		return "redirect:/boardview.do";
+		return "redirect:/adminBoardView";
 		
 	}
 	
