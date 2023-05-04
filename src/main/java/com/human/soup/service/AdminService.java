@@ -64,6 +64,15 @@ public interface AdminService {
 		public List<AdminVO> updateCnt(AdminVO vo);
 
 
+		public void commentDelete(AdminVO vo);
+
+
+		public List<AdminVO> adminBoardView(AdminVO vo);
+
+
+		public void commentEdit(AdminVO vo);
+
+
 	
 	
 }

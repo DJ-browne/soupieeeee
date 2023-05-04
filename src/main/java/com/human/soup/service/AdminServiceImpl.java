@@ -79,7 +79,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public int saveBoard(AdminVO vo) {
-		System.out.println("서비스");
 				
 		return adminDao.saveBoard(vo);
 		
@@ -114,8 +113,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int insertComment(AdminVO vo) {
-		System.out.println("서비스");
-				
 		return adminDao.insertComment(vo);
 		
 	}
@@ -128,7 +125,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<AdminVO> updateCnt(AdminVO vo) {
 		
-		System.out.println("서비스");
+		
 
 		List<AdminVO> aList = null;
 		
@@ -142,7 +139,25 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	@Override
+	public void commentDelete(AdminVO vo) {
+		adminDao.commentDelete(vo);
+		
+	}
+
+	@Override
+	public void commentEdit(AdminVO vo) {
+		adminDao.commentEdit(vo);
+		
+	}
 	
+	@Override
+	public List<AdminVO> adminBoardView(AdminVO vo) {
+	
+		return adminDao.getBoard(vo);
+		
+	}
+
 	
 	
 }

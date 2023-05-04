@@ -125,9 +125,7 @@
 	update adminPost set postCnt = postCnt + 1 where postId = #{postId} 
 	
 	</update>
-	
-  	
-  	
+	  	
     	
   	<insert id="insertComment" parameterType="admin">
   		INSERT INTO usercomment 
@@ -146,8 +144,15 @@
   		 FROM usercomment order by commentId desc
   	</select>
   	
+  	<delete id="commentDelete" parameterType="admin">
+  	delete from usercomment where commentId = #{commentId}
+  	</delete>
   	
-  	
+  	<update id="commentEdit" parameterType="admin">
+	
+	update usercomment set CONTENT = #{content} where commentId = #{commentId} 
+	
+	</update>
   	
   	
   	

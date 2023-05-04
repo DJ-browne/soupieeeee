@@ -6,9 +6,11 @@
     <%
     String id = null;
     String name = null;
+    String password = null;
     if(session.getAttribute("userid") != null) {
   	  id = (String) session.getAttribute("userid"); 
   	name = (String) session.getAttribute("username"); 
+  	password = (String) session.getAttribute("password"); 
     }
 
     %> 
@@ -89,7 +91,7 @@
             </ul>
           </li>
           <% } // else안에 if %>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+<!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
 <!--         <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
@@ -200,7 +202,13 @@
 		
 		
 	<!-- Comments Form -->
-	<h3 id="com">Comments :</h3><hr id="hr"/>
+	<form name="comment-form" id="commentForm" method="post">
+		<input type="hidden" id="formcommentId" name="commentId" value="">
+		<input type="hidden" id="formpostId"name="postId" value="">
+		<input type="hidden" id="formcontent"name="content" value="">
+	<h3 id="com">Comments :</h3>
+	<hr id="hr"/>
+	</form>
 	<div class="card my-4" id="commentBox">
 		<h5 class="card-header" style="font-size: 15px; padding: 15px;">댓글을 남겨주세요 </h5>
 		<div class="card-body">
@@ -208,7 +216,7 @@
 				<div class="form-group">
 				<div id="inputBox">
 				<div id="inputBoxL">
-					<input type="hidden" name="postId" id="hiddenPostId" value="${post.postId}">
+					<input type="hidden" name="postId" id="hiddenPostId" value="${list.get(0).postId}">
 					<label class="control-label" for="id" id="writerTop">작성자</label>
             		<input class="form-control" type="text" name="writer" id="writerBot" value="<%=id%>"/>					
 				</div>
@@ -265,10 +273,20 @@
 				
 			</div>
 		</div>
-		<br>
+		
+		<div class="bt_wrap">
+			<button type="button" class="boardList" id="listBtn">목록</button>
+		</div>
+		
+		
 	<!-- Comments Form -->
-	<h3 id="com">Comments :</h3><hr id="hr"/>
-	<form name="comment-form" id="deleteBtn" action="commentDelete" method="post">
+	<form name="comment-form" id="commentForm" method="post">
+		<input type="hidden" id="formcommentId" name="commentId" value="">
+		<input type="hidden" id="formpostId"name="postId" value="">
+		<input type="hidden" id="formcontent"name="content" value="">
+	<h3 id="com">Comments :</h3>
+	<hr id="hr"/>
+	</form>	
 	<div class="card my-4" id="commentBox">
 		<h5 class="card-header" style="font-size: 15px; padding: 15px;">댓글을 남겨주세요 </h5>
 		<div class="card-body">
@@ -276,25 +294,24 @@
 				<div class="form-group">
 				<div id="inputBox">
 				<div id="inputBoxL">
-					<input type="hidden" name="postId" id="hiddenPostId" value="${post.postId}">
+					<input type="hidden" name="postId" id="hiddenPostId" value="${list.get(0).postId}">
 					<label class="control-label" for="id" id="writerTop">작성자</label>
             		<input class="form-control" type="text" name="writer" id="writerBot" value="<%=id%>"/>					
 				</div>
 				<div id="inputBoxR">
 					<label class="control-label" for="pwd" id="pwdTop" >비밀번호</label>
             		<input class="form-control" type="password" name="password" id="pwdBot"/>
+            		<input type="hidden" name="postPass" id="hiddenPass" value="<%=password%>">
             	</div>
             	</div>
 					<textarea name="content" class="form-control" rows="3" id="commentText" maxlength="500" style="margin-top: 15px;"></textarea>
 				</div><br>
-				<button type="button" class="submitComment" id="leavecomment">댓글등록</button>
+				<button type="button" class="submitComment" id="leavecomment" >댓글등록</button>
 			</form>
 		</div>
 	</div>
-		</form>
-		<div class="bt_wrap">
-			<button type="button" class="boardList" id="listBtn">목록</button>
-		</div>
+		
+		
 	</div>
 
 
@@ -413,62 +430,54 @@ function getCommentList() {
 			var commentname = $('#writerBot').val()
 			var hiddenPostId = $('#hiddenPostId').val()
 			
-			console.log(commentname)
-			console.log(hiddenPostId)
-			
-			
+						
 			let htmlTag ='';
 														
 			for (let idx in commentList) {
 				
-				if (commentname == commentList[idx].writer) {
-									
-					
 				if (hiddenPostId == commentList[idx].postId) {
 					
-				htmlTag += '<thead><tr id="comTableTop">' +
-				'<th id="writertd">작성자</th>' +
-				'<th>내용</th>' +
-				'<th id="dateTd">날짜</th></tr></thead>' + 
-				'<tr id="comTable">' +
-				'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
-				'<input type="hidden" name="postId" value="'+commentList[idx].postId+'">' +
-				'<td id="writertd">'+commentList[idx].writer+'</td>' +
-				'<td>'+commentList[idx].content+'</td>' +
-				'<td id="dateTd">'+commentList[idx].regDate+'</td>' +
-				'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>' 
-				
-				
-				} else if (commentname == 'coco') {
+					if (commentname == 'coco') {
+						
+						htmlTag += '<thead><tr id="comTableTop">' +
+						'<th id="writertd">작성자</th>' +
+						'<th>내용</th>' +
+						'<th id="dateTd">날짜</th>' + 
+						'<th id="dateTd"></th></tr></thead>' + 
+						'<tr id="comTable">' +
+						'<td id="writertd">'+commentList[idx].writer+'</td>' +
+						'<td>'+commentList[idx].content+'</td>' +
+						'<td id="dateTd">'+commentList[idx].regDate+'</td>' +
+						'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>' +
+						'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
+						'<input type="hidden" name="postId" id="hiddenPostId" value="'+commentList[idx].postId+'">' 
+					} else if (commentname == commentList[idx].writer)  {
+											
+						htmlTag += '<thead><tr id="comTableTop">' +
+						'<th id="writertd">작성자</th>' +
+						'<th>내용</th>' +
+						'<th id="dateTd">날짜</th>' + 
+						'<th id="dateTd"></th>' + 
+						'<th id="dateTd"></th></tr></thead>' +  
+						'<tr id="comTable">' +
+						'<td id="writertd">'+commentList[idx].writer+'</td>' +
+						'<td>'+commentList[idx].content+'</td>' +
+						'<td id="dateTd">'+commentList[idx].regDate+'</td>' +
+						'<td id="editTd"><button type="button" class="editComment" id="commentEditBtn">수정</button></td>'+ 
+						'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>'+ 
+						'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
+						'<input type="hidden" name="postId" value="'+commentList[idx].postId+'">' 
+					}
 					
-					htmlTag += '<thead><tr id="comTableTop">' +
-					'<th id="writertd">작성자</th>' +
-					'<th>내용</th>' +
-					'<th id="dateTd">날짜</th></tr></thead>' + 
-					'<tr id="comTable">' +
-					'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
-					'<input type="hidden" name="postId" id="hiddenPostId" value="'+commentList[idx].postId+'">' +
-					'<td id="writertd">'+commentList[idx].writer+'</td>' +
-					'<td>'+commentList[idx].content+'</td>' +
-					'<td id="dateTd">'+commentList[idx].regDate+'</td></tr>' +
-					'<tr id="comTableBtn">' +
-					'<td><input type="hidden"></td>'+ 
-					'<td><input type="hidden"></td>' +
-					'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>' 
-				}
-			
-			$('#com').next().after('<div id="commentAdded"><table id="commentAddedTable">'+htmlTag+'</table></div>')
+				} 
+					
+					
 								
-			 }
-				
-				
+			 } // for 문
+						
+			$('#com').next().after('<div id="commentAdded"><table id="commentAddedTable">'+htmlTag+'</table></div>')
 			
-		}
-		
-		  
-					
-			
-		},
+		}, // success function
 		error : function(err){
 			console.log(err);
 		}				
@@ -476,15 +485,20 @@ function getCommentList() {
 	}) //ajax
 }
 
+
 $(function () {
-	  	var pwd = $('#pwdBot').val()
+	
+		  		  		  	
+	$('#leavecomment').click(function() {
+	  	
+		var pwd = $('#pwdBot').val()
 	  	var text = $('#commentText').val()
+	  	var hiddenPass = $('#hiddenPass').val()
 	  	
 	  	console.log(pwd)
 	  	console.log(text)
-	  	
-	$('#leavecomment').click(function() {
-	  	
+	  	console.log(hiddenPass)
+	  		  		  	
 		if(pwd == '' && text == '' ) {
 			alert('작성한 내용이 없습니다.')
 		} else if (text == '') {
@@ -493,7 +507,12 @@ $(function () {
 		} else if (pwd == '') {
 			alert('비밀번호를 입력해주세요.')
 		} else {
+			if (pwd != hiddenPass) {
+				alert('비밀번호가 다릅니다(로그인 할 때의 비밀번호입니다.).')
+			} else {
 		$('#frm').submit();
+				
+			}
 			
 		}
 		
@@ -504,8 +523,48 @@ $(function () {
 		location.href='adminBoard.do';
 	})
 	
+	$('#commentForm').on('click', '.deletePost', function() {
+		$('#commentForm').attr("action", "commentDelete")
+		
+		$('#formcommentId').val($(this).parent().parent().next().val());
+		$('#formpostId').val($(this).parent().parent().next().next().val());
+		
+		
+		$('#commentForm').submit();
+	})
 	
+// 	$('#commentForm').on('click', '.editComment', function() {
+// 		$('#commentD').attr("action", "commentEdit")
+// 		$('#commentD').submit();
+// 	})
+
+	$('#commentForm').on('click', '.editComment', function() {
+		let selectTag = $(this).parent().prev().prev()
+		let selectTagText = selectTag.text();
+		selectTag.html("<input name='' id='saveComment' type='text' size='80' value='"+selectTagText+"'>");
+		// 지우지말고 태그를 변경하는식으로 하세욤
+// 		$(this).remove('#commentEditBtn')
+		$(this).attr("class", "saveComment")
+		$(this).text("저장")
+
+		
+		$('.saveComment').click(function(){
+			
+			$('#commentForm').attr("action", "commentEdit")
+			
+			$('#formcommentId').val($(this).parent().parent().next().val());
+			$('#formpostId').val($(this).parent().parent().next().next().val());
+			$('#formcontent').val($('#saveComment').val());
+			
+	 		$('#commentForm').submit();
+		});
+		
+		
+	})
 	
+	function getEditPage() {
+		
+	}
 	
 })
 

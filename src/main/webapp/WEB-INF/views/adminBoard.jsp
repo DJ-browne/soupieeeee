@@ -112,67 +112,13 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-   <%
-    	if (id == null) {  // >>>> 로그인 안한상태
-    	
-    %>
-    
-<div class="board_wrap">
-			<div class="board_list_wrap">
-			  	<div class="table-responsive" id="tableH" >
-        <form action="updateCnt" method="post" id="frm">
-        <table class="table table-striped table-sm text-center" id="tableid">
-          <thead>
-            <tr id="tabletr">
-              <th scope="col">글번호</th>
-              <th scope="col">제목</th>
-              <th scope="col">글쓴이</th>
-              <th scope="col">작성일</th>
-              <th scope="col">조회</th>
-              
-            </tr>
-          </thead>   
-          <c:forEach items="${list}" var="board">
-          <tbody>
-        	  <tr id="tabletr">
-		      	<td scope="col">${board.postId}</td>
-		        <input type="hidden" name="postId" id="hiddenPostId" value="${board.postId}">
-		        <td scope="col" style="cursor: pointer;" onclick="comment()">${board.postTitle}</td>
-		        <td scope="col">관리자</td>
-		        <td scope="col">${board.postDate}</td>
-		        <td scope="col">${board.postCnt}</td>
-		       </tr>
-		        
-          </tbody>
-          	 </c:forEach>              	
-        		                              	  
-           </table>
-           </form>
-           
-     	 </div>
-			
-				
-		</div>
-		<div class="board_page">
-			<a href="#" class="bt first"><<</a> 
-			<a href="#" class="bt prev"><</a>
-			<a href="#" class="num on">1</a> 
-			<a href="#" class="num">2</a> 
-			<a href="#" class="num">3</a> 
-			<a href="#" class="num">4</a> 
-			<a href="#" class="num">5</a> 
-			<a href="#" class="bt next">></a> 
-			<a href="#" class="bt last">>></a>
-		</div>
+	
 
-		
-<% } else { if(name.equals("코코딩")) {  // >>>>> 관리자로 로그인 %>
 
 <div class="board_wrap">
 		
 		<div class="board_list_wrap">
 			  	<div class="table-responsive" id="tableH" >
-        <form action="updateCnt" method="post" id="frm">
          <table class="table table-striped table-sm text-center" id="tableid">
           <thead>
             <tr id="tabletr">
@@ -189,8 +135,7 @@
           <tbody>
         	  <tr id="tabletr">
 		      	<td scope="col">${board.postId}</td>
-		        <input type="hidden" name="postId" id="hiddenPostId" value="${board.postId}">
-		        <td scope="col" style="cursor: pointer;" onclick="comment()">${board.postTitle}</td>
+		        <td scope="col" style="cursor: pointer;" class="postView" >${board.postTitle}</td>
 		        <td scope="col">관리자</td>
 		        <td scope="col">${board.postDate}</td>
 		        <td scope="col">${board.postCnt}</td>
@@ -200,65 +145,16 @@
           	 </c:forEach>       
                           	  
            </table>
-           </form>
      	 </div>
-			
-				
-		</div>
-		<div class="board_page">
-			<a href="#" class="bt first"><<</a> 
-			<a href="#" class="bt prev"><</a>
-			<a href="#" class="num on">1</a> 
-			<a href="#" class="num">2</a> 
-			<a href="#" class="num">3</a> 
-			<a href="#" class="num">4</a> 
-			<a href="#" class="num">5</a> 
-			<a href="#" class="bt next">></a> 
-			<a href="#" class="bt last">>></a>
-		</div>
 		
+		</div>
+     	<% if(id != null){ %>
+		<% if(name.equals("코코딩")) {  // >>>>> 관리자로 로그인 %>	
 		<div class="bt_wrap">
 			<button type="button" class="writePost" id="insertBtn" onclick="insertBoard()" >글쓰기</button>
 		</div>
-	</div>	
+		<% } }%>
 		
-<%} else {// else안에 if >>>> 회원이여서 로그인 한후 %> 
-    	
-
-<div class="board_wrap">
-		<div class="board_list_wrap">
-			  	<div class="table-responsive" id="tableH" >
-			<form action="updateCnt" method="post" id="frm">         
-         <table class="table table-striped table-sm text-center" id="tableid">
-          <thead>
-            <tr id="tabletr">
-              <th scope="col">글번호</th>
-              <th scope="col">제목</th>
-              <th scope="col">글쓴이</th>
-              <th scope="col">작성일</th>
-              <th scope="col">조회</th>
-              
-            </tr>
-          </thead>   
-          <c:forEach items="${list}" var="board">
-          <tbody>
-        	  <tr id="tabletr">
-		      	<td scope="col">${board.postId}</td>
-		        <input type="hidden" name="postId" id="hiddenPostId" value="${board.postId}">
-		        <td scope="col" style="cursor: pointer;" onclick="comment()">${board.postTitle}</td>
-		        <td scope="col">관리자</td>
-		        <td scope="col">${board.postDate}</td>
-		        <td scope="col">${board.postCnt}</td>
-		       </tr>
-		        
-          </tbody>
-          	 </c:forEach>       	
-           </table>
-			</form>
-     	 </div>
-			
-				
-		</div>
 		<div class="board_page">
 			<a href="#" class="bt first"><<</a> 
 			<a href="#" class="bt prev"><</a>
@@ -270,13 +166,25 @@
 			<a href="#" class="bt next">></a> 
 			<a href="#" class="bt last">>></a>
 		</div>
+		
+	
+	</div>	
+		
+ 	   
 
     
-    <%} // else%>
-    
-<%} // else%>
+	<form action="updateCnt" method="post" id="frm">   
+	 
+		<input type="hidden" name="postId" id="hiddenPostId" value="">
+		<input type="hidden" name="postTitle" id="hiddenPostTitle" value="">
+		<input type="hidden" name="postDate" id="hiddenPostDate" value="">
+		<input type="hidden" name="postCnt" id="hiddenPostICnt" value="">
 
-
+	</form>
+		
+		
+		
+		
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -371,52 +279,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
 
-// $(document).ready(function() {
-// 	$.ajax({
-// 		url: "getBoardList",
-// 		type : "get",
-// 		dataType: "json",
-// 		success : function(data){
-			
-// 			var adminList = data.adminList;
-
-// 				let htmlTag ='';
-				
-// 				for( let idx in adminList) {
-					
-// 					htmlTag +='<tr id="tabletr">' +
-// 		              '<td scope="col">'+adminList[idx].postId+'</td>' +
-// 		              '<input type="hidden" name="postId" id="hiddenPostId" value="'+adminList[idx].postId+'">' +
-// 		              '<td scope="col" style="cursor: pointer;" onclick="comment()">'+adminList[idx].postTitle+'</td>' +
-// 		              '<td scope="col">관리자</td>' +
-// 		              '<td scope="col">'+adminList[idx].postDate+'</td>'+
-// 		              '<td scope="col">'+adminList[idx].postCnt+'</td></tr>'
-// 		       }
-								
-								
-// 				// thead 다음을 지우고
-// 	            $('#tableid > thead').next().remove();
-// 				// 지운후 thead 다음에 넣는다
-// 	            $('#tableid > thead').after( '<tbody>'+htmlTag +'</tbody>');
-	            
-					
-			
-// 		},
-// 		error : function(err){
-// 			console.log(err);
-// 		}				
-		
-// 	}) //ajax
-// })
-
 function insertBoard() {
 	 window.location.href = 'adminBoardInsert'
 }
 
-function comment() {
-	document.getElementById('frm').submit();
-}
+// function comment() {
+// 	document.getElementById('frm').submit();
+// }
+
+$(function () {
  
+		$('#tableH').on('click','.postView', function(){
+		
+			console.log($(this).parent().parent().find('td')[0].innerHTML );
+			console.log($(this).parent().parent().find('td')[1].innerHTML );
+			console.log($(this).parent().parent().find('td')[3].innerHTML );
+			console.log($(this).parent().parent().find('td')[4].innerHTML );
+			
+			$('#hiddenPostId').val($(this).parent().parent().find('td')[0].innerHTML)
+			$('#hiddenPostTitle').val($(this).parent().parent().find('td')[1].innerHTML)
+			$('#hiddenPostDate').val($(this).parent().parent().find('td')[3].innerHTML)
+			$('#hiddenPostICnt').val($(this).parent().parent().find('td')[4].innerHTML)
+		
+			$('#frm').submit();
+	
+		})
+})
 
 
 </script>

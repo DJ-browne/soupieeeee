@@ -70,6 +70,10 @@ public interface AdminDao {
 
 	public int updateCnt(AdminVO vo);
 
+	public void commentDelete(AdminVO vo);
+
+	public void commentEdit(AdminVO vo);
+
 	
 	
 }

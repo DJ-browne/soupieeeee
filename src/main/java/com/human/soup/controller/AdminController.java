@@ -143,6 +143,7 @@ public class AdminController {
 		} else {
 			session.setAttribute("userid", result.getUserid() );
 			session.setAttribute("username", result.getUsername() );
+			session.setAttribute("password", result.getPassword() );
 			session.setAttribute("sessionTime", new Date().toLocaleString());
 		}
 		
@@ -201,13 +202,12 @@ public class AdminController {
 	
 	}
 	
-	
+	// ======================================================================//
 
 	
 	@RequestMapping("saveBoard")
 	public String saveBoard(AdminVO vo) {
 		
-		System.out.println("컨트롤");
 		adminService.saveBoard(vo);
 		
 		return "redirect:/adminBoard";
@@ -217,7 +217,6 @@ public class AdminController {
 	@RequestMapping("updateCnt")
 	public String updateCnt(AdminVO vo, Model model) {
 		
-		System.out.println("컨트롤");
 				
 		List<AdminVO> aList = adminService.updateCnt(vo);
 		model.addAttribute("list", aList);
@@ -226,36 +225,21 @@ public class AdminController {
 		
 	}
 	
-		
-//	@RequestMapping("getBoardList")
-//	@ResponseBody
-//	public HashMap<String, List<AdminVO>> getBoardList(AdminVO vo) {
-//		List<AdminVO> aList = adminService.getBoardList(vo);
-//	
-//	HashMap<String, List<AdminVO>> map = new HashMap<String, List<AdminVO>>();
-//	 map.put("adminList", aList);
-//	
-//	return map;
-//	
-//	}
-	
+
 	@RequestMapping("adminBoard.do")
 	public String getBoardList(AdminVO vo, Model model) {
-		
 		List<AdminVO> aList = adminService.getBoardList(vo);
-	
 		model.addAttribute("list", aList);
-	
-	return "adminBoard";
+		return "adminBoard";
 	
 	}
 	
 	@RequestMapping("commentAction")
-	public String insertComment(AdminVO vo) {
-		
-		System.out.println("컨트롤");
+	public String insertComment(AdminVO vo, Model model) {
 		adminService.insertComment(vo);
 		
+		model.addAttribute("postId",vo.getPostId());
+
 		return "redirect:/adminBoardView";
 		
 	}
@@ -270,6 +254,34 @@ public class AdminController {
 	
 	return map;
 	
+	}
+		
+	@RequestMapping("commentDelete")
+	public String commentDelete(AdminVO vo, Model model) {
+		adminService.commentDelete(vo);
+		model.addAttribute("postId",vo.getPostId());
+		return "redirect:/adminBoardView";
+		
+	}
+	
+	@RequestMapping("commentEdit")
+	public String commentEdit(AdminVO vo, Model model) {
+		adminService.commentEdit(vo);
+		model.addAttribute("postId",vo.getPostId());
+		return "redirect:/adminBoardView";
+		
+	}
+	
+	@RequestMapping("adminBoardView")
+	public String adminBoardView(AdminVO vo, Model model) {
+		
+		
+		List<AdminVO> aList = adminService.adminBoardView(vo);
+		model.addAttribute("list", aList);
+		
+		
+		return "adminBoardView";
+		
 	}
 	
 }

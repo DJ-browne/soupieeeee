@@ -60,6 +60,11 @@ public class AdminDaoImpl implements AdminDao{
 		
 		return mybatis.update("adminDao.changeInfo",vo);
 	}
+	
+	public int bookingUpdate(AdminVO vo) {
+		return mybatis.update("adminDao.bookingUpdate", vo);
+		
+	}
 
 	@Override
 	public void userUpdate(AdminVO vo) {
@@ -67,17 +72,28 @@ public class AdminDaoImpl implements AdminDao{
 		
 		
 	}
+	@Override
+	public void bookingDelete(AdminVO vo) {
+		
+		mybatis.delete("adminDao.bookingDelete", vo);
+		
+	}
+	public List<AdminVO> getAllList() {
+		
+		List<AdminVO> bList = mybatis.selectList("adminDao.getAllList");
+		return bList;
+	}
 	
 	@Override
 	public int memberInfo(AdminVO vo) {
-		System.out.println("다오왔다");
 		return mybatis.insert("adminDao.userReservation",vo);
 	}
 
-
+//====================================================//
+	
+	
 	@Override
 	public int saveBoard(AdminVO vo) {
-		System.out.println("다오");
 		
 		return mybatis.insert("adminDao.insertPost",vo);
 		
@@ -97,23 +113,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 	}
 
-	public int bookingUpdate(AdminVO vo) {
-		return mybatis.update("adminDao.bookingUpdate", vo);
-		
-	}
 
-	@Override
-	public void bookingDelete(AdminVO vo) {
-		
-		mybatis.delete("adminDao.bookingDelete", vo);
-		
-	}
-
-	public List<AdminVO> getAllList() {
-		
-		List<AdminVO> bList = mybatis.selectList("adminDao.getAllList");
-		return bList;
-	}
 
 	@Override
 	public void deleteBoard(AdminVO vo) {
@@ -130,7 +130,6 @@ public class AdminDaoImpl implements AdminDao{
 	
 	@Override
 	public int insertComment(AdminVO vo) {
-		System.out.println("다오");
 		return mybatis.insert("adminDao.insertComment",vo);
 	}
 
@@ -142,8 +141,20 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public int updateCnt(AdminVO vo) {
-		System.out.println("다오");
+		
 		return mybatis.update("adminDao.updateCnt",vo);
+		
+	}
+
+	@Override
+	public void commentDelete(AdminVO vo) {
+		mybatis.delete("adminDao.commentDelete",vo);
+		
+	}
+
+	@Override
+	public void commentEdit(AdminVO vo) {
+		mybatis.update("adminDao.commentEdit",vo);
 		
 	}
 
