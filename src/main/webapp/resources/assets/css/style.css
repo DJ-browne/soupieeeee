@@ -1870,27 +1870,40 @@ tbody > #tabletr td a:hover {
 	
 }
 
-.board_page {
-	margin-top: 130px;
-	text-align: center;
-	font-size: 0;
-	}		
+.pageList {
+	margin: 0 auto;
+    max-width: 900px;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+.pagination {
+	display: flex;
+    padding-left: 0;
+    list-style: none;
+	align-items: center;
+	justify-content: center;
+	margin: 100px 0;
+	
+}
 
 	.board_page a {
 	display: inline-block;
-	width: 32px;
-	height: 32px;
-	box-sizing: border-box;
-	vertical-align: middle;
 	border: 1px solid #ddd;
-	border-left: 0;
-	line-height: 100%;
+	color: #878e98;
 	}
 	
 	.board_page a:hover {
 		background: #1dc078;
 		color: #fff;
 		font-weight: bold;
+	}
+	
+	.board_page a:focus {
+		background: #1dc078;
+		color: #fff;
+		font-weight: bold;
+		box-shadow: none;
 	}
 	
 	.board_page a.bt {
@@ -2033,9 +2046,9 @@ tbody > #tabletr td a:hover {
 	padding: 1px 10px;
     margin-bottom: 1px;
     border-radius: 50px;
-    color: #719a60;
-    font-size: 14px;
-    border: 2px solid #719a60;
+    color: #1dc078;
+    font-size: 13px;
+    border: 2px solid #1dc078;
     font-weight: 600;
     background-color:#fff;
     width: 53px;
@@ -2043,8 +2056,8 @@ tbody > #tabletr td a:hover {
 	
 	#commentEditBtn:hover {
     color: #fff;
-    background-color: #719a60;
-    border: 2px solid #719a60;
+    background-color: #1dc078;
+    border: 2px solid #1dc078;
     transition: 0.3s;
 	}
 	
@@ -2052,9 +2065,9 @@ tbody > #tabletr td a:hover {
 	padding: 1px 10px;
     margin-bottom: 1px;
     border-radius: 50px;
-    color: #719a60;
-    font-size: 14px;
-    border: 2px solid #719a60;
+    color: #1dc078;
+    font-size: 13px;
+    border: 2px solid #1dc078;
     font-weight: 600;
     background-color:#fff;
     width: 53px;
@@ -2062,8 +2075,8 @@ tbody > #tabletr td a:hover {
 	
 	#commentDeleteBtn:hover {
     color: #fff;
-    background-color: #719a60;
-    border: 2px solid #719a60;
+    background-color: #1dc078;
+    border: 2px solid #1dc078;
     transition: 0.3s;
 	}
 	
@@ -2154,6 +2167,25 @@ font-family: "Poppins", sans-serif;
 	
 }
 
+
+.form-check-input:focus {
+    box-shadow: none;
+    border-color: #878e98;
+}
+
+.form-check-input:checked {
+    background-color: #1dc078;
+    border-color: #1dc078;
+    box-shadow: none;
+}
+
+.form-check-label {
+	font-size: 13px; 
+	margin-left: 10px;
+	position: relative;
+    top: -3px;
+}
+
 #commentAddedTable {
 	margin: 0 auto;
 	max-width: 900px;
@@ -2167,11 +2199,11 @@ padding: 1px 25px 3px 2px;
 
 #comTableTop th {
 	text-align: center;
-	
+	height: 28px;
 }
 #comTable td {
 	text-align: left;
-		
+	height: 28px;	
 }
 #comTableTop #dateTd {
 	width: 40px;
@@ -2190,11 +2222,24 @@ padding: 1px 25px 3px 2px;
 #comTableTop #writertd, #comTable #writertd {
 	padding-left: 15px;
 	
+	
 }
 
 #comTableTop #writertd {
 	padding-right: 22px;
 	padding-left: 12px;
+}
+
+#saveComment {
+	border-radius: 0.25rem;
+	border: 1px solid #878e98;
+}
+
+#saveComment:focus {
+	outline: 1px solid #1dc078;
+	border: none;
+	border-radius: 0.25rem;
+	color: #1dc078;
 }
 
 #hr {
@@ -2205,13 +2250,9 @@ padding: 1px 25px 3px 2px;
 	
 }
 
-#commentAdded {
-	
-}
-
 #inputBox {
 	display: flex;
-	
+	align-items: center;
 }
 
 #inputBoxL {

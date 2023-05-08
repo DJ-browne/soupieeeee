@@ -19,7 +19,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <title>Soupie - 공지사항</title>
+  <title>Soupie - FAQs</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -65,7 +65,7 @@
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
               <li><a href="adminBoard.do">공지사항</a></li>
-              <li><a href="#">FAQs</a></li>
+              <li><a href="faqsBoard">FAQs</a></li>
             </ul>
           </li>
 <!--           <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> -->
@@ -107,7 +107,7 @@
           <li><a href="main">Home</a></li>
           <li>Announcements</li>
         </ol>
-        <h2>공지 사항</h2>
+        <h2>FAQs</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -157,18 +157,16 @@
 		
 		<div class="board_page">
 		
-	<c:forEach items="${groupPerPage}" var="group" begin="1" end="${groupPerPage}">
-	<nav aria-label="Page navigation example" class="pageList">
+		<nav aria-label="Page navigation example" class="pageList">
 		<ul class="pagination" id="pageUl">
-    		<li class="page-item disabled" id="page-item List">
+    		<li class="page-item">
       			<a class="page-link" href="#" aria-label="Previous">
         			<span aria-hidden="true">&laquo;</span>
       			</a>
     		</li>
-    		<li class="page-item"><a class="page-link" href="adminBoard.do?group=${group}">1 ${group}</a></li>
+    		<li class="page-item"><a class="page-link" href="#">1</a></li>
    			<li class="page-item"><a class="page-link" href="#">2</a></li>
     		<li class="page-item"><a class="page-link" href="#">3</a></li>
-    		<li class="page-item"><a class="page-link" href="#">4</a></li>
     		<li class="page-item">
      	 		<a class="page-link" href="#" aria-label="Next">
         			<span aria-hidden="true">&raquo;</span>
@@ -176,20 +174,6 @@
     		</li>
   		</ul>
 	</nav>
-	</c:forEach>		
-<!-- 			<a href="#" class="bt first"><<</a>  -->
-<!-- 			<a href="#" class="bt prev"><</a> -->
-<!-- 			<a href="#" class="num on">1</a>  -->
-<!-- 			<a href="#" class="num">2</a>  -->
-<!-- 			<a href="#" class="num">3</a>  -->
-<!-- 			<a href="#" class="num">4</a>  -->
-<!-- 			<a href="#" class="num">5</a>  -->
-<!-- 			<a href="#" class="bt next">></a>  -->
-<!-- 			<a href="#" class="bt last">>></a> -->
-
-
-		</div>
-		
 	
 	</div>	
 		

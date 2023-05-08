@@ -6,11 +6,9 @@
     <%
     String id = null;
     String name = null;
-    String password = null;
     if(session.getAttribute("userid") != null) {
   	  id = (String) session.getAttribute("userid"); 
   	name = (String) session.getAttribute("username"); 
-  	password = (String) session.getAttribute("password"); 
     }
 
     %> 
@@ -220,9 +218,10 @@
 					<label class="control-label" for="id" id="writerTop">작성자</label>
             		<input class="form-control" type="text" name="writer" id="writerBot" value="<%=id%>"/>					
 				</div>
-				<div id="inputBoxR">
-					<label class="control-label" for="pwd" id="pwdTop" >비밀번호</label>
-            		<input class="form-control" type="password" name="password" id="pwdBot"/>
+				<div class="form-check form-switch" id="inputBoxR">
+					<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+  					<label class="form-check-label" for="flexSwitchCheckChecked">비밀댓글</label>
+            		<input type="hidden" name="secretCheck" id=switchCheck>
             	</div>
             	</div>
 					<textarea name="content" class="form-control" rows="3" id="commentText" maxlength="500" style="margin-top: 15px;"></textarea>
@@ -298,10 +297,10 @@
 					<label class="control-label" for="id" id="writerTop">작성자</label>
             		<input class="form-control" type="text" name="writer" id="writerBot" value="<%=id%>"/>					
 				</div>
-				<div id="inputBoxR">
-					<label class="control-label" for="pwd" id="pwdTop" >비밀번호</label>
-            		<input class="form-control" type="password" name="password" id="pwdBot"/>
-            		<input type="hidden" name="postPass" id="hiddenPass" value="<%=password%>">
+				<div class="form-check form-switch" id="inputBoxR">
+					<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+  					<label class="form-check-label" for="flexSwitchCheckChecked">비밀댓글</label>
+            		<input type="hidden" name="secretCheck" id=switchCheck>
             	</div>
             	</div>
 					<textarea name="content" class="form-control" rows="3" id="commentText" maxlength="500" style="margin-top: 15px;"></textarea>
@@ -427,6 +426,7 @@ function getCommentList() {
 		success : function(data){
 			
 			var commentList = data.commentList;
+			
 			var commentname = $('#writerBot').val()
 			var hiddenPostId = $('#hiddenPostId').val()
 			
@@ -434,6 +434,7 @@ function getCommentList() {
 			let htmlTag ='';
 														
 			for (let idx in commentList) {
+				
 				
 				if (hiddenPostId == commentList[idx].postId) {
 					
@@ -450,7 +451,8 @@ function getCommentList() {
 						'<td id="dateTd">'+commentList[idx].regDate+'</td>' +
 						'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>' +
 						'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
-						'<input type="hidden" name="postId" id="hiddenPostId" value="'+commentList[idx].postId+'">' 
+						'<input type="hidden" name="postId" id="hiddenPostId" value="'+commentList[idx].postId+'">'
+						
 					} else if (commentname == commentList[idx].writer)  {
 											
 						htmlTag += '<thead><tr id="comTableTop">' +
@@ -467,11 +469,36 @@ function getCommentList() {
 						'<td><button type="button" class="deletePost" id="commentDeleteBtn">삭제</button></td></tr>'+ 
 						'<input type="hidden" name="commentId" value="'+commentList[idx].commentId+'">' +
 						'<input type="hidden" name="postId" value="'+commentList[idx].postId+'">' 
+				
+					} else {
+						
+						if (commentList[idx].secretCheck =='N') {
+							
+							htmlTag += '<thead><tr id="comTableTop">' +
+							'<th id="writertd">작성자</th>' +
+							'<th>내용</th>' +
+							'<th id="dateTd">날짜</th></tr></thead>' + 
+							'<tr id="comTable">' +
+							'<td id="writertd">'+commentList[idx].writer+'</td>' +
+							'<td>'+commentList[idx].content+'</td>' +
+							'<td id="dateTd">'+commentList[idx].regDate+'</td></tr>'
+							
+						} else if (commentList[idx].secretCheck =='Y') {
+							
+							htmlTag += '<thead><tr id="comTableTop">' +
+							'<th id="writertd">작성자</th>' +
+							'<th>내용</th>' +
+							'<th id="dateTd">날짜</th></tr></thead>' + 
+							'<tr id="comTable">' +
+							'<td id="writertd">'+commentList[idx].writer+'</td>' +
+							'<td>비밀댓글은 작성자와 관리자만 볼 수 있습니다.</td>' +
+							'<td id="dateTd">'+commentList[idx].regDate+'</td></tr>'
+							
+						}
 					}
 					
 				} 
-					
-					
+										
 								
 			 } // for 문
 						
@@ -490,38 +517,35 @@ $(function () {
 	
 		  		  		  	
 	$('#leavecomment').click(function() {
-	  	
-		var pwd = $('#pwdBot').val()
-	  	var text = $('#commentText').val()
-	  	var hiddenPass = $('#hiddenPass').val()
-	  	
-	  	console.log(pwd)
-	  	console.log(text)
-	  	console.log(hiddenPass)
-	  		  		  	
-		if(pwd == '' && text == '' ) {
-			alert('작성한 내용이 없습니다.')
-		} else if (text == '') {
+	  				
+		var text = $('#commentText').val()
+
+	  	if (text == '') {
 			alert('댓글을 입력해주세요.')
-			
-		} else if (pwd == '') {
-			alert('비밀번호를 입력해주세요.')
+		
 		} else {
-			if (pwd != hiddenPass) {
-				alert('비밀번호가 다릅니다(로그인 할 때의 비밀번호입니다.).')
+			var checked = $('#flexSwitchCheckChecked').is(':checked');
+			
+			if(checked) {
+				$('#switchCheck').attr("value", "Y")
 			} else {
+				$('#switchCheck').attr("value", "N")
+			}
+			
+			var checkVal = $('#switchCheck').val()
+		  	
 		$('#frm').submit();
 				
 			}
 			
-		}
+		})
 		
 	})
-	
 	
 	$('#listBtn').click(function() {
 		location.href='adminBoard.do';
 	})
+	
 	
 	$('#commentForm').on('click', '.deletePost', function() {
 		$('#commentForm').attr("action", "commentDelete")
@@ -533,17 +557,11 @@ $(function () {
 		$('#commentForm').submit();
 	})
 	
-// 	$('#commentForm').on('click', '.editComment', function() {
-// 		$('#commentD').attr("action", "commentEdit")
-// 		$('#commentD').submit();
-// 	})
 
 	$('#commentForm').on('click', '.editComment', function() {
 		let selectTag = $(this).parent().prev().prev()
 		let selectTagText = selectTag.text();
-		selectTag.html("<input name='' id='saveComment' type='text' size='80' value='"+selectTagText+"'>");
-		// 지우지말고 태그를 변경하는식으로 하세욤
-// 		$(this).remove('#commentEditBtn')
+		selectTag.html("<input name='' id='saveComment' type='text' size='60' value='"+selectTagText+"'>");
 		$(this).attr("class", "saveComment")
 		$(this).text("저장")
 
@@ -565,8 +583,10 @@ $(function () {
 	function getEditPage() {
 		
 	}
-	
-})
+
+
+
+
 
 
 </script>

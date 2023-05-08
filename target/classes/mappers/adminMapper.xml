@@ -129,8 +129,8 @@
     	
   	<insert id="insertComment" parameterType="admin">
   		INSERT INTO usercomment 
-  		VALUES ( seq_commentId.nextval, #{postId}, #{writer}, #{password}, #{content}, 
-  		sysdate)
+  		VALUES ( seq_commentId.nextval, #{postId}, #{writer}, 
+  		#{content}, sysdate, #{secretCheck} )
 
   	</insert>
   	
@@ -140,6 +140,7 @@
   			 , writer
   			 , content
   			 , TO_CHAR(regDate, 'YYYY-MM-DD') as regDate
+  			 , secretCheck
   			   			 
   		 FROM usercomment order by commentId desc
   	</select>
@@ -153,8 +154,25 @@
 	update usercomment set CONTENT = #{content} where commentId = #{commentId} 
 	
 	</update>
+    
+    <select id="getTotalPage" resultType="admin">
+  		SELECT count(POSTID) FROM adminpost
+  	</select>	
   	
-  	
+  	<select id="getListPage" resultType="admin" parameterType="admin">
+  		
+  		SELECT *
+  		FROM (
+  			select POSTID
+            , POSTTITLE
+            , POSTCONTENT
+            , TO_CHAR(postdate, 'YYYY-MM-DD') as POSTDATE
+            , POSTCNT , 
+                row_number() over (order by postId desc) as num from adminpost 
+            ) 
+  		where num between #{postStart} and #{postEnd} order by postId desc
+   	
+   	</select>
   	
   	
   </mapper>

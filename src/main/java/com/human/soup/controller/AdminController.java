@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -227,17 +228,21 @@ public class AdminController {
 	
 
 	@RequestMapping("adminBoard.do")
-	public String getBoardList(AdminVO vo, Model model) {
-		List<AdminVO> aList = adminService.getBoardList(vo);
-		model.addAttribute("list", aList);
+	public String getBoardList(AdminVO vo, Model model, adminPaging ap) {
+		
+				
+		List<AdminVO> pList = adminService.getBoardList(vo);
+		model.addAttribute("list", pList);
+				
+		
 		return "adminBoard";
 	
 	}
 	
 	@RequestMapping("commentAction")
 	public String insertComment(AdminVO vo, Model model) {
-		adminService.insertComment(vo);
 		
+		adminService.insertComment(vo);
 		model.addAttribute("postId",vo.getPostId());
 
 		return "redirect:/adminBoardView";

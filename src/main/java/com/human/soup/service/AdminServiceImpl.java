@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.human.soup.dao.AdminDao;
 import com.human.soup.dao.AdminDaoImpl;
 import com.human.soup.domain.AdminVO;
+import com.human.soup.domain.adminPaging;
 
 import java.text.DecimalFormat;
 
@@ -108,7 +109,11 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<AdminVO> getBoardList(AdminVO vo) {
+		
+
 		return adminDao.getBoardList();
+		
+		
 	}
 
 	@Override
@@ -158,7 +163,19 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
-	
+	@Override
+	public int getTotalPage() {
+		
+		return adminDao.getTotalPage();
+	}
+
+	@Override
+	public List<AdminVO> getListPage(adminPaging ap) {
+		
+		return adminDao.getListPage(ap);
+		
+		
+	}
 	
 }
 

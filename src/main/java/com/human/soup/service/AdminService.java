@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.human.soup.dao.AdminDao;
 import com.human.soup.domain.AdminVO;
+import com.human.soup.domain.adminPaging;
 
 
 public interface AdminService {
@@ -71,6 +72,14 @@ public interface AdminService {
 
 
 		public void commentEdit(AdminVO vo);
+
+
+		public int getTotalPage();
+
+
+		List<AdminVO> getListPage(adminPaging ap);
+
+
 
 
 	

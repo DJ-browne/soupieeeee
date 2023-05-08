@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.human.soup.domain.AdminVO;
+import com.human.soup.domain.adminPaging;
 
 // DB와 직접 연결하는 클래스 + mybatis를 통해서 데이터 베이스 쿼리문을 관리
 @Repository("adminDao")
@@ -158,7 +159,23 @@ public class AdminDaoImpl implements AdminDao{
 		
 	}
 
-	
+	@Override
+	public void secretMode(AdminVO vo) {
+		mybatis.update("adminDao.secretMode",vo);
+		
+	}
+
+	@Override
+	public int getTotalPage() {
+		
+		return mybatis.selectOne("adminDao.getTotalPage");
+	}
+
+	@Override
+	public List<AdminVO> getListPage(adminPaging ap) {
+		List<AdminVO> pList = mybatis.selectList("adminDao.getListPage", ap);
+		return pList;
+	}
 	
 
 	

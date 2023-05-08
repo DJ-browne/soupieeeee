@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.human.soup.domain.AdminVO;
+import com.human.soup.domain.adminPaging;
 
 // DB와 직접 연결하는 클래스 + mybatis를 통해서 데이터 베이스 쿼리문을 관리
 
@@ -73,6 +74,12 @@ public interface AdminDao {
 	public void commentDelete(AdminVO vo);
 
 	public void commentEdit(AdminVO vo);
+
+	public void secretMode(AdminVO vo);
+
+	public int getTotalPage();
+
+	public List<AdminVO> getListPage(adminPaging ap);
 
 	
 	

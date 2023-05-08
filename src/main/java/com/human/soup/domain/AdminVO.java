@@ -37,12 +37,23 @@ public class AdminVO
 	private String postDate;
 	private int postCnt;
 	
+	private int totalBoardCount;
+	private int postPerPage;
+	private int groupNum;
+	private int postStart;
+	private int postEnd;
+	private int totalGroupPerPage;
+	
+	
+	
 	private int commentId;
 	private String writer;
 	private String content;
 	private String regDate;
+	private String secretCheck;
 	
 	public AdminVO() {
+		
 		
 	}
 
