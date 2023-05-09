@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.human.soup.dao.AdminDao;
 import com.human.soup.dao.AdminDaoImpl;
 import com.human.soup.domain.AdminVO;
-import com.human.soup.domain.adminPaging;
 
 import java.text.DecimalFormat;
 
@@ -132,15 +131,15 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 
-		List<AdminVO> aList = null;
+		List<AdminVO> bList = null;
 		
 		int result = adminDao.updateCnt(vo);
 		
 		if (result>0) {
-			aList = adminDao.getBoard(vo);
+			bList = adminDao.getBoard(vo);
 		}
 		 
-		return aList;
+		return bList;
 		
 	}
 
@@ -170,11 +169,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<AdminVO> getListPage(adminPaging ap) {
+	public List<AdminVO> getListPage(AdminVO vo) {
 		
-		return adminDao.getListPage(ap);
+		return adminDao.getListPage(vo);
 		
-		
+	
+	}
+
+	@Override
+	public List<AdminVO> badCommentList(AdminVO vo) {
+		return adminDao.badCommentList(vo);
 	}
 	
 }

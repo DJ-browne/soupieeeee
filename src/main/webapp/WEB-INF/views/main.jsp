@@ -66,7 +66,7 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
-              <li><a href="adminBoard.do?group=1">공지사항</a></li>
+              <li><a href="adminBoard.do">공지사항</a></li>
               <li><a href="#">FAQs</a></li>
             </ul>
           </li>
@@ -84,13 +84,24 @@
             </ul>
           </li>
         <% } else { %>
+        <% if (name.equals("코코딩")) { %>
+          
           <li class="dropdown" id="getonline"><a href="#"><span>Get Online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="myPage"><%=name%> 페이지</a></li>
+              <li><a href="badComment">신고글 페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
-          <% } // else안에 if %>
+          <% } else { %>
+          
+           <li class="dropdown" id="getonline"><a href="#"><span>Get Online</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="badComment"><%=name %>페이지</a></li>
+              <li><a href="logoutAction">로그아웃</a></li>
+            </ul>
+          </li>
+          	<%} %>
+          <%} %>
 <!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
 <!--         <i class="bi bi-list mobile-nav-toggle"></i> -->

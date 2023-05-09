@@ -228,12 +228,67 @@ public class AdminController {
 	
 
 	@RequestMapping("adminBoard.do")
-	public String getBoardList(AdminVO vo, Model model, adminPaging ap) {
+	public String getBoardList(AdminVO vo, Model model
+			, @RequestParam(value = "pageNum", defaultValue = "1")int pageNum
+			, @RequestParam(value = "groupNum", defaultValue = "1")int groupNum
+			) {
 		
+		
+		// 게시물 총 갯수
+		int totalRecCount = adminService.getTotalPage();
+		// vo 변수에 넣어주기
+		vo.setTotalRecCount(totalRecCount);
+		
+		// 총 갯수에 따른 페이지 총 갯수 (전체 게시물 / 13) -> 13씩 보여지게
+		vo.setPageTotalCount(totalRecCount / vo.getCountPerPage());
+		
+		if(totalRecCount%vo.getCountPerPage() > 0 ) { 
+			// 나눴을때 나머지가 있으면 페이지 한개 더 만들어서 13개가 다 없어도 게시물 나오게 +1 해줌
+			vo.setCountPerPage(vo.getCountPerPage()+1);
+		}
+		
+		// 전체 레코드를 검색해 온다면
+		// 현재 페이지 번호에 의한 레코드를 검색
+		// 한페이지에 표현할 게시글 수를 13로 잡았을 경우
+		// 1번 : 1~ 13 행
+		// 2번 : 14 ~ 26 행
+		// 3번 : 26 ~ 39 행
+			
+		// 맨 처음 번호 (보여줄 게시글수 countPerPage)
+		int firstRow = (pageNum-1) * vo.getCountPerPage()+1; 
+		// 맨 마지막 번호
+		int endRow = pageNum * vo.getCountPerPage();
+		
+		vo.setFirstRow(firstRow);
+		vo.setEndRow(endRow);
+		
+		List<AdminVO> aList = adminService.getListPage(vo);
+		
+		// 페이지갯수 = 전체 데이터의 갯수 / 보여줄갯수
+		// pageTotalCount = 전체 데이터의 갯수 / 페이지별 보여줄 갯수
+		// pageTotalCount = totalRecCount /countPerPage
+		// 데이터베이스 담긴 적체 레코드 갯수
+		int totalCountGroup = vo.getPageTotalCount() / vo.getTotalCountPageGroup();
+		
+		vo.setTotalCountGroup(totalCountGroup);
+		
+		if( ( vo.getPageTotalCount() % vo.getTotalCountPageGroup() ) > 0) {
+			vo.setTotalCountGroup(vo.getTotalCountGroup()+1);
+			// 100 / 13 = 7.xx 
+			// 99 / 13 = 7.xx
+			// 98 / 13 = 7.xx
+			// 97 / 13 = 7.xx
+			// 90 / 13 = 6.xx
+		}
 				
-		List<AdminVO> pList = adminService.getBoardList(vo);
-		model.addAttribute("list", pList);
-				
+		model.addAttribute("list", aList);
+//		model.addAttribute("totalCount",vo.getPageTotalCount());
+		model.addAttribute("totalCountGroup",vo.getTotalCountGroup());
+		model.
+		
+		model.addAttribute("startGroupNum", groupNum-1);
+		model.addAttribute("endGroupNum", groupNum+1);
+			
 		
 		return "adminBoard";
 	
@@ -288,5 +343,25 @@ public class AdminController {
 		return "adminBoardView";
 		
 	}
+	
+	@RequestMapping("badComment")
+	public String badCommentList(AdminVO vo, Model model) {
+	
+		
+		List<AdminVO> cList = adminService.badCommentList(vo);
+			
+		
+				
+		model.addAttribute("list", cList);
+
+				
+		
+		return "badComment";
+	
+	}
+	
+	
+	
+	
 	
 }

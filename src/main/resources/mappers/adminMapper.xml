@@ -156,23 +156,40 @@
 	</update>
     
     <select id="getTotalPage" resultType="admin">
-  		SELECT count(POSTID) FROM adminpost
+  		SELECT count(POSTID) as totalRecCount FROM adminpost
   	</select>	
   	
-  	<select id="getListPage" resultType="admin" parameterType="admin">
-  		
+  	<select id="getListPage" resultType="admin">
+  		<![CDATA[
   		SELECT *
   		FROM (
+  			select rownum rn,
+  			A.*
+  			FROM (
   			select POSTID
             , POSTTITLE
             , POSTCONTENT
             , TO_CHAR(postdate, 'YYYY-MM-DD') as POSTDATE
-            , POSTCNT , 
-                row_number() over (order by postId desc) as num from adminpost 
+            , POSTCNT from adminpost order by postId desc) A 
             ) 
-  		where num between #{postStart} and #{postEnd} order by postId desc
-   	
+  		where rn >= #{firstRow} AND rn <= #{endRow}
+   	]]>
    	</select>
+    	
+  	<select id="adCommentList" resultType="admin">
+  		SELECT BADID
+  			 , BADTITLE
+  			 , TO_CHAR(BADDATE, 'YYYY-MM-DD') as BADDATE
+  			 , BADWRITER
+  			 , REASON
+  			 , REPORTER
+  			 , BADCONTENT
+  			 , BADBOARD
+  			 
+  		 FROM BADCOMMENT order by BADID desc
+  	</select>
+  	
+  	
   	
   	
   </mapper>

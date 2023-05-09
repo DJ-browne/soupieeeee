@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class AdminVO
 {
-	// member field
+	
 	private	int seq_userId;
 	private String userid;
 	private String password;
@@ -37,14 +37,14 @@ public class AdminVO
 	private String postDate;
 	private int postCnt;
 	
-	private int totalBoardCount;
-	private int postPerPage;
-	private int groupNum;
-	private int postStart;
-	private int postEnd;
-	private int totalGroupPerPage;
-	
-	
+	private int totalRecCount;		// 전체 레코드 수	
+	private int pageTotalCount;		// 전체 페이지 수
+	private int countPerPage = 10;	// 한페이지당 레코드 수
+	private int totalCountGroup;    // 페이지 그룹
+	private int totalCountPageGroup = 5;	// 한그룹당 레코드 수
+		
+	private int firstRow;
+	private int endRow;
 	
 	private int commentId;
 	private String writer;
@@ -52,20 +52,23 @@ public class AdminVO
 	private String regDate;
 	private String secretCheck;
 	
+	private int badId;
+	private String badTitle;
+	private String badDate;
+	private String badWriter;
+	private String reason;
+	private String reporter;
+	private String badContent;
+	private String badBoard;
+	
 	public AdminVO() {
 		
 		
 	}
 
-		
-	
-}
 
-/*
-	[ 참고 ]
+	}
+
 	
-	@ postingDate 가 실제 DB에서는 Date 형이지만, 날짜 값을 출력만 하기에 
-	 Date 형이 아닌 String  형으로 받아도 된다.
-	 나중에 날짜값을 사용할 일이 있으면 Date 형으로 변경 
- 
-*/
+
+

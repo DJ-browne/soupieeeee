@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@page import="java.io.PrintWriter"%>
     <%@page import="com.human.soup.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <%
     String id = null;
     String name = null;
@@ -82,15 +92,16 @@
               <li><a href="join">회원가입</a></li>
             </ul>
           </li>
-        <% } else { %>
+        <% } else {  %>
+          <% if( name.equals("코코딩") ) { %>               
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="myPage"><%=name%> 페이지</a></li>
+              <li><a href="badComment">신고글 페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
-          <% } // else안에 if %>
-<!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
+          
+          <!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
 <!--         <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
@@ -106,9 +117,9 @@
 
         <ol>
           <li><a href="main">Home</a></li>
-          <li>Announcements</li>
+          <li>Reported posts</li>
         </ol>
-        <h2>공지 사항</h2>
+        <h2></h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -123,23 +134,33 @@
          <table class="table table-striped table-sm text-center" id="tableid">
           <thead>
             <tr id="tabletr">
-              <th scope="col">글번호</th>
-              <th scope="col">제목</th>
-              <th scope="col">글쓴이</th>
-              <th scope="col">작성일</th>
-              <th scope="col">조회</th>
+              <th scope="col">신고글 번호</th>
+              <th scope="col">신고글 게시판</th>
+              <th scope="col">신고일</th>
+              <th scope="col">신고글 제목</th>
+              <th scope="col">신고글 글쓴이</th>
+              <th scope="col">신고사유</th>
+              <th scope="col">신고자</th>
+              <th scope="col">신고글 내용</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
               
             </tr>
           </thead>         	
           
-          <c:forEach items="${list}" var="board">
+          <c:forEach items="${list}" var="report">
           <tbody>
         	  <tr id="tabletr">
-		      	<td scope="col">${board.postId}</td>
-		        <td scope="col" style="cursor: pointer;" class="postView" >${board.postTitle}</td>
-		        <td scope="col">관리자</td>
-		        <td scope="col">${board.postDate}</td>
-		        <td scope="col">${board.postCnt}</td>
+		      	<td scope="col">${report.badId}</td>
+		        <td scope="col">${report.badBoard}</td>
+		        <td scope="col">${report.badDate}</td>
+		        <td scope="col" style="cursor: pointer;" class="reportView" >${report.badTitle}</td>
+		        <td scope="col">${report.badWriter}</td>
+		        <td scope="col">${report.reason}</td>
+		        <td scope="col">${report.reporter}</td>
+		        <td scope="col">${report.badContent}</td>
+		        <td scope="col"><button type="button" class="cancelBadComment" id="cancelBadComment">신고 취소</button></td>
+		        <td scope="col"><button type="button" class="deleteBadComment" id="deleteBadComment">글삭제</button></td>
 		       </tr>
 		        
           </tbody>
@@ -149,56 +170,44 @@
      	 </div>
 		
 		</div>
-     	<% if(id != null){ %>
-		<% if(name.equals("코코딩")) {  // >>>>> 관리자로 로그인 %>	
+     
 		<div class="bt_wrap">
 			<button type="button" class="writePost" id="insertBtn" onclick="insertBoard()" >글쓰기</button>
 		</div>
-		<% } }%>
+	
 		
 		<div class="board_page">
 		
 	<nav aria-label="Page navigation example" class="pageList">
 		<ul class="pagination" id="pageUl">
-
-		<!-- 이전 그룹 번호로 생성-->		
-<%-- 		<c:if test="${startGroupNum == 0} "> --%>
+		
+	<c:forEach items="${list}" var="board">
+		<c:if test="${board.prev}">
     		<li class="page-item disabled" id="page-item List">
-      			<a class="page-link" href="adminBoard.do" aria-label="Previous">
+      			<a class="page-link" href="adminBoard.do?pageNum=${board.pageStart - 1 }&amount=${amount}" aria-label="Previous">
         			<span aria-hidden="true">&laquo;</span>
       			</a>
     		</li>
-<%--     	</c:if> --%>
-<%--     	<c:if test="${startGroupNum > 0} "> --%>
-    		<li class="page-item" id="page-item List">
-      			<a class="page-link" href="adminBoard.do?groupNum=${startGroupNum }&pageNum=${(startGroupNum-1)*10+1 }" aria-label="Previous">
-        			<span aria-hidden="true">&laquo;</span>
-      			</a>
-    		</li>
-<%--     	</c:if> --%>
+    	</c:if>
+    </c:forEach>
     	
     
-
-    <c:forEach var="i" begin="1" end="5" step="1">
-<%--     <c:forEach var="board" begin="1" end="640/15"> --%>
-    		<li class="page-item"><a class="page-link" href="adminBoard.do?groupNum=2&pageNum=${i}">${i}</a></li>
+    <c:forEach items="${list}" var="board" begin="${list.pageStart }" end="${list.pageEnd }">
+    		<li class="page-item"><a class="page-link" href="#">1</a></li>
+   			<li class="page-item"><a class="page-link" href="#">2</a></li>
+    		<li class="page-item"><a class="page-link" href="#">3</a></li>
+    		<li class="page-item"><a class="page-link" href="#">4</a></li>
     </c:forEach>
 
-		<!--  이후 그룹 번호로 생성 -->
-<%-- 		<c:if test="${endGroupNum == totalCountGroup} "> --%>
-    		<li class="page-item disabled">
-     	 		<a class="page-link" href="adminBoard.do" aria-label="Next">
-        			<span aria-hidden="true">&raquo;</span>
-      			</a>
-    		</li>
-<%--     	</c:if> --%>
-<%--     	<c:if test="${endGroupNum < totalCountGroup} "> --%>
+	<c:forEach items="${list}" var="board">
+		<c:if test="${board.next}">
     		<li class="page-item">
-     	 		<a class="page-link" href="adminBoard.do?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*10+1 }" aria-label="Next">
+     	 		<a class="page-link" href="adminBoard.do?pageNum=${board.pageEnd +1 }&amount=${board.amount}" aria-label="Next">
         			<span aria-hidden="true">&raquo;</span>
       			</a>
     		</li>
-<%--     	</c:if>       --%>
+    	</c:if>
+	</c:forEach>    
   		</ul>
 	</nav>
 	
@@ -235,6 +244,10 @@
 		
 		
   </main><!-- End #main -->
+          <% }  %>
+  
+          <% } %>
+
 
   <!-- ======= Footer ======= -->
 <!--   <footer id="footer"> -->
@@ -357,4 +370,14 @@ $(function () {
 
 
 </script>
+</html>
+
+
+
+
+
+
+
+
+</body>
 </html>
