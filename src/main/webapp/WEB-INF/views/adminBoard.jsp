@@ -171,7 +171,7 @@
 <%--     	</c:if> --%>
 <%--     	<c:if test="${startGroupNum > 0} "> --%>
     		<li class="page-item" id="page-item List">
-      			<a class="page-link" href="adminBoard.do?groupNum=${startGroupNum }&pageNum=${(startGroupNum-1)*10+1 }" aria-label="Previous">
+      			<a class="page-link" href="adminBoard.do?groupNum=${startGroupNum }&pageNum=${(startGroupNum-1)*5+1 }" aria-label="Previous">
         			<span aria-hidden="true">&laquo;</span>
       			</a>
     		</li>
@@ -179,26 +179,28 @@
     	
     
 
-    <c:forEach var="i" begin="1" end="5" step="1">
+    <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }" step="1">
 <%--     <c:forEach var="board" begin="1" end="640/15"> --%>
-    		<li class="page-item"><a class="page-link" href="adminBoard.do?groupNum=2&pageNum=${i}">${i}</a></li>
+    		<li class="page-item"><a class="page-link" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
     </c:forEach>
 
 		<!--  이후 그룹 번호로 생성 -->
-<%-- 		<c:if test="${endGroupNum == totalCountGroup} "> --%>
+		<a href="#"> ${endGroupNum }</a>
+		<a href="#"> ${totalCountGroup +1}</a>
+		<c:if test="${endGroupNum eq 1} ">
     		<li class="page-item disabled">
      	 		<a class="page-link" href="adminBoard.do" aria-label="Next">
         			<span aria-hidden="true">&raquo;</span>
       			</a>
     		</li>
-<%--     	</c:if> --%>
-<%--     	<c:if test="${endGroupNum < totalCountGroup} "> --%>
+    	</c:if>
+    	<c:if test="${endGroupNum < totalCountGroup+1} ">
     		<li class="page-item">
-     	 		<a class="page-link" href="adminBoard.do?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*10+1 }" aria-label="Next">
+     	 		<a class="page-link" href="adminBoard.do?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*5+1 }" aria-label="Next">
         			<span aria-hidden="true">&raquo;</span>
       			</a>
     		</li>
-<%--     	</c:if>       --%>
+    	</c:if>      
   		</ul>
 	</nav>
 	

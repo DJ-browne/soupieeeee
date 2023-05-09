@@ -284,7 +284,14 @@ public class AdminController {
 		model.addAttribute("list", aList);
 //		model.addAttribute("totalCount",vo.getPageTotalCount());
 		model.addAttribute("totalCountGroup",vo.getTotalCountGroup());
-		model.
+		
+		int firstPageNo = (groupNum-1) * vo.getTotalCountPageGroup() + 1;
+		int endPageNo = groupNum * vo.getTotalCountPageGroup();
+		
+		if( endPageNo >= vo.getPageTotalCount() ) endPageNo = vo.getPageTotalCount() ;
+		   
+		model.addAttribute("startPageNum" , firstPageNo);
+		model.addAttribute("endPageNum" , endPageNo);
 		
 		model.addAttribute("startGroupNum", groupNum-1);
 		model.addAttribute("endGroupNum", groupNum+1);

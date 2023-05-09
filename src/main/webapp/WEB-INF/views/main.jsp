@@ -535,7 +535,7 @@
             <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
               <div class="pic"><img src="../resources/img/pea.png" class="img-fluid" alt=""></div>
               <div class="member-info">
-                <h4>Yenny Song</h4>
+                <h4>Yennie Song</h4>
                 <span>Back-End Developer</span>
                 <p>she slay</p>
                 <div class="social">
@@ -553,7 +553,7 @@
               <div class="pic"><img src="../resources/img/pea.png" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>HyeJin Jeon</h4>
-                <span>Full-Stack Developer</span>
+                <span>Back-End Developer</span>
                 <p>she sub sub</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
