@@ -211,7 +211,7 @@ public class AdminController {
 		
 		adminService.saveBoard(vo);
 		
-		return "redirect:/adminBoard";
+		return "redirect:/adminBoard.do";
 		
 	}
 	
@@ -282,7 +282,6 @@ public class AdminController {
 		}
 				
 		model.addAttribute("list", aList);
-//		model.addAttribute("totalCount",vo.getPageTotalCount());
 		model.addAttribute("totalCountGroup",vo.getTotalCountGroup());
 		
 		int firstPageNo = (groupNum-1) * vo.getTotalCountPageGroup() + 1;
@@ -293,9 +292,13 @@ public class AdminController {
 		model.addAttribute("startPageNum" , firstPageNo);
 		model.addAttribute("endPageNum" , endPageNo);
 		
+		
 		model.addAttribute("startGroupNum", groupNum-1);
+		
 		model.addAttribute("endGroupNum", groupNum+1);
-			
+		if( groupNum == vo.getTotalCountGroup() ) {
+			model.addAttribute("endGroupNum", 0);
+		}
 		
 		return "adminBoard";
 	
@@ -354,19 +357,43 @@ public class AdminController {
 	@RequestMapping("badComment")
 	public String badCommentList(AdminVO vo, Model model) {
 	
-		
+		System.out.println("컨트롤");
 		List<AdminVO> cList = adminService.badCommentList(vo);
-			
+						
+		System.out.println(vo.getBadBoard());
+		System.out.println(vo.getBadContent());
+		System.out.println(vo.getBadDate());
+		System.out.println(vo.getBadTitle());
+		System.out.println(vo.getBadWriter());
+		System.out.println(vo.getReason());
+		System.out.println(vo.getReporter());
 		
-				
+		
+		System.out.println(cList);
 		model.addAttribute("list", cList);
 
-				
-		
+			
 		return "badComment";
 	
 	}
 	
+	@RequestMapping("adminBoardDelete")
+	public String adminBoardDelete(AdminVO vo, Model model) {
+		adminService.deleteBoard(vo);
+		
+		model.addAttribute("postId",vo.getPostId());
+		return "redirect:/adminBoard.do";
+		
+	}
+	
+	@RequestMapping("newBoardSave")
+		public String newBoardSave(AdminVO vo, Model model) {
+		adminService.updateBoard(vo);
+		
+		model.addAttribute("postId",vo.getPostId());
+		return "redirect:/adminBoardView";
+		
+	}
 	
 	
 	

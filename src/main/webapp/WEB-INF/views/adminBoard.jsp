@@ -66,7 +66,7 @@
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
               <li><a href="adminBoard.do">공지사항</a></li>
-              <li><a href="#">FAQs</a></li>
+              <li><a href="faqsBoard">FAQs</a></li>
             </ul>
           </li>
 <!--           <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> -->
@@ -82,14 +82,22 @@
               <li><a href="join">회원가입</a></li>
             </ul>
           </li>
-        <% } else { %>
+        <% } else {  if (name.equals("코코딩")) { %>
+          <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="badComment">신고글 페이지</a></li>
+              <li><a href="logoutAction">로그아웃</a></li>
+            </ul>
+          </li>
+          <% } else {// else안에 if %>
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="myPage"><%=name%> 페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
-          <% } // else안에 if %>
+          <%} %>
+          <%} %>
 <!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
 <!--         <i class="bi bi-list mobile-nav-toggle"></i> -->
@@ -120,7 +128,7 @@
 		
 		<div class="board_list_wrap">
 			  	<div class="table-responsive" id="tableH" >
-         <table class="table table-striped table-sm text-center" id="tableid">
+         <table class="table table-striped table-sm text-center table-hover" id="tableid">
           <thead>
             <tr id="tabletr">
               <th scope="col">글번호</th>
@@ -132,8 +140,8 @@
             </tr>
           </thead>         	
           
-          <c:forEach items="${list}" var="board">
           <tbody>
+          <c:forEach items="${list}" var="board">
         	  <tr id="tabletr">
 		      	<td scope="col">${board.postId}</td>
 		        <td scope="col" style="cursor: pointer;" class="postView" >${board.postTitle}</td>
@@ -142,79 +150,72 @@
 		        <td scope="col">${board.postCnt}</td>
 		       </tr>
 		        
-          </tbody>
           	 </c:forEach>       
+          </tbody>
                           	  
            </table>
      	 </div>
 		
 		</div>
-     	<% if(id != null){ %>
-		<% if(name.equals("코코딩")) {  // >>>>> 관리자로 로그인 %>	
+		
+     	<% if(id != null){ if(name.equals("코코딩")) { // >>>>> 관리자로 로그인 %>
 		<div class="bt_wrap">
 			<button type="button" class="writePost" id="insertBtn" onclick="insertBoard()" >글쓰기</button>
 		</div>
-		<% } }%>
+		<% }%>
+		<% }%>
 		
 		<div class="board_page">
 		
 	<nav aria-label="Page navigation example" class="pageList">
 		<ul class="pagination" id="pageUl">
-
-		<!-- 이전 그룹 번호로 생성-->		
-<%-- 		<c:if test="${startGroupNum == 0} "> --%>
-    		<li class="page-item disabled" id="page-item List">
-      			<a class="page-link" href="adminBoard.do" aria-label="Previous">
-        			<span aria-hidden="true">&laquo;</span>
-      			</a>
-    		</li>
-<%--     	</c:if> --%>
-<%--     	<c:if test="${startGroupNum > 0} "> --%>
-    		<li class="page-item" id="page-item List">
-      			<a class="page-link" href="adminBoard.do?groupNum=${startGroupNum }&pageNum=${(startGroupNum-1)*5+1 }" aria-label="Previous">
-        			<span aria-hidden="true">&laquo;</span>
-      			</a>
-    		</li>
-<%--     	</c:if> --%>
+		
+			<!-- 이전 그룹 번호로 생성-->		
+		<c:choose>
+			<c:when test="${startGroupNum == '0'}">
+	    		<li class="page-item disabled" id="page-item List">
+	      			<a class="page-link" href="adminBoard.do" aria-label="Previous">
+	        			<span aria-hidden="true">&laquo;</span>
+	      			</a>
+	    		</li>
+	    	</c:when>		
+			<c:otherwise>
+	    		<li class="page-item" id="page-item List">
+	      			<a class="page-link" href="adminBoard.do?groupNum=${startGroupNum}&pageNum=${(startGroupNum-1)*5+1}" aria-label="Previous">
+	        			<span aria-hidden="true">&laquo;</span>
+	      			</a>
+	    		</li>
+	    	</c:otherwise>
     	
+    	</c:choose>
     
-
+<%--     <c:forEach var="board" begin="1" end="총게시물 / 한페이지당 몇개 보여줄건지 "> --%>
     <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }" step="1">
-<%--     <c:forEach var="board" begin="1" end="640/15"> --%>
-    		<li class="page-item"><a class="page-link" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+    		<li class="page-item pageClickClass" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
     </c:forEach>
 
+	   	  
 		<!--  이후 그룹 번호로 생성 -->
-		<a href="#"> ${endGroupNum }</a>
-		<a href="#"> ${totalCountGroup +1}</a>
-		<c:if test="${endGroupNum eq 1} ">
-    		<li class="page-item disabled">
-     	 		<a class="page-link" href="adminBoard.do" aria-label="Next">
+    <c:choose>
+		<c:when test="${endGroupNum == 0}">
+	   		<li class="page-item disabled">
+	    	 		<a class="page-link" href="adminBoard.do" aria-label="Next">
+		       			<span aria-hidden="true">&raquo;</span>
+	     			</a>
+	   		</li>
+    	</c:when>
+		<c:otherwise>
+    		<li class="page-item" id="page-item List">
+      			<a class="page-link" href="adminBoard.do?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*5+1}" aria-label="Next">
         			<span aria-hidden="true">&raquo;</span>
       			</a>
     		</li>
-    	</c:if>
-    	<c:if test="${endGroupNum < totalCountGroup+1} ">
-    		<li class="page-item">
-     	 		<a class="page-link" href="adminBoard.do?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*5+1 }" aria-label="Next">
-        			<span aria-hidden="true">&raquo;</span>
-      			</a>
-    		</li>
-    	</c:if>      
+    	</c:otherwise>
+    	
+    	</c:choose>
+    	  
   		</ul>
 	</nav>
-	
-			
-<!-- 			<a href="#" class="bt first"><<</a>  -->
-<!-- 			<a href="#" class="bt prev"><</a> -->
-<!-- 			<a href="#" class="num on">1</a>  -->
-<!-- 			<a href="#" class="num">2</a>  -->
-<!-- 			<a href="#" class="num">3</a>  -->
-<!-- 			<a href="#" class="num">4</a>  -->
-<!-- 			<a href="#" class="num">5</a>  -->
-<!-- 			<a href="#" class="bt next">></a>  -->
-<!-- 			<a href="#" class="bt last">>></a> -->
-
 
 		</div>
 		
@@ -334,28 +335,32 @@ function insertBoard() {
 	 window.location.href = 'adminBoardInsert'
 }
 
-// function comment() {
-// 	document.getElementById('frm').submit();
-// }
 
 $(function () {
  
 		$('#tableH').on('click','.postView', function(){
-		
-			console.log($(this).parent().parent().find('td')[0].innerHTML );
-			console.log($(this).parent().parent().find('td')[1].innerHTML );
-			console.log($(this).parent().parent().find('td')[3].innerHTML );
-			console.log($(this).parent().parent().find('td')[4].innerHTML );
-			
-			$('#hiddenPostId').val($(this).parent().parent().find('td')[0].innerHTML)
-			$('#hiddenPostTitle').val($(this).parent().parent().find('td')[1].innerHTML)
-			$('#hiddenPostDate').val($(this).parent().parent().find('td')[3].innerHTML)
-			$('#hiddenPostICnt').val($(this).parent().parent().find('td')[4].innerHTML)
+
+			console.log($(this).prev().text());
+			console.log($(this).text());
+			console.log($(this).next().next().text());
+			console.log($(this).next().next().next().text());
+										
+			$('#hiddenPostId').val( $(this).prev().text() );
+			$('#hiddenPostTitle').val($(this).text())
+			$('#hiddenPostDate').val($(this).next().next().text())
+			$('#hiddenPostICnt').val($(this).next().next().next().text())
 		
 			$('#frm').submit();
 	
 		})
+		
 })
+		
+		$('#pageClicked').click(function() {
+			alert('clicked')
+			$(this).parent().attr("class", "page-item active")
+		})
+
 
 
 </script>

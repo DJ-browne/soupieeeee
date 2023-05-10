@@ -86,12 +86,12 @@ public class AdminServiceImpl implements AdminService {
 		
 	@Override
 	public void updateBoard(AdminVO vo) {
-		
+		adminDao.updateBoard(vo);
 	}
 
 	@Override
 	public void deleteBoard(AdminVO vo) {
-		// TODO Auto-generated method stub
+		adminDao.deleteBoard(vo);
 		
 	}
 
@@ -178,8 +178,13 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<AdminVO> badCommentList(AdminVO vo) {
+		System.out.println("서비스");
 		return adminDao.badCommentList(vo);
 	}
+
+	
+
+	
 	
 }
 

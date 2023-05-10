@@ -65,7 +65,7 @@
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
               <li><a href="adminBoard.do">공지사항</a></li>
-              <li><a href="#">FAQs</a></li>
+              <li><a href="faqsBoard">FAQs</a></li>
             </ul>
           </li>
 <!--           <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> -->
@@ -81,14 +81,22 @@
               <li><a href="join">회원가입</a></li>
             </ul>
           </li>
-        <% } else { %>
+        <% } else {  if (name.equals("코코딩")) { %>
+          <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="badComment">신고글 페이지</a></li>
+              <li><a href="logoutAction">로그아웃</a></li>
+            </ul>
+          </li>
+          <% } else {// else안에 if %>
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="myPage"><%=name%> 페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
-          <% } // else안에 if %>
+          <%} %>
+          <%} %>
 <!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
 <!--         <i class="bi bi-list mobile-nav-toggle"></i> -->
@@ -160,16 +168,22 @@
 
 <div class="board_wrap">
 		
+		
 		<div class="board_view_wrap">
 			<div class="board_view">
+		<form id="adminBoardForm" class="adminBoardForm" method="post" >
 				<c:forEach items="${list}" var="post">
 				<div class="title">
 					${post.postTitle}
+					<input type="hidden" id="adminBoardFormId" name="postTitle" value="${post.postTitle}">
 				</div>
 				<div class="info">
 					<dl>
 						<dt>번호</dt>
 						<dd id="boardPostId">${post.postId}</dd>
+						<input type="hidden" id="adminBoardFormId" name="postId" value="${post.postId}">
+						<input type="hidden" id="adminBoardFormId" name="postPass" value="${post.postPass}">
+						
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
@@ -186,18 +200,39 @@
 				</div>
 				<div class="cont">
 					${post.postContent}
+					<input type="hidden" id="adminBoardFormId" name="postContent" value="${post.postContent}">
 				</div>
 				 </c:forEach> 
+		</form>	
 				
 			</div>
 		</div>
-								
+		
+						
 		<div class="bt_wrap">
 			<button type="button" class="boardList" id="listBtn">목록</button>
 			<button type="button" class="editPost" id="editBtn">수정</button>
-			<button type="button" class="deletePost" id="deleteBtn">삭제</button>
+			<button type="button" class="deletePost" id="deleteBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
 		</div>
 		
+		<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="exampleModalLabel">공지사항</h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        	게시물을 삭제하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="deletePost" id="modalDeleteBtn">삭제하기</button>
+			        <button type="button" class="cancleModal" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		
 	<!-- Comments Form -->
 	<form name="comment-form" id="commentForm" method="post">
@@ -546,6 +581,17 @@ $(function () {
 		location.href='adminBoard.do';
 	})
 	
+	$('#editBtn').click(function() {
+		$('#adminBoardForm').attr("action", "adminBoardEdit")	
+		$('#adminBoardForm').submit();
+	})
+	
+	$('#modalDeleteBtn').click(function() {
+		$('#adminBoardForm').attr("action", "adminBoardDelete")			
+		
+		$('#adminBoardForm').submit();
+	})
+
 	
 	$('#commentForm').on('click', '.deletePost', function() {
 		$('#commentForm').attr("action", "commentDelete")
@@ -580,9 +626,7 @@ $(function () {
 		
 	})
 	
-	function getEditPage() {
-		
-	}
+	
 
 
 

@@ -82,6 +82,9 @@ public interface AdminDao {
 
 	public List<AdminVO> badCommentList(AdminVO vo);
 
+
+	
+
 	
 	
 }

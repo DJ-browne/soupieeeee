@@ -99,7 +99,14 @@
   		sysdate, 0 )
 
   	</insert>
-
+	
+	<update id="newBoardSave" parameterType="admin">
+	
+	update adminPost set postTitle = #{postTitle}, postContent = #{postContent} where postId = #{postId} 
+	
+	</update>
+	
+	
 	<select id="getBoardList" resultType="admin">
   		SELECT POSTID
   			 , POSTTITLE
@@ -113,6 +120,7 @@
   	<select id="getViewList" parameterType="admin" resultType="admin">
   	SELECT POSTID
   			 , POSTTITLE
+  			 , POSTPASS
   			 , POSTCONTENT
   			 , TO_CHAR(postdate, 'YYYY-MM-DD') as POSTDATE
   			 , POSTCNT
@@ -176,7 +184,7 @@
    	]]>
    	</select>
     	
-  	<select id="adCommentList" resultType="admin">
+  	<select id="badCommentList" resultType="admin">
   		SELECT BADID
   			 , BADTITLE
   			 , TO_CHAR(BADDATE, 'YYYY-MM-DD') as BADDATE
@@ -189,6 +197,9 @@
   		 FROM BADCOMMENT order by BADID desc
   	</select>
   	
+  	<delete id="adminBoardDelete" parameterType="admin">
+  	delete from adminPost where postId = #{postId}
+  	</delete>
   	
   	
   	

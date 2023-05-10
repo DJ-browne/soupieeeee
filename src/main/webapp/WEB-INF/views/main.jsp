@@ -67,7 +67,7 @@
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
               <li><a href="adminBoard.do">공지사항</a></li>
-              <li><a href="#">FAQs</a></li>
+              <li><a href="faqsBoard">FAQs</a></li>
             </ul>
           </li>
 <!--           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li> -->

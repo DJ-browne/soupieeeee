@@ -109,7 +109,7 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public void updateBoard(AdminVO vo) {
-		// TODO Auto-generated method stub
+		mybatis.update("adminDao.newBoardSave",vo);
 		
 	}
 
@@ -117,7 +117,7 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public void deleteBoard(AdminVO vo) {
-		// TODO Auto-generated method stub
+		mybatis.delete("adminDao.adminBoardDelete",vo);
 		
 	}
 
@@ -179,9 +179,12 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public List<AdminVO> badCommentList(AdminVO vo) {
+		System.out.println("다오");
 		List<AdminVO> cList = mybatis.selectList("adminDao.badCommentList");
 		return cList;
 	}
+
+	
 	
 
 	

@@ -10,6 +10,10 @@
   	  id = (String) session.getAttribute("userid"); 
   	name = (String) session.getAttribute("username"); 
     }
+    
+    String postId = request.getParameter("postId");
+    String postTitle = request.getParameter("postTitle");
+    String postContent = request.getParameter("postContent");
 
     %> 
 <!DOCTYPE html>
@@ -65,7 +69,7 @@
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
               <li><a href="adminBoard.do">공지사항</a></li>
-              <li><a href="faqsBoard">FAQs</a></li>
+              <li><a href="#">FAQs</a></li>
             </ul>
           </li>
 <!--           <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> -->
@@ -81,16 +85,23 @@
               <li><a href="join">회원가입</a></li>
             </ul>
           </li>
-        <% } else {  %>
-          <% if( name.equals("코코딩") ) { %>               
+        <% } else {  if (name.equals("코코딩")) { %>
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="badComment">신고글 페이지</a></li>
+              <li><a href="myPage">신고글 페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
-          
-          <!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
+          <% } else {// else안에 if %>
+          <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="myPage"><%=name%> 페이지</a></li>
+              <li><a href="logoutAction">로그아웃</a></li>
+            </ul>
+          </li>
+          <%} %>
+          <%} %>
+<!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
 <!--         <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
@@ -106,82 +117,51 @@
 
         <ol>
           <li><a href="main">Home</a></li>
-          <li>Reported posts</li>
+          <li>Announcements</li>
         </ol>
-        <h2></h2>
+        <h2>공지 사항</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
-
-	
-
-
-<div class="board_wrap">
-		
-		<div class="board_list_wrap">
-			  	<div class="table-responsive" id="tableH" >
-         <table class="table table-striped table-sm text-center" id="tableid">
-          <thead>
-            <tr id="tabletr">
-              <th scope="col">신고글 번호</th>
-              <th scope="col">신고글 게시판</th>
-              <th scope="col">신고일</th>
-              <th scope="col">신고글 제목</th>
-              <th scope="col">신고글 글쓴이</th>
-              <th scope="col">신고사유</th>
-              <th scope="col">신고자</th>
-              <th scope="col">신고글 내용</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              
-            </tr>
-          </thead>         	
-          
-          <tbody>
-          <c:forEach items="${list}" var="report">
-        	  <tr id="tabletr">
-		      	<td scope="col">${report.badId}</td>
-		        <td scope="col">${report.badBoard}</td>
-		        <td scope="col">${report.badDate}</td>
-		        <td scope="col" style="cursor: pointer;" class="reportView" >${report.badTitle}</td>
-		        <td scope="col">${report.badWriter}</td>
-		        <td scope="col">${report.reason}</td>
-		        <td scope="col">${report.reporter}</td>
-		        <td scope="col">${report.badContent}</td>
-		        <td scope="col"><button type="button" class="cancelBadComment" id="cancelBadComment">신고 취소</button></td>
-		        <td scope="col"><button type="button" class="deleteBadComment" id="deleteBadComment">글삭제</button></td>
-		       </tr>
-		        
-          	 </c:forEach>       
-          </tbody>
-                          	  
-           </table>
-     	 </div>
-		
-		</div>
-     
-
-		</div>
-		
-
     
-	<form action="updateCnt" method="post" id="frm">   
-	 
-		<input type="hidden" name="postId" id="hiddenPostId" value="">
-		<input type="hidden" name="postTitle" id="hiddenPostTitle" value="">
-		<input type="hidden" name="postDate" id="hiddenPostDate" value="">
-		<input type="hidden" name="postCnt" id="hiddenPostICnt" value="">
+<form action="newBoardSave" method="post" id="frm">
+		<div class="board_insert_wrap">
+			<div class="board_insert">
+				<div class="title">
+					<dl>
+						<input type="hidden" id="adminBoardFormId" name="postId" value="<%=postId %>">
+						<dt>제목</dt>
+						<dd><input type="text" name="postTitle" id="adminT" placeholder="<%=postTitle %>" ></dd>
+					</dl>
+				</div>				
+				<div class="info">
+					<dl>
+						<dt>글쓴이</dt>
+						<dd><input type="text" value="관리자" readonly></dd>
+					</dl>
+					<dl>
+						<dt>비밀번호</dt>
+						<dd><input type="password" name="postPass" id="adminPass" placeholder="**********" readonly></dd>
+					</dl>
+					
+				</div>				
+				<div class="cont">
+					<textarea name="postContent" id="adminC"  placeholder="내용 입력"><%=postContent %></textarea>
+				</div>				
+			</div>
+		</div>
+				
+		
+		</form>
+				
+		<div class="bt_wrap">
+			<button type="button" class="writePost" id="insertBtn" >수정</button>
+			<button type="button" class="cancelPost" id="cancelBtn" >취소</button>
+		</div>
+	</div>
 
-	</form>
-		
-		
-		
-		
+
   </main><!-- End #main -->
-          <% }  %>
-  
-          <% } %>
-
 
   <!-- ======= Footer ======= -->
 <!--   <footer id="footer"> -->
@@ -275,43 +255,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
 
-function insertBoard() {
-	 window.location.href = 'adminBoardInsert'
-}
-
-// function comment() {
-// 	document.getElementById('frm').submit();
-// }
 
 $(function () {
- 
-		$('#tableH').on('click','.postView', function(){
-		
-			console.log($(this).parent().parent().find('td')[0].innerHTML );
-			console.log($(this).parent().parent().find('td')[1].innerHTML );
-			console.log($(this).parent().parent().find('td')[3].innerHTML );
-			console.log($(this).parent().parent().find('td')[4].innerHTML );
-			
-			$('#hiddenPostId').val($(this).parent().parent().find('td')[0].innerHTML)
-			$('#hiddenPostTitle').val($(this).parent().parent().find('td')[1].innerHTML)
-			$('#hiddenPostDate').val($(this).parent().parent().find('td')[3].innerHTML)
-			$('#hiddenPostICnt').val($(this).parent().parent().find('td')[4].innerHTML)
-		
-			$('#frm').submit();
 	
-		})
+	
+	$('#insertBtn').click(function() {
+		
+		var title = $('#adminT').val()
+		var pass = $('#adminPass').val()
+		var content = $('#adminC').val()
+		
+		if (title == '') {
+			alert('제목을 입력하세요.')
+		} else if (content == '') {
+			alert('내용을 입력하세요.')
+		} else {
+				$('#frm').submit();
+				
+			}
+	
+		
+		
+	})
+	
+	$('#cancelBtn').click(function() {
+		location.href='adminBoard.do';
+	})
+	
+	
+	
 })
+ 
 
 
 </script>
-</html>
-
-
-
-
-
-
-
-
-</body>
 </html>

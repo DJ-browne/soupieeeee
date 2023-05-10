@@ -64,7 +64,7 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li class="dropdown"><a class="nav-link scrollto" href="#announcements"><span>Announcements</span><i class="bi bi-chevron-down"></i></a>
            <ul>
-              <li><a href="adminBoard">공지사항</a></li>
+              <li><a href="adminBoard.do">공지사항</a></li>
               <li><a href="#">FAQs</a></li>
             </ul>
           </li>
@@ -81,14 +81,22 @@
               <li><a href="join">회원가입</a></li>
             </ul>
           </li>
-        <% } else { %>
+        <% } else {  if (name.equals("코코딩")) { %>
+          <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="myPage">신고글 페이지</a></li>
+              <li><a href="logoutAction">로그아웃</a></li>
+            </ul>
+          </li>
+          <% } else {// else안에 if %>
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="myPage"><%=name%> 페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
-          <% } // else %>
+          <%} %>
+          <%} %>
 <!--           <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
 <!--         <i class="bi bi-list mobile-nav-toggle"></i> -->
@@ -96,7 +104,6 @@
 
     </div>
   </header><!-- End Header -->
-
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
