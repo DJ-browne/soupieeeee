@@ -85,7 +85,7 @@
         <% } else {  if (name.equals("코코딩")) { %>
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="badComment">신고글 페이지</a></li>
+              <li><a href="badComment">신고글 관리페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>

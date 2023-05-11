@@ -82,6 +82,12 @@ public interface AdminService {
 		public List<AdminVO> badCommentList(AdminVO vo);
 
 
+		public int saveReport(AdminVO vo);
+
+
+		public void reportRemove(AdminVO vo);
+
+
 
 
 		

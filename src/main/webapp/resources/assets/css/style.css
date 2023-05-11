@@ -2123,7 +2123,54 @@ tbody > #tabletr td a:hover {
     transition: 0.3s;
 	}
 	
+	.bt_wrap #cancelBadComment {
+	padding: 8px 20px;
+    border-radius: 50px;
+    color: #719a60;
+    font-size: 14px;
+    border: 2px solid #719a60;
+    font-weight: 600;
+    background-color:#fff;
+	}
 	
+	.bt_wrap #cancelBadComment:hover {
+	padding: 8px 20px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid #719a60;
+    font-weight: 600;
+    background-color: #719a60;
+    transition: 0.3s;
+	}
+		
+	.bt_wrap #deleteBadComment {
+	padding: 8px 20px;
+    margin-left: 5px;
+    border-radius: 50px;
+    color: #719a60;
+    font-size: 14px;
+    border: 2px solid #719a60;
+    font-weight: 600;
+    background-color:#fff;
+	}
+	
+		
+	.bt_wrap #deleteBadComment:hover {
+	padding: 8px 20px;
+    margin-left: 5px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid #719a60;
+    font-weight: 600;
+    background-color: #719a60;
+    transition: 0.3s;
+	}
+	
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-warning);
+}
 	
 	
 	
@@ -2133,8 +2180,84 @@ tbody > #tabletr td a:hover {
     padding: 0;
     box-sizing: inherit;
 }
-	
-	
+
+.reportModalTable {
+	display: flex; 
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.reportModalTable #reportModalThead {
+	display: flex; 
+	flex-direction: row;
+	align-items: center;
+}
+
+.reportModalTable #reportModalThead tr:nth-child(1) {
+	display: flex; 
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.reportModalTable #reportModalThead tr:nth-child(2) {
+	display: flex; 
+	flex-direction: column;
+	padding-left: 3px;
+}
+
+.reportModalTable #reportModalThead tr:nth-child(3) {
+	display: flex; 
+	flex-direction: column;
+}
+
+.reportBoard thead td:nth-child(2n-1) {
+	padding-top: 3px;
+}
+
+.reportBoard thead td:nth-child(2n) {
+	padding-top: 9px;
+}
+
+.reportModalTable #reportModalTbody {
+	display: flex; 
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.reportModalTable #reportModalTbody tr:nth-child(2) {
+	display: flex; 
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.reportModalTable tfoot {
+	display: flex;
+}
+
+.reportBoard td {
+	padding-left: 15px;
+	padding-bottom: 3px;
+}
+
+.reportBoard tr, .reportBoard th {
+	margin: 5px 0;
+}
+
+.reportBoard textarea {
+	display: block;
+	width: 350px;
+	height: 150px;
+	padding: 25px;
+	box-sizing: border-box;
+	border: 1px solid #dee2e6;
+	resize: none;
+	font-size: 13px;
+}
+
+.reportBoard textarea:focus {
+	outline: none;
+}
+
 .board_view {
 	width: 100%;
 	border-top: 2px solid #719a60;
@@ -2457,4 +2580,32 @@ input:autofill:active {
 
 ul, li {
 	list-style: none;
+}
+
+.board_wrap_report {
+	margin-top: 50px;
+}
+.board_report_wrap {
+	margin: 0 auto;
+    max-width: 1100px;
+    padding: 0;
+    box-sizing: inherit;
+    
+}
+
+.board_report_top {
+	margin: 0 auto;
+    max-width: 1200px;
+    padding: 0;
+    box-sizing: inherit;
+    color: #878e98;
+    font-size: 12px;
+    margin-top: 40px;
+}
+.board_report_wrap table td {
+	
+    vertical-align: middle;
+    font-size: 13px;
+	padding: 3px 7px;
+    	
 }

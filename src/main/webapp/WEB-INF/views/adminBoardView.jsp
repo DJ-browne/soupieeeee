@@ -84,7 +84,7 @@
         <% } else {  if (name.equals("코코딩")) { %>
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="badComment">신고글 페이지</a></li>
+              <li><a href="badComment">신고글 관리페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
@@ -217,7 +217,7 @@
 		
 		<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
+			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h1 class="modal-title fs-5" id="exampleModalLabel">공지사항</h1>
@@ -278,18 +278,147 @@
 		
 		<div class="board_view_wrap">
 			<div class="board_view">
+				<form action="reportAction" method="post" id="reportPost">
 				<c:forEach items="${list}" var="post">
-				<div class="title">
+				<div class="title" style="display: flex; justify-content: space-between; align-items: center;">
+					<div id="posttitle" style="display: inline-block;">
 					${post.postTitle}
+					<input type="hidden" name="badTitle" id="badTitle" value="${post.postTitle}">
+					</div>
+					<div id=reportBtn style="display: inline-block; cursor: pointer;" 
+					data-bs-toggle="modal" data-bs-target="#exampleModal" >
+					<img style="width: 26px;" src="resources/img/ding.png" data-bs-toggle="tooltip" data-bs-placement="top"
+			        data-bs-custom-class="custom-tooltip"
+			        data-bs-title="게시글 신고하기">
+					</div>
+		
+					<!-- Report Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h1 class="modal-title fs-5" id="exampleModalLabel">게시글 신고</h1>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        	<div class="reportBoard_wrap">
+			<div class="reportBoard">
+				<table class="reportModalTable">
+					<thead id="reportModalThead">
+						<tr>
+							<th>제목</th>
+							<th>작성자</th>
+						</tr>
+						<tr>
+							<td>:</td>
+							<td>:</td>
+						</tr>
+							
+						<tr>
+							<td>${post.postTitle}</td>
+							<td>관리자</td>
+						</tr>
+					</thead>
+					<tbody id="reportModalTbody">
+						<tr>
+							<th>신고사유 :</th>
+							<input type="hidden" id="reportReason" name="reason" value="">
+						</tr>
+						<tr>
+							<td><input type="text" placeholder="여러사유에 해당될 경우, 대표적 사유 1개를 선택해 주세요." size="50" style="border:none; font-size: 12px;" disabled ></td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault1" value="불법광고">
+  							<label class="form-check-label" for="flexRadioDefault1">
+    						불법광고
+							</label>
+							</td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault2" value="욕설/인신공격">
+  							<label class="form-check-label" for="flexRadioDefault2">
+    						욕설/인신공격
+							</label>
+							</td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault3" value="도배성글/댓글반복">
+  							<label class="form-check-label" for="flexRadioDefault3">
+  							도배성글/댓글반복
+  							</label>
+							</td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault4" value="개인정보노출/사생활침해">
+  							<label class="form-check-label" for="flexRadioDefault4">
+  							개인정보노출/사생활침해
+  							</label>
+							</td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault5" value="음란성/선정성">
+  							<label class="form-check-label" for="flexRadioDefault5">
+  							음란성/선정성
+  							</label>
+							</td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault6" value="영리목적">
+  							<label class="form-check-label" for="flexRadioDefault6">
+  							영리목적
+  							</label>
+							</td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault7" value="악성코드/스파이웨어">
+  							<label class="form-check-label" for="flexRadioDefault7">
+  							악성코드/스파이웨어
+  							</label>
+							</td>
+							<td>
+							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault8" value="기타">
+  							<label class="form-check-label" for="flexRadioDefault8">
+  							기타
+  							</label>
+							</td>
+						</tr>
+						
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>신고내용 :</th>
+						</tr>
+						<tr>
+							<td><textarea name="reasonContent" class="reasonContent" rows="3" id="reasonContentText" maxlength="300"></textarea></td>
+						</tr>
+						<tr>
+							<th>첨부파일 :</th>
+						</tr>
+						<tr>
+							<td><input type="file" name="badFile" maxlength="60" size="40"/></td>
+						</tr>
+					</tfoot>
+								
+				
+				
+				</table>
+			</div>
+		</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="deletePost" id="modalReportBtn">신고하기</button>
+					        <button type="button" class="cancleModal" data-bs-dismiss="modal">취소</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					
 				</div>
 				<div class="info">
 					<dl>
 						<dt>번호</dt>
 						<dd id="boardPostId">${post.postId}</dd>
+						<input type="hidden" name="badBoard" id="badBoard" value="공지사항 게시판">
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
 						<dd>관리자</dd>
+						<input type="hidden" name="badWriter" id="badWriter" value="글쓴이">
+						<input type="hidden" name="reporter" id="reporter" value="<%=id%>">
 					</dl>
 					<dl>
 						<dt>작성일</dt>
@@ -302,9 +431,10 @@
 				</div>
 				<div class="cont">
 					${post.postContent}
+					<input type="hidden" name="badContent" id="badContent" value="${post.postContent}">
 				</div>
 				 </c:forEach> 
-				
+				</form>
 			</div>
 		</div>
 		
@@ -447,6 +577,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 
 $(document).ready(function() {
 	getCommentList();
@@ -591,7 +725,30 @@ $(function () {
 		
 		$('#adminBoardForm').submit();
 	})
-
+	
+	$('#modalReportBtn').click(function() {
+		alert('신고버튼눌림')	
+		var reason = $('input[name=reportReason]:checked').val();
+		console.log(reason)
+		if(reason == '기타') {
+			var content = $('#reasonContentText').val()
+			if (content == '') {
+				alert('신고내용을 적어주세요.')
+			} else {
+					$('#reportReason').val(reason);
+					console.log($('#reportReason').val());
+					$('#reportPost').submit();
+				
+			}
+			
+		} else {
+				$('#reportReason').val(reason);
+				console.log($('#reportReason').val());
+				$('#reportPost').submit();
+		}
+		
+		
+	})
 	
 	$('#commentForm').on('click', '.deletePost', function() {
 		$('#commentForm').attr("action", "commentDelete")
@@ -602,6 +759,8 @@ $(function () {
 		
 		$('#commentForm').submit();
 	})
+	
+	
 	
 
 	$('#commentForm').on('click', '.editComment', function() {

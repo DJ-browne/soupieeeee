@@ -57,9 +57,13 @@ public class AdminVO
 	private String badDate;
 	private String badWriter;
 	private String reason;
+	private String reasonContent;
 	private String reporter;
 	private String badContent;
 	private String badBoard;
+	private String badFile;
+	private String badF_en;
+	private long badF_size;
 	
 	public AdminVO() {
 		

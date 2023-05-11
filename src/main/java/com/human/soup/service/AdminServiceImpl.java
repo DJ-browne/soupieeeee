@@ -178,8 +178,19 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<AdminVO> badCommentList(AdminVO vo) {
-		System.out.println("서비스");
 		return adminDao.badCommentList(vo);
+	}
+
+	@Override
+	public int saveReport(AdminVO vo) {
+		return adminDao.saveReport(vo);
+		
+	}
+
+	@Override
+	public void reportRemove(AdminVO vo) {
+		adminDao.reportRemove(vo);
+		
 	}
 
 	

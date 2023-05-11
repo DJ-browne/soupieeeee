@@ -359,17 +359,7 @@ public class AdminController {
 	
 		System.out.println("컨트롤");
 		List<AdminVO> cList = adminService.badCommentList(vo);
-						
-		System.out.println(vo.getBadBoard());
-		System.out.println(vo.getBadContent());
-		System.out.println(vo.getBadDate());
-		System.out.println(vo.getBadTitle());
-		System.out.println(vo.getBadWriter());
-		System.out.println(vo.getReason());
-		System.out.println(vo.getReporter());
-		
-		
-		System.out.println(cList);
+			
 		model.addAttribute("list", cList);
 
 			
@@ -395,6 +385,23 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("reportAction")
+	public String saveReport(AdminVO vo) {
+		
+		adminService.saveReport(vo);
+		
+		return "redirect:/adminBoard.do";
+		
+	}
+	
+	@RequestMapping("reportRemove")
+	public String reportRemove(AdminVO vo, Model model) {
+		adminService.reportRemove(vo);
+		
+		model.addAttribute("badId",vo.getBadId());
+		return "redirect:/badComment";
+		
+	}
 	
 	
 	

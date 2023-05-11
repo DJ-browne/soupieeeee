@@ -179,9 +179,19 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public List<AdminVO> badCommentList(AdminVO vo) {
-		System.out.println("다오");
 		List<AdminVO> cList = mybatis.selectList("adminDao.badCommentList");
 		return cList;
+	}
+
+	@Override
+	public int saveReport(AdminVO vo) {
+		return mybatis.insert("adminDao.saveReport",vo);
+	}
+
+	@Override
+	public void reportRemove(AdminVO vo) {
+		mybatis.delete("adminDao.reportRemove",vo);
+		
 	}
 
 	

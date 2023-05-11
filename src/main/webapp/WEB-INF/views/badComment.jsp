@@ -85,7 +85,7 @@
           <% if( name.equals("코코딩") ) { %>               
           <li class="dropdown"><a href="#"><span>Get online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="badComment">신고글 페이지</a></li>
+              <li><a href="badComment">신고글 관리페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
@@ -108,70 +108,100 @@
           <li><a href="main">Home</a></li>
           <li>Reported posts</li>
         </ol>
-        <h2></h2>
+        <h2>신고글 관리 페이지</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
 
 	
+		<div class="board_report_wrap">
+			<div class="board_report_top">
+			<span>🚩 신고된 글이 삭제되어야 한다고 정해지면 "꼭" 그 글이 저장된 데이터베이스에서
+			 글을 지워 주시고 완전히 지워진게 확인 된 후에 
+			 신고글 관리 페이지 리스트에서 지워주시기 바랍니다. 감사합니다. 🚩</span>
+			</div>
 
 
-<div class="board_wrap">
+<div class="board_wrap_report">
 		
-		<div class="board_list_wrap">
-			  	<div class="table-responsive" id="tableH" >
+		
+		
+		
+		<div class="table-responsive" id="tableH" >
          <table class="table table-striped table-sm text-center" id="tableid">
           <thead>
-            <tr id="tabletr">
-              <th scope="col">신고글 번호</th>
+            <tr id="reportTableTrTop">
+              <th scope="col"></th>
               <th scope="col">신고글 게시판</th>
               <th scope="col">신고일</th>
               <th scope="col">신고글 제목</th>
               <th scope="col">신고글 글쓴이</th>
-              <th scope="col">신고사유</th>
+              <th scope="col">신고 사유</th>
+              <th scope="col">신고 내용</th>
               <th scope="col">신고자</th>
               <th scope="col">신고글 내용</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th scope="col">첨부 파일</th>
               
             </tr>
           </thead>         	
           
           <tbody>
           <c:forEach items="${list}" var="report">
-        	  <tr id="tabletr">
-		      	<td scope="col">${report.badId}</td>
-		        <td scope="col">${report.badBoard}</td>
+        	  <tr id="reportTableTrBot">
+        	  	<td scope="col"> <input class="form-check-input" type="checkbox" name="badId" value="${report.badId}" id="flexCheckDefault" onclick="checkonlyone(this)"></td>
+		        <td scope="col"> ${report.badBoard}</td>
 		        <td scope="col">${report.badDate}</td>
 		        <td scope="col" style="cursor: pointer;" class="reportView" >${report.badTitle}</td>
 		        <td scope="col">${report.badWriter}</td>
 		        <td scope="col">${report.reason}</td>
+		        <td scope="col">${report.reasonContent}</td>
 		        <td scope="col">${report.reporter}</td>
 		        <td scope="col">${report.badContent}</td>
-		        <td scope="col"><button type="button" class="cancelBadComment" id="cancelBadComment">신고 취소</button></td>
-		        <td scope="col"><button type="button" class="deleteBadComment" id="deleteBadComment">글삭제</button></td>
+		        <td scope="col">${report.badFile}</td>
 		       </tr>
 		        
           	 </c:forEach>       
           </tbody>
-                          	  
+                 	  
            </table>
+           
+          
      	 </div>
 		
 		</div>
-     
-
+             <div class="bt_wrap">
+				<button type="button" class="cancelBadComment" id="cancelBadComment">신고 취소</button>
+				<button type="button" class="deleteBadComment" id="deleteBadComment" data-bs-toggle="modal" data-bs-target="#exampleModal">글삭제</button>
+			</div>  
+			
+				<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="exampleModalLabel">신고글 삭제 확인</h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        	이 게시글이 저장된 데이터베이스에서 이 글을 삭제 하셨습니까? 
+			        	
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="deletePost" id="modalDeleteReport">네. 삭제하겠습니다.</button>
+			        <button type="button" class="cancleModal" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
 		</div>
 		
 
     
-	<form action="updateCnt" method="post" id="frm">   
+	<form method="post" id="frm">   
 	 
-		<input type="hidden" name="postId" id="hiddenPostId" value="">
-		<input type="hidden" name="postTitle" id="hiddenPostTitle" value="">
-		<input type="hidden" name="postDate" id="hiddenPostDate" value="">
-		<input type="hidden" name="postCnt" id="hiddenPostICnt" value="">
-
+		<input type="hidden" name="badId" id="hiddenReportId" value="">
+		
 	</form>
 		
 		
@@ -283,23 +313,60 @@ function insertBoard() {
 // 	document.getElementById('frm').submit();
 // }
 
+function checkonlyone(element) {
+  
+  const checkboxes 
+      = document.getElementsByName("badId");
+  
+  checkboxes.forEach((cd) => {
+	  cd.checked = false;
+  })
+  
+  element.checked = true;
+}
+
 $(function () {
- 
-		$('#tableH').on('click','.postView', function(){
+ 	
+	 $('input[type="checkbox"][name="badId"]').click(function() {
 		
-			console.log($(this).parent().parent().find('td')[0].innerHTML );
-			console.log($(this).parent().parent().find('td')[1].innerHTML );
-			console.log($(this).parent().parent().find('td')[3].innerHTML );
-			console.log($(this).parent().parent().find('td')[4].innerHTML );
+		var checked = $('input[name=badId]:checked').val();
+		console.log(checked)
+		$('#hiddenReportId').val(checked);
+		console.log($('#hiddenReportId').val())
+		
+		if ($('#hiddenReportId').val() != '') {
 			
-			$('#hiddenPostId').val($(this).parent().parent().find('td')[0].innerHTML)
-			$('#hiddenPostTitle').val($(this).parent().parent().find('td')[1].innerHTML)
-			$('#hiddenPostDate').val($(this).parent().parent().find('td')[3].innerHTML)
-			$('#hiddenPostICnt').val($(this).parent().parent().find('td')[4].innerHTML)
-		
-			$('#frm').submit();
-	
+		$('#cancelBadComment').click(function () {
+			
+		console.log($('#hiddenReportId').val())
+		$('#frm').attr("action", "reportRemove")
+		$('#frm').submit();
+			
 		})
+		
+		$('#modalDeleteReport').click(function() {
+			$('#frm').attr("action", "reportRemove")
+			$('#frm').submit();
+		})
+		
+	}
+			
+	})
+		
+		
+// 		$('#reportTableTrBot').on('click', function(){
+			
+// 			alert('눌림')
+// 			console.log($(this).parent().parent().find('input')[0].innerHTML );
+			
+			
+// 			$('#hiddenReportId').val($(this).parent().parent().find('td')[0].innerHTML)
+// 			console.log($('#hiddenReportId').val())
+			
+		
+// // 			$('#frm').submit();
+	
+// 		})
 })
 
 

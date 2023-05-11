@@ -4,6 +4,8 @@
     <%@page import="com.human.soup.*"%>
     
     <%
+    
+//     session.setAttribute("userid",  ); 강제로 세션에 관리자 담아서 사용
     String id = null;
     String name = null;
     if(session.getAttribute("userid") != null) {
@@ -88,7 +90,7 @@
           
           <li class="dropdown" id="getonline"><a href="#"><span>Get Online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="badComment">신고글 페이지</a></li>
+              <li><a href="badComment">신고글 관리페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
@@ -96,7 +98,7 @@
           
            <li class="dropdown" id="getonline"><a href="#"><span>Get Online</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="badComment"><%=name %>페이지</a></li>
+              <li><a href="#"><%=name %>페이지</a></li>
               <li><a href="logoutAction">로그아웃</a></li>
             </ul>
           </li>
