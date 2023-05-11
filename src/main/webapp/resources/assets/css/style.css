@@ -2232,6 +2232,7 @@ tbody > #tabletr td a:hover {
 
 .reportModalTable tfoot {
 	display: flex;
+	flex-direction: column;
 }
 
 .reportBoard td {
