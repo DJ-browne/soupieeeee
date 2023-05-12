@@ -88,6 +88,9 @@ public interface AdminService {
 		public void reportRemove(AdminVO vo);
 
 
+		public int getTotalReportPage();
+
+
 
 
 		

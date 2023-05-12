@@ -175,7 +175,8 @@ public class AdminServiceImpl implements AdminService {
 		
 	
 	}
-
+	
+	
 	@Override
 	public List<AdminVO> badCommentList(AdminVO vo) {
 		return adminDao.badCommentList(vo);
@@ -191,6 +192,11 @@ public class AdminServiceImpl implements AdminService {
 	public void reportRemove(AdminVO vo) {
 		adminDao.reportRemove(vo);
 		
+	}
+
+	@Override
+	public int getTotalReportPage() {
+		return adminDao.getTotalReportPage();
 	}
 
 	

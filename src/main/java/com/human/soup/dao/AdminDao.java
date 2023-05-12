@@ -86,6 +86,8 @@ public interface AdminDao {
 
 	public void reportRemove(AdminVO vo);
 
+	public int getTotalReportPage();
+
 
 	
 

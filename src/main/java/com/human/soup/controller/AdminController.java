@@ -31,6 +31,7 @@ public class AdminController {
 	// 빈 컨테이너 : servlet-context.xml 에서 만든 객체들에서 UserDao객체명을 가진 bean을 가져와서 쓴다
 	@Autowired
 	private AdminService adminService;
+	
 	// 우리가 매번 new를 통한 인스턴스 생성 혹은 싱글톤패턴을 만들 필요가 없어짐
 	
 	// controller : 화면과 로직에 대해서 연결해주는 파일
@@ -145,7 +146,7 @@ public class AdminController {
 			session.setAttribute("userid", result.getUserid() );
 			session.setAttribute("username", result.getUsername() );
 			session.setAttribute("password", result.getPassword() );
-			session.setAttribute("sessionTime", new Date().toLocaleString());
+//			session.setAttribute("sessionTime", new Date().toLocaleString());
 		}
 		
 		return "redirect:/main";
@@ -355,13 +356,58 @@ public class AdminController {
 	}
 	
 	@RequestMapping("badComment")
-	public String badCommentList(AdminVO vo, Model model) {
+	public String badCommentList(AdminVO vo, Model model
+			, @RequestParam(value = "pageNum", defaultValue = "1")int pageNum
+			, @RequestParam(value = "groupNum", defaultValue = "1")int groupNum) {
 	
-		System.out.println("컨트롤");
-		List<AdminVO> cList = adminService.badCommentList(vo);
-			
-		model.addAttribute("list", cList);
-
+		
+		
+				int totalRecCount = adminService.getTotalReportPage();
+				vo.setTotalRecCount(totalRecCount);
+				
+				vo.setPageTotalCount(totalRecCount / vo.getCountPerPage());
+				
+				if(totalRecCount%vo.getCountPerPage() > 0 ) { 
+					vo.setCountPerPage(vo.getCountPerPage()+1);
+				}
+				
+				
+				int firstRow = (pageNum-1) * vo.getCountPerPage()+1; 
+				int endRow = pageNum * vo.getCountPerPage();
+				
+				vo.setFirstRow(firstRow);
+				vo.setEndRow(endRow);
+				
+				List<AdminVO> cList = adminService.badCommentList(vo);
+					
+				model.addAttribute("list", cList);
+				
+				
+				int totalCountGroup = vo.getPageTotalCount() / vo.getTotalCountPageGroup();
+				
+				vo.setTotalCountGroup(totalCountGroup);
+				
+				if( ( vo.getPageTotalCount() % vo.getTotalCountPageGroup() ) > 0) {
+					vo.setTotalCountGroup(vo.getTotalCountGroup()+1);
+				}
+						
+				model.addAttribute("totalCountGroup",vo.getTotalCountGroup());
+				
+				int firstPageNo = (groupNum-1) * vo.getTotalCountPageGroup() + 1;
+				int endPageNo = groupNum * vo.getTotalCountPageGroup();
+				
+				if( endPageNo >= vo.getPageTotalCount() ) endPageNo = vo.getPageTotalCount() ;
+				   
+				model.addAttribute("startPageNum" , firstPageNo);
+				model.addAttribute("endPageNum" , endPageNo);
+				
+				
+				model.addAttribute("startGroupNum", groupNum-1);
+				
+				model.addAttribute("endGroupNum", groupNum+1);
+				if( groupNum == vo.getTotalCountGroup() ) {
+					model.addAttribute("endGroupNum", 0);
+				}
 			
 		return "badComment";
 	
@@ -387,7 +433,6 @@ public class AdminController {
 	
 	@RequestMapping("reportAction")
 	public String saveReport(AdminVO vo) {
-		
 		adminService.saveReport(vo);
 		
 		return "redirect:/adminBoard.do";

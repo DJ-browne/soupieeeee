@@ -194,6 +194,9 @@
   			 , BADCONTENT
   			 , BADBOARD
   			 , REASONCONTENT
+  			 , BADFILE
+  			 , BADF_SIZE
+  			 , BADF_EN
   			 
   		 FROM BADCOMMENT order by BADID desc
   	</select>
@@ -205,13 +208,13 @@
   	<insert id="saveReport" parameterType="admin">
   		INSERT INTO BADCOMMENT 
   		(BADID, BADTITLE, BADDATE, BADWRITER, REASON, REPORTER, BADCONTENT, BADBOARD, REASONCONTENT
-  			<if test="BADFILE != null">
+  			<if test="badFile != null">
   			, BADFILE, BADF_SIZE, BADF_EN
   			</if>
   		 )
   		VALUES ( seq_comId.nextval, #{badTitle}, sysdate, '신고된자아이디', 
   		 #{reason}, #{reporter}, #{badContent}, #{badBoard}, #{reasonContent}
-  		 	<if test="BADFILE != null">
+  		 	<if test="badFile != null">
   			, #{badFile}, #{badF_size}, #{badF_en}
   			</if>
   		 )
@@ -222,6 +225,9 @@
   	delete from BADCOMMENT where badId = #{badId}
   	</delete>
   
+  	 <select id="getTotalReportPage" resultType="admin">
+  		SELECT count(badId) as totalRecCount FROM BADCOMMENT
+  	</select>
   	
   </mapper>
   	

@@ -194,6 +194,12 @@ public class AdminDaoImpl implements AdminDao{
 		
 	}
 
+	@Override
+	public int getTotalReportPage() {
+		AdminVO vo = mybatis.selectOne("adminDao.getTotalReportPage");
+		 return vo.getTotalRecCount();	
+	}
+
 	
 	
 

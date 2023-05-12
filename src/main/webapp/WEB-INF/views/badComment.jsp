@@ -116,26 +116,24 @@
 	
 		<div class="board_report_wrap">
 			<div class="board_report_top">
-			<span>🚩 신고된 글이 삭제되어야 한다고 정해지면 "꼭" 그 글이 저장된 데이터베이스에서
+			<span>📢 신고된 글이 삭제되어야 한다고 정해지면 "꼭" 그 글이 저장된 데이터베이스에서
 			 글을 지워 주시고 완전히 지워진게 확인 된 후에 
-			 신고글 관리 페이지 리스트에서 지워주시기 바랍니다. 감사합니다. 🚩</span>
+			 신고글 관리 페이지 리스트에서 지워주시기 바랍니다. 감사합니다. 📢</span>
 			</div>
 
 
 <div class="board_wrap_report">
-		
-		
-		
+				
 		
 		<div class="table-responsive" id="tableH" >
          <table class="table table-striped table-sm text-center" id="tableid">
           <thead>
-            <tr id="reportTableTrTop">
+            <tr id="reportTableTrTop" >
               <th scope="col"></th>
-              <th scope="col">신고글 게시판</th>
+              <th scope="col">게시판</th>
               <th scope="col">신고일</th>
-              <th scope="col">신고글 제목</th>
-              <th scope="col">신고글 글쓴이</th>
+              <th scope="col">제목</th>
+              <th scope="col">글쓴이</th>
               <th scope="col">신고 사유</th>
               <th scope="col">신고 내용</th>
               <th scope="col">신고자</th>
@@ -147,17 +145,27 @@
           
           <tbody>
           <c:forEach items="${list}" var="report">
-        	  <tr id="reportTableTrBot">
+        	  <tr id="reportTableTrBot" >
         	  	<td scope="col"> <input class="form-check-input" type="checkbox" name="badId" value="${report.badId}" id="flexCheckDefault" onclick="checkonlyone(this)"></td>
-		        <td scope="col"> ${report.badBoard}</td>
-		        <td scope="col">${report.badDate}</td>
-		        <td scope="col" style="cursor: pointer;" class="reportView" >${report.badTitle}</td>
-		        <td scope="col">${report.badWriter}</td>
-		        <td scope="col">${report.reason}</td>
-		        <td scope="col">${report.reasonContent}</td>
-		        <td scope="col">${report.reporter}</td>
-		        <td scope="col">${report.badContent}</td>
-		        <td scope="col">${report.badFile}</td>
+		        <td scope="col" class="noPointer"> ${report.badBoard}</td>
+		        <td scope="col" class="noPointer" id="dateText">${report.badDate}</td>
+		        <td scope="col" class="noPointer" id="titleText" class="reportView" >${report.badTitle}</td>
+		        <td scope="col" class="noPointer">${report.badWriter}</td>
+		        <td scope="col" class="noPointer">${report.reason}</td>
+		        <td scope="col" class="noPointer">${report.reasonContent}</td>
+		        <td scope="col" class="noPointer">${report.reporter}</td>
+		        <td scope="col" class="noPointer" id="contentText">${report.badContent}</td>
+		        <td scope="col">
+		        <c:choose>
+                   <c:when test="${report.badF_size==0}">🚧없음🚧</c:when>
+                   <c:otherwise>
+                      <a href='resources/upload/${report.badF_en}'>
+                      <img src="resources/upload/${report.badF_en}">
+                      </a> 
+                   </c:otherwise>
+                </c:choose> 
+		        </td>
+		        
 		       </tr>
 		        
           	 </c:forEach>       
@@ -196,7 +204,68 @@
 			
 		</div>
 		
+		<div class="board_page">
+		
+	<nav aria-label="Page navigation example" class="pageList">
+		<ul class="pagination" id="pageUl">
+		
+			<!-- 이전 그룹 번호로 생성-->		
+				<c:choose>
+					<c:when test="${startGroupNum == '0'}">
+			    		<li class="page-item disabled" id="page-item List">
+			      			<a class="page-link" href="adminBoard.do" aria-label="Previous">
+			        			<span aria-hidden="true">&laquo;</span>
+			      			</a>
+			    		</li>
+			    	</c:when>		
+					<c:otherwise>
+			    		<li class="page-item" id="page-item List">
+			      			<a class="page-link" href="adminBoard.do?groupNum=${startGroupNum}&pageNum=${(startGroupNum-1)*5+1}" aria-label="Previous">
+			        			<span aria-hidden="true">&laquo;</span>
+			      			</a>
+			    		</li>
+			    	</c:otherwise>
+		    	
+		    	</c:choose>
+    
+		<%--     <c:forEach var="board" begin="1" end="총게시물 / 한페이지당 몇개 보여줄건지 "> --%>
+		    <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }" step="1">
+		    
+				<c:choose>
+					<c:when test="${param.pageNum eq i }">
+								<li class="page-item pageClickClass active" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+			    		<li class="page-item pageClickClass" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>   
+		    
+		    </c:forEach>
 
+	   	  
+		<!--  이후 그룹 번호로 생성 -->
+		    <c:choose>
+				<c:when test="${endGroupNum == 0}">
+			   		<li class="page-item disabled">
+			    	 		<a class="page-link" href="adminBoard.do" aria-label="Next">
+				       			<span aria-hidden="true">&raquo;</span>
+			     			</a>
+			   		</li>
+		    	</c:when>
+				<c:otherwise>
+		    		<li class="page-item" id="page-item List">
+		      			<a class="page-link" href="adminBoard.do?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*5+1}" aria-label="Next">
+		        			<span aria-hidden="true">&raquo;</span>
+		      			</a>
+		    		</li>
+		    	</c:otherwise>
+		    	
+		    	</c:choose>
+		    	  
+		  		</ul>
+			</nav>
+
+		</div>
     
 	<form method="post" id="frm">   
 	 

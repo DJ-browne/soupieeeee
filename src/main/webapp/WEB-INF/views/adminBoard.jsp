@@ -191,7 +191,16 @@
     
 <%--     <c:forEach var="board" begin="1" end="총게시물 / 한페이지당 몇개 보여줄건지 "> --%>
     <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }" step="1">
-    		<li class="page-item pageClickClass" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+    
+		<c:choose>
+			<c:when test="${param.pageNum eq i }">
+						<li class="page-item pageClickClass active" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+			</c:when>
+			<c:otherwise>
+	    		<li class="page-item pageClickClass" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+			</c:otherwise>
+		</c:choose>   
+    
     </c:forEach>
 
 	   	  
@@ -220,10 +229,8 @@
 		</div>
 		
 	
-	</div>	
+	</div>
 		
- 	   
-
     
 	<form action="updateCnt" method="post" id="frm">   
 	 
@@ -354,12 +361,12 @@ $(function () {
 	
 		})
 		
+		
+		
+		
 })
 		
-		$('#pageClicked').click(function() {
-			alert('clicked')
-			$(this).parent().attr("class", "page-item active")
-		})
+
 
 
 

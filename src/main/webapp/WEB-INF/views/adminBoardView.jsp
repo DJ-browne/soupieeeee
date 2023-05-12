@@ -16,15 +16,19 @@
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
+	
+	
+	
   <title>Soupie - 공지사항</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+	
+	
   <!-- Favicons -->
-	<link href="../resources/img/soupie.png" rel="icon">
+  <link href="../resources/img/soupie.png" rel="icon">
   <link href="../resources/img/soupie.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -41,7 +45,7 @@
 
   <!-- Template Main CSS File -->
   <link href="resources/assets/css/style.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
   <!-- =======================================================
   * Template Name: Arsha - v4.3.0
   * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
@@ -278,7 +282,7 @@
 		
 		<div class="board_view_wrap">
 			<div class="board_view">
-				<form action="reportAction" method="post" id="reportPost">
+				<form action="reportAction" method="post" id="reportPost"  enctype="multipart/form-data">
 				<c:forEach items="${list}" var="post">
 				<div class="title" style="display: flex; justify-content: space-between; align-items: center;">
 					<div id="posttitle" style="display: inline-block;">
@@ -325,7 +329,7 @@
 							<input type="hidden" id="reportReason" name="reason" value="">
 						</tr>
 						<tr>
-							<td><input type="text" placeholder="여러사유에 해당될 경우, 대표적 사유 1개를 선택해 주세요." size="50" style="border:none; font-size: 12px;" disabled ></td>
+							<td><input type="text" id="noticeText" placeholder="여러사유에 해당될 경우, 대표적 사유 1개를 선택해 주세요." size="50" style="border:none; font-size: 12px;" disabled ></td>
 							<td>
 							<input class="form-check-input" type="radio" name="reportReason" id="flexRadioDefault1" value="불법광고">
   							<label class="form-check-label" for="flexRadioDefault1">
@@ -388,15 +392,13 @@
 							<th>첨부파일 :</th>
 						</tr>
 						<tr>
-							<td><input type="file" name="badFile" maxlength="60" size="40"/></td>
+							<td><input type="file" name="file" maxlength="60" size="40"/></td>
 						</tr>
 					</tfoot>
 								
-				
-				
 				</table>
-			</div>
-		</div>
+						</div>
+							</div>
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="deletePost" id="modalReportBtn">신고하기</button>
@@ -405,14 +407,14 @@
 					    </div>
 					  </div>
 					</div>
-					
+								
 					
 				</div>
 				<div class="info">
 					<dl>
 						<dt>번호</dt>
 						<dd id="boardPostId">${post.postId}</dd>
-						<input type="hidden" name="badBoard" id="badBoard" value="공지사항 게시판">
+						<input type="hidden" name="badBoard" id="badBoard" value="공지사항">
 					</dl>
 					<dl>
 						<dt>글쓴이</dt>
@@ -459,7 +461,7 @@
 				<div id="inputBox">
 				<div id="inputBoxL">
 					<input type="hidden" name="postId" id="hiddenPostId" value="${list.get(0).postId}">
-					<label class="control-label" for="id" id="writerTop">작성자</label>
+					<label class="control-label" for="writerBot" id="writerTop">작성자</label>
             		<input class="form-control" type="text" name="writer" id="writerBot" value="<%=id%>"/>					
 				</div>
 				<div class="form-check form-switch" id="inputBoxR">
@@ -573,6 +575,7 @@
   <script src="resources/assets/js/main.js"></script>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -584,6 +587,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 
 $(document).ready(function() {
 	getCommentList();
+	
 })
 
 function getCommentList() {
@@ -726,27 +730,50 @@ $(function () {
 		$('#adminBoardForm').submit();
 	})
 	
+	
+
+	
 	$('#modalReportBtn').click(function() {
-		alert('신고버튼눌림')	
+		
 		var reason = $('input[name=reportReason]:checked').val();
-		console.log(reason)
 		if(reason == '기타') {
 			var content = $('#reasonContentText').val()
 			if (content == '') {
 				alert('신고내용을 적어주세요.')
 			} else {
 					$('#reportReason').val(reason);
-					console.log($('#reportReason').val());
-					$('#reportPost').submit();
-				
+
+					Swal.fire({
+					  title: 'Success!',
+					  text: '신고 접수가 되었습니다.',
+					  icon: 'success',
+					  confirmButtonText: '확인',
+					}).then((result) => {
+						  if (result.isConfirmed) {
+		 						$('#reportPost').submit();
+							  }
+							})
+					
+					
 			}
+			
 			
 		} else {
 				$('#reportReason').val(reason);
-				console.log($('#reportReason').val());
-				$('#reportPost').submit();
+
+				Swal.fire({
+					  title: 'Success!',
+					  text: '신고 접수가 되었습니다.',
+					  icon: 'success',
+					  confirmButtonText: '확인',
+					}).then((result) => {
+						  if (result.isConfirmed) {
+		 						$('#reportPost').submit();
+							  }
+							})
+				
+					
 		}
-		
 		
 	})
 	
