@@ -179,7 +179,7 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public List<AdminVO> badCommentList(AdminVO vo) {
-		List<AdminVO> cList = mybatis.selectList("adminDao.badCommentList");
+		List<AdminVO> cList = mybatis.selectList("adminDao.badCommentList",vo);
 		return cList;
 	}
 

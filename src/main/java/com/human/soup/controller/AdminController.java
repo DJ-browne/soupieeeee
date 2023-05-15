@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+//import com.fasterxml.jackson.annotation.JsonAlias;
 import com.human.soup.dao.AdminDao;
 import com.human.soup.dao.AdminDaoImpl;
 import com.human.soup.domain.*;
@@ -205,7 +205,18 @@ public class AdminController {
 	}
 	
 	// ======================================================================//
-
+	
+	@RequestMapping("main.do")
+	public String mainList(AdminVO vo, Model model) {
+		
+		List<AdminVO> bList = adminService.getBoardList(vo);
+	
+		model.addAttribute("list", bList);
+		
+		return "main";
+		
+	}
+	
 	
 	@RequestMapping("saveBoard")
 	public String saveBoard(AdminVO vo) {
@@ -240,11 +251,11 @@ public class AdminController {
 		// vo 변수에 넣어주기
 		vo.setTotalRecCount(totalRecCount);
 		
-		// 총 갯수에 따른 페이지 총 갯수 (전체 게시물 / 13) -> 13씩 보여지게
+		// 총 갯수에 따른 페이지 총 갯수 (전체 게시물 / 10) -> 10씩 보여지게
 		vo.setPageTotalCount(totalRecCount / vo.getCountPerPage());
 		
 		if(totalRecCount%vo.getCountPerPage() > 0 ) { 
-			// 나눴을때 나머지가 있으면 페이지 한개 더 만들어서 13개가 다 없어도 게시물 나오게 +1 해줌
+			// 나눴을때 나머지가 있으면 페이지 한개 더 만들어서 10개가 다 없어도 게시물 나오게 +1 해줌
 			vo.setCountPerPage(vo.getCountPerPage()+1);
 		}
 		
@@ -360,7 +371,7 @@ public class AdminController {
 			, @RequestParam(value = "pageNum", defaultValue = "1")int pageNum
 			, @RequestParam(value = "groupNum", defaultValue = "1")int groupNum) {
 	
-		
+				vo.setCountPerPage(5);
 		
 				int totalRecCount = adminService.getTotalReportPage();
 				vo.setTotalRecCount(totalRecCount);

@@ -1698,7 +1698,7 @@ section {
   line-height: 1;
   text-transform: uppercase;
   font-weight: 600;
-  color: #37517e;
+  color: #1dc078;
 }
 
 #footer .footer-top .footer-contact p {
@@ -1712,7 +1712,7 @@ section {
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: bold;
-  color: #37517e;
+  color: #1dc078;
   position: relative;
   padding-bottom: 12px;
 }
@@ -1729,7 +1729,7 @@ section {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #47b2e4;
+  color: #1dc078;
   font-size: 18px;
   line-height: 1;
 }
@@ -1759,7 +1759,7 @@ section {
 #footer .footer-top .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #47b2e4;
+  background: #1dc078;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -2696,3 +2696,23 @@ ul, li {
     background-color: #719a60;
     transition: 0.3s;
 	}
+	
+.board_accordion {
+	margin: 100px auto;
+    max-width: 900px;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+.accordion-button:focus {
+	color: white;
+	box-shadow: none;
+	background-color: #1dc078;
+}
+
+.accordion-button:not(.collapsed) {
+	color: white;
+	background-color: #719a60;
+}
+
+

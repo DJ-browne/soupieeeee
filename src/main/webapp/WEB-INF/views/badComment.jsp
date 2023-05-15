@@ -56,7 +56,7 @@
   <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="main">Soupie</a></h1>
+      <h1 class="logo me-auto"><a href="main.do">Soupie</a></h1>
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -213,14 +213,14 @@
 				<c:choose>
 					<c:when test="${startGroupNum == '0'}">
 			    		<li class="page-item disabled" id="page-item List">
-			      			<a class="page-link" href="adminBoard.do" aria-label="Previous">
+			      			<a class="page-link" href="badComment" aria-label="Previous">
 			        			<span aria-hidden="true">&laquo;</span>
 			      			</a>
 			    		</li>
 			    	</c:when>		
 					<c:otherwise>
 			    		<li class="page-item" id="page-item List">
-			      			<a class="page-link" href="adminBoard.do?groupNum=${startGroupNum}&pageNum=${(startGroupNum-1)*5+1}" aria-label="Previous">
+			      			<a class="page-link" href="badComment?groupNum=${startGroupNum}&pageNum=${(startGroupNum-1)*5+1}" aria-label="Previous">
 			        			<span aria-hidden="true">&laquo;</span>
 			      			</a>
 			    		</li>
@@ -233,10 +233,10 @@
 		    
 				<c:choose>
 					<c:when test="${param.pageNum eq i }">
-								<li class="page-item pageClickClass active" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+								<li class="page-item pageClickClass active" aria-current="page"><a class="page-link" id="pageClicked" href="badComment?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
 					</c:when>
 					<c:otherwise>
-			    		<li class="page-item pageClickClass" aria-current="page"><a class="page-link" id="pageClicked" href="adminBoard.do?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
+			    		<li class="page-item pageClickClass" aria-current="page"><a class="page-link" id="pageClicked" href="badComment?groupNum=${startGroupNum+1 }&pageNum=${i}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>   
 		    
@@ -247,14 +247,14 @@
 		    <c:choose>
 				<c:when test="${endGroupNum == 0}">
 			   		<li class="page-item disabled">
-			    	 		<a class="page-link" href="adminBoard.do" aria-label="Next">
+			    	 		<a class="page-link" href="badComment" aria-label="Next">
 				       			<span aria-hidden="true">&raquo;</span>
 			     			</a>
 			   		</li>
 		    	</c:when>
 				<c:otherwise>
 		    		<li class="page-item" id="page-item List">
-		      			<a class="page-link" href="adminBoard.do?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*5+1}" aria-label="Next">
+		      			<a class="page-link" href="badComment?groupNum=${endGroupNum }&pageNum=${(endGroupNum-1)*5+1}" aria-label="Next">
 		        			<span aria-hidden="true">&raquo;</span>
 		      			</a>
 		    		</li>

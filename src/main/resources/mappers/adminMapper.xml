@@ -167,7 +167,7 @@
   		SELECT count(POSTID) as totalRecCount FROM adminpost
   	</select>	
   	
-  	<select id="getListPage" resultType="admin">
+  	<select id="getListPage" resultType="admin" parameterType="admin">
   		<![CDATA[
   		SELECT *
   		FROM (
@@ -184,8 +184,15 @@
    	]]>
    	</select>
     	
-  	<select id="badCommentList" resultType="admin">
-  		SELECT BADID
+  	<select id="badCommentList" resultType="admin" parameterType="admin">
+  	
+  		<![CDATA[
+  		SELECT *
+  		FROM (
+  			select rownum rn,
+  			A.*
+  			FROM (
+  			SELECT BADID
   			 , BADTITLE
   			 , TO_CHAR(BADDATE, 'YYYY-MM-DD') as BADDATE
   			 , BADWRITER
@@ -196,9 +203,11 @@
   			 , REASONCONTENT
   			 , BADFILE
   			 , BADF_SIZE
-  			 , BADF_EN
-  			 
-  		 FROM BADCOMMENT order by BADID desc
+  			 , BADF_EN from BADCOMMENT order by BADID desc) A
+           ) 
+  		where rn >= #{firstRow} AND rn <= #{endRow}
+   	]]>
+  	  	
   	</select>
   	
   	<delete id="adminBoardDelete" parameterType="admin">

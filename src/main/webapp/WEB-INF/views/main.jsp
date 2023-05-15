@@ -58,7 +58,7 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="main"><img src="../resources/img/soupie.png" style="margin-right: 10px; margin-bottom: 10px;">Soupie</a></h1>
+      <h1 class="logo me-auto"><a href="main.do"><img src="../resources/img/soupie.png" style="margin-right: 10px; margin-bottom: 10px;">Soupie</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
 <!--       <a href="mainWeb" class="logo me-auto"><img src="resources/img/soupie.png" alt="" class="img-fluid"></a> -->
 
@@ -136,39 +136,40 @@
   <main id="main">
 
     <!-- ======= Cliens Section ======= -->
-    <section id="cliens" class="cliens section-bg">
-      <div class="container">
+<!--     <section id="cliens" class="cliens section-bg"> -->
+<!--       <div class="container"> -->
 
-        <div class="row" data-aos="zoom-in">
+<!--         <div class="row" data-aos="zoom-in"> -->
 
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-          </div>
+<!--           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"> -->
+<!--             <img src="assets/img/clients/client-1.png" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-          </div>
+<!--           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"> -->
+<!--             <img src="assets/img/clients/client-2.png" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-          </div>
+<!--           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"> -->
+<!--             <img src="assets/img/clients/client-3.png" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-          </div>
+<!--           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"> -->
+<!--             <img src="assets/img/clients/client-4.png" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-          </div>
+<!--           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"> -->
+<!--             <img src="assets/img/clients/client-5.png" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-          </div>
+<!--           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"> -->
+<!--             <img src="assets/img/clients/client-6.png" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
-        </div>
+<!--         </div> -->
 
-      </div>
-    </section><!-- End Cliens Section -->
+<!--       </div> -->
+<!--     </section> -->
+    <!-- End Cliens Section -->
 
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
@@ -317,44 +318,45 @@
         <div class="section-title">
           <h2>Announcements</h2>
           <p>Soupie를 이용하는 모든 학생분들과 강사분들에게 보다 빠르고 정확한 공지사항을 
-          	전달하기 위한 공간!</p>
+          	전달하기 위한 공간!</p><br>
+          	<p style="font-size: 13px;">** 가장 최근 공지사항들 입니다 **</p>
         </div>
-
+        
+        <c:forEach items="${list}">
         <div class="row">
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">February</a></h4>
-              <p>2월 공지 사항입니다.</p>
+              <h4><a href="">공지사항</a></h4>
+              <p>${list.get(0).postTitle}</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">March</a></h4>
-              <p>3월 공지 사항입니다.</p>
+              <h4><a href="">공지사항</a></h4>
+              <p>${list.get(1).postTitle}</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">April</a></h4>
-              <p>4월 공지 사항입니다.</p>
+              <h4><a href="">공지사항</a></h4>
+              <p>${list.get(2).postTitle}</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">May</a></h4>
-              <p>5월 공지 사항입니다.</p>
+              <h4><a href="">공지사항</a></h4>
+              <p>${list.get(3).postTitle}</p>
             </div>
           </div>
-
         </div>
-
+		</c:forEach>
       </div>
     </section><!-- End Services Section -->
 
@@ -806,13 +808,13 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Arsha</h3>
+            <h3>Soupie</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+                    123-45 Soupie-gil<br>
+              	Soupie-dong, Soupie-si 16167<br>
+               Gyeongki-do <br><br>
+              <strong>Phone:</strong> +82 031 000 0000<br>
+              <strong>Email:</strong> admin@soupie.com<br>
             </p>
           </div>
 
@@ -840,7 +842,7 @@
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Social Networks</h4>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+            <p>You can explore more about Soupie!</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
               <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
