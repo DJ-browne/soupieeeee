@@ -146,6 +146,9 @@ public class AdminController {
 			session.setAttribute("userid", result.getUserid() );
 			session.setAttribute("username", result.getUsername() );
 			session.setAttribute("password", result.getPassword() );
+
+						
+			
 //			session.setAttribute("sessionTime", new Date().toLocaleString());
 		}
 		
@@ -210,7 +213,7 @@ public class AdminController {
 	public String mainList(AdminVO vo, Model model) {
 		
 		List<AdminVO> bList = adminService.getBoardList(vo);
-	
+		
 		model.addAttribute("list", bList);
 		
 		return "main";

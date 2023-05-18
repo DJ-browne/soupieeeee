@@ -18,7 +18,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <title>Soupie - FAQs</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -26,7 +26,6 @@
   <!-- Favicons -->
 	<link href="../resources/img/soupie.png" rel="icon">
   <link href="../resources/img/soupie.png" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -48,6 +47,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  
 </head>
 
 <body>
@@ -119,69 +119,166 @@
 
       </div>
     </section><!-- End Breadcrumbs -->
+	<p class="faq_heading">Soupie안에서 궁금한 점이 있으신가요? <br>
+	아래의 자주 묻는 질문 FAQs 리스트를 확인 해주세요!</p>
+	
 
-	<div class=board_accordion>
-		
-		<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+	
+	
+	
+<div class=board_accordion>
+	
+<div class="accordion accordion-flush" id="accordionFlushExample"  >
+ 
+  <div class="accordion-item" >
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" 
+      aria-expanded="false" aria-controls="flush-collapseOne">
         [서비스오류] Soupie 서비스 이용 중 오류가 발생해요.
       </button>
     </h2>
-    <div id="collapseOne" class="accordion-collapse" data-bs-parent="#accordionExample">
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-        <strong>인프런은 구글 크롬 브라우저에 최적화되어 있어요.</strong><br> 
+      <strong>인프런은 구글 크롬 브라우저에 최적화되어 있어요.</strong><br> 
         	강의 시청, 결제 등 서비스 이용 중 오류가 발생할 경우 크롬 브라우저에서 다시 진행해 주세요.<br><br>
 			※ 혹시 크롬 브라우저에서도 오류가 발생한다면 아래 안내사항을 체크해보세요.<br><br>
 			<strong>🕐 크롬 시크릿 모드에서 재실행합니다.</strong><br> 
 			시크릿 모드에서 정상 작동한다면, 확장 프로그램의 문제일 가능성이 높습니다.<br>		
-			※  시크릿 모드 경로 : 크롬 브라우저 오른쪽 상단 더보기 ( : )클릭 - 새 시크릿 창<br><br>
+			<span style="font-style: italic;">※  시크릿 모드 경로 : 크롬 브라우저 오른쪽 상단 더보기 ( : )클릭 - 새 시크릿 창</span><br><br>
 			<strong>🕑 강력 새로고침 후 재실행합니다.</strong><br>
 			새로운 기능 배포 및 버전 업데이트로 인한 일시적 오류일 수 있습니다.<br>
-			※ 강력 새로고침 단축키 : [윈도우 Ctrl + Shift + R] / [맥 Cmd + Shift + R]
-      </div>
+			<span style="font-style: italic;">※ 강력 새로고침 단축키 : [윈도우 Ctrl + Shift + R] / [맥 Cmd + Shift + R]</span>
     </div>
   </div>
+ </div>
+  
   <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Accordion Item #2
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+       [탈퇴] Soupie 탈퇴는 어떻게 하나요?
       </button>
     </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
+      <strong>마이 페이지 > '탈퇴'가 가능해요.</strong><br><br>
+
+		※ 탈퇴할 경우 해당 계정의 모든 데이터가 삭제되며 복구가 불가능하니 신중히 결정하시는 것을 권장 드려요.
     </div>
   </div>
+  </div>
+  
   <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Accordion Item #3
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+       [미정] 아직 미정
       </button>
     </h2>
-    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
+      <strong>아직 모릅니다.</strong>
     </div>
   </div>
-</div>							
+</div> 
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingFour">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+       [미정] 아직 미정
+      </button>
+    </h2>
+    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <strong>아직 모릅니다.</strong>
+    </div>
+  </div>
+</div>   
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingFive">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+       [미정] 아직 미정
+      </button>
+    </h2>
+    <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <strong>아직 모릅니다.</strong>
+    </div>
+  </div>
+</div>   
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingSix">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+       [미정] 아직 미정
+      </button>
+    </h2>
+    <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <strong>아직 모릅니다.</strong>
+    </div>
+  </div>
+</div>   
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingSeven">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+       [미정] 아직 미정
+      </button>
+    </h2>
+    <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <strong>아직 모릅니다.</strong>
+    </div>
+  </div>
+</div>     
+ 	   
+<div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingEight">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+       [미정] 아직 미정
+      </button>
+    </h2>
+    <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <strong>아직 모릅니다.</strong>
+    </div>
+  </div>
+</div> 
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingNine">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+       [미정] 아직 미정
+      </button>
+    </h2>
+    <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <strong>아직 모릅니다.</strong>
+    </div>
+  </div>
+</div> 
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTen">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+       [미정] 아직 미정
+      </button>
+    </h2>
+    <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+      <strong>아직 모릅니다.</strong>
+    </div>
+  </div>
+</div> 	   	   
  	   
 </div>
-    
-	<form action="updateCnt" method="post" id="frm">   
-	 
-		<input type="hidden" name="postId" id="hiddenPostId" value="">
-		<input type="hidden" name="postTitle" id="hiddenPostTitle" value="">
-		<input type="hidden" name="postDate" id="hiddenPostDate" value="">
-		<input type="hidden" name="postCnt" id="hiddenPostICnt" value="">
-
-	</form>
-		
-		
-		
+   </div>
+   
+   <div>
+   <ul id="paginationFAQ">
+   
+   </ul>
+   </div>
 		
   </main><!-- End #main -->
 
@@ -261,7 +358,7 @@
 
   <!-- Vendor JS Files -->
   <script src="resources/assets/vendor/aos/aos.js"></script>
-  <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--   <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
   <script src="resources/assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="resources/assets/vendor/php-email-form/validate.js"></script>
@@ -272,37 +369,60 @@
   <script src="resources/assets/js/main.js"></script>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" ></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" ></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
 
-// function insertBoard() {
-// 	 window.location.href = 'adminBoardInsert'
-// }
+const itemsPerPage = 5; // 페이지당 아이템 수
+var currentPage = 1; // 현재 페이지
+const data = Array.from(document.querySelectorAll('#accordionFlushExample .accordion-item')); // 화면에 있는 데이터 배열
+const totalPages = Math.ceil(data.length / itemsPerPage); // 총 페이지 수
 
-// function comment() {
-// 	document.getElementById('frm').submit();
-// }
+console.log("data : "+data)
+console.log("totalPages : "+totalPages)
 
-$(function () {
- 
-		$('#tableH').on('click','.postView', function(){
-		
-			console.log($(this).parent().parent().find('td')[0].innerHTML );
-			console.log($(this).parent().parent().find('td')[1].innerHTML );
-			console.log($(this).parent().parent().find('td')[3].innerHTML );
-			console.log($(this).parent().parent().find('td')[4].innerHTML );
-			
-			$('#hiddenPostId').val($(this).parent().parent().find('td')[0].innerHTML)
-			$('#hiddenPostTitle').val($(this).parent().parent().find('td')[1].innerHTML)
-			$('#hiddenPostDate').val($(this).parent().parent().find('td')[3].innerHTML)
-			$('#hiddenPostICnt').val($(this).parent().parent().find('td')[4].innerHTML)
-		
-			$('#frm').submit();
-	
-		})
-})
+
+
+function showPage(page) {
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  console.log("startIndex : "+startIndex)
+  console.log("endIndex : "+endIndex)
+  
+  // 현재 페이지에 해당하는 데이터를 화면에 표시
+  data.forEach(function(item, index) {
+    if (index >= startIndex && index < endIndex) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+function renderPagination() {
+  $('#paginationFAQ').empty();
+
+  for (let i = 1; i <= totalPages; i++) {
+    const activeClass = (i === currentPage) ? 'active' : '';
+    $('#paginationFAQ').append('<li><a class="' + activeClass + '" href="#">' + i + '</a></li>');
+  }
+
+  $('#paginationFAQ a').click(function(event) {
+    event.preventDefault();
+    currentPage = parseInt($(this).text());
+    showPage(currentPage);
+    renderPagination();
+  });
+}
+
+	// 초기 페이지 및 페이지네이션 렌더링
+	showPage(currentPage);
+	renderPagination();
 
 
 </script>
