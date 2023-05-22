@@ -113,7 +113,7 @@
       <div class="container">
 
         <ol>
-          <li><a href="main">Home</a></li>
+          <li><a href="main.do">Home</a></li>
           <li>Announcements</li>
         </ol>
         <h2>공지 사항</h2>
