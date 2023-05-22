@@ -259,7 +259,7 @@ public class AdminController {
 		
 		if(totalRecCount%vo.getCountPerPage() > 0 ) { 
 			// 나눴을때 나머지가 있으면 페이지 한개 더 만들어서 10개가 다 없어도 게시물 나오게 +1 해줌
-			vo.setCountPerPage(vo.getCountPerPage()+1);
+			vo.setPageTotalCount(vo.getPageTotalCount()+1);
 		}
 		
 		// 전체 레코드를 검색해 온다면
@@ -277,7 +277,14 @@ public class AdminController {
 		vo.setFirstRow(firstRow);
 		vo.setEndRow(endRow);
 		
+		System.out.println("pageNum : " + pageNum);
+		System.out.println("vo.getCountPerPage() : " + vo.getCountPerPage());
+		System.out.println("firstRow : "+firstRow);
+		System.out.println("endRow : "+endRow);
+		
+		
 		List<AdminVO> aList = adminService.getListPage(vo);
+		System.out.println("aList : "+aList.size());
 		
 		// 페이지갯수 = 전체 데이터의 갯수 / 보여줄갯수
 		// pageTotalCount = 전체 데이터의 갯수 / 페이지별 보여줄 갯수
@@ -302,6 +309,8 @@ public class AdminController {
 		int firstPageNo = (groupNum-1) * vo.getTotalCountPageGroup() + 1;
 		int endPageNo = groupNum * vo.getTotalCountPageGroup();
 		
+		System.out.println("firstPageNo : "+firstPageNo);
+		System.out.println("endPageNo : "+endPageNo);
 		if( endPageNo >= vo.getPageTotalCount() ) endPageNo = vo.getPageTotalCount() ;
 		   
 		model.addAttribute("startPageNum" , firstPageNo);
