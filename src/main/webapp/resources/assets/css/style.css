@@ -1894,19 +1894,19 @@ tbody > #tabletr td a:hover {
 	}
 	
 	.board_page a:hover {
-		background: #1dc078;
+		background: #719a60;
 		color: #fff;
 	}
 	
 	.board_page li.active a{
-		background: #1dc078 !important;
+		background: #719a60 !important;
 		border-color : #ddd !important; 
 		color: #fff;
 	}
 	
 	
 	.board_page a:focus {
-		background: #1dc078;
+		background: #719a60;
 		color: #fff;
 		box-shadow: none;
 	}
